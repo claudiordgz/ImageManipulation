@@ -1,3 +1,5 @@
-/**
- * Created by crodriguez2 on 8/26/15.
- */
+$(document).ready(function() {
+    var card = ich.elRow();
+    $(".row").append(card);
+    aload();
+});
