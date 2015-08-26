@@ -1,0 +1,2490 @@
+
+.cm_mobHeader_weather_temp,
+.cm_mobHeader_weather_text,
+.cm_mobHeader_location_inner,
+.cm_mobHeader_lsp_song,
+.cm_mobHeader_sticky_lsp_song,
+.cm_mobHeader_lsp_artist,
+.cm_mobHeader_sticky_lsp_artist,
+.cm_mobHeader_search_logo,
+.cm_mobHeader_nav_link {
+    font-family: Montserrat;
+}
+
+@media screen and (min-device-width: 320px) {
+    .cm_mobHeader_propfix {
+        font-size: 12px;
+    }
+}
+@media screen and (min-device-width: 375px) {
+    .cm_mobHeader_propfix {
+        font-size: 14.0625px;
+    }
+}
+@media screen and (min-device-width: 414px) {
+    .cm_mobHeader_propfix {
+        font-size: 15.525px;
+    }
+}
+
+.cm_mobHeader_middle {
+    font-size: 0.83333333em;
+}
+
+.cm_mobHeader_lsp_song {
+    font-size: 1.08333333em;
+}
+
+.cm_mobHeader_lsp_artist {
+    font-size: 0.91666667em;
+}
+
+.cm_mobHeader_sticky_lsp_song {
+    font-size: 12px;
+    width: 11em;
+}
+
+.cm_mobHeader_sticky_lsp_artist {
+    font-size: 11px;
+    width: 10em;
+}
+
+.cm_mobHeader_search_input {
+    font-size: 11px;
+}
+
+li.cm_mobHeader_nav {
+    font-size: 11px;
+}
+
+/*
+    CONTAINERS, MAIN HEADER
+
+    These styles define the layout for the enclosing container elements
+    of the main header.
+
+    These include "cm_mobHeader_propfix" (a pure container that uses a
+    padding trick to scale the top-level container's height in proportion
+    to its width; it also holds the default background image for the
+    redesigned header) and "cm_mobHeader_artist_overlay" (a container layer
+    that holds the artist image grabbed from the "now playing" API).
+
+*/
+
+.cm_mobHeader_propfix {
+    position: relative;
+    padding-bottom: 62.1875%;
+    background-size: 100%;
+    height: 100%;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-shadow: none;
+    -webkit-font-smoothing: antialiased;
+}
+
+.cm_mobHeader_artist_overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: 50% 50%;
+}
+
+
+/*
+    TOP HEADER LAYER, MAIN HEADER
+
+    These styles define the topmost container of the main header,
+    which contains the station logo and the navigation menu button.
+
+    The size of the top container is proportionate to the overall
+    height of the container, its proportions given as 70/199.
+
+    The height and width of the logo container are proportionate
+    to the enclosing element. The width can consistently be set
+    to 66%. Because the logo element must be centered vertically,
+    and a flexible transform-based vertical centering doesn't
+    work on Android phones, it is necessary to set fixed heights
+    and center by means of margin-top; hence these heights are
+    not set by percentages but by breakpoints.
+
+    The diameter of the navigation menu button is given as 32px
+    at min-screen-width 320px and 41px at min-screen-width 414px.
+    The diameter of 37.5px for min-width 375px has been interpolated.
+    These sizes have been specified with media queries. The button's
+    right margin of 15px at min-screen-width 320px has been scaled
+    up to 18px at min-screen-width 375px and 19.4px at min-device-width
+    414px to preserve the proportions of its layout at larger sizes.
+*/
+
+.cm_mobHeader_top {
+    height: 35.175879%;
+    width: 100%;
+    position: relative;
+}
+
+.cm_mobHeader_logo {
+    float: left;
+    width: 66%;
+    position: absolute;
+    top: 50%;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+}
+
+.cm_mobHeader_menu_button {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.cm_mobHeader_logo {
+    margin-left: 4.6875%;
+    height: 71.428571%;
+    transform: translate(0%, -50%);
+    -webkit-transform: translate(0%, -50%);
+}
+
+.cm_mobHeader_menu_button {
+    width: 10%;
+    height: 45.714286%;
+    margin-right: 4.6875%;
+    transform: translate(0%, -50%);
+    -webkit-transform: translate(0%, -50%);
+}
+
+/*
+    MIDDLE LAYER, MAIN HEADER
+
+    These styles define the middle layer of the main header,
+    which contains the station location text and the weather
+    text.
+
+    The middle layer's height is proportionate to the height
+    of the container, the proportion given by 30/199.
+
+    The contents of the middle layer are enclosed by an inner
+    container, .cm_mobHeader_middle_inner, whose width is
+    given by the proportion 290/320. This container is
+    centered in the middle element.
+
+    The width of the station location text's enclosing container
+    is proportionate to the width of the inner container, the
+    width given by 98/290.
+
+    The width of the weather text's enclosing container
+    is proportionate to the width of the inner container, the
+    width given by 174/290.
+
+    The station location text and weather text containers are
+    separated by a pair of lines, each 1px wide, each 1/3 of
+    the height of the middle layer container.
+
+    The text of the station location text and weather text has
+    respectively a left and right margin of 9px. It is centered
+    vertically. These text elements have a character limit of 15
+    and 24 characters. (The latter character limit is divided between
+    the temperature text, which generally contains 4 characters,
+    and the "sky" text, which contains up to 20.) Overflow hiding
+    reveals an ellipsis. The widths are calibrated in such a way
+    that the maximum number of characters are those *visible*
+    when the ellipsis is shown.
+
+    The weather text is vertically centered in the container element.
+    Its height is given as 1em, i.e. 10px, and so it is 10px from the
+    top of the container. The weather sprite element is required by
+    the spec to be 15px high and to sit 6px from the top of the container
+    at a screen width of 320px; therefore it is pulled up by 0.4em to
+    be 4px higher than the weather text.
+*/
+
+.cm_mobHeader_middle {
+    height: 15.075377%;
+    text-align: center;
+}
+
+.cm_mobHeader_middle_inner {
+    height: 100%;
+    display: inline-block;
+}
+
+.cm_mobHeader_location {
+    float: left;
+    display: table;
+    position: relative;
+}
+
+.cm_mobHeader_weather {
+    height: 100%;
+    float: left;
+    display: table;
+    position: relative;
+}
+
+.cm_mobHeader_location::after {
+    content: " ";
+    position: absolute;
+    width: 1px;
+    height: 33.333333%;
+    right: 0px;
+    top: 33.333333%;
+}
+
+.cm_mobHeader_weather::before {
+    content: " ";
+    position: absolute;
+    width: 1px;
+    height: 33.333333%;
+    left: 0px;
+    top: 33.333333%;
+}
+
+.cm_mobHeader_location_inner {
+    max-width: 10em;
+    display: table-cell;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+    padding-right: 0.73441667em;
+}
+
+.cm_mobHeader_weather_inner {
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 0.73441667em;
+}
+.cm_mobHeader_weather_temp, .cm_mobHeader_weather_text {
+    height: 1em;
+    margin-top: 0.6em;
+}
+
+.cm_mobHeader_weather_text {
+    max-width: 13em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cm_mobHeader_weather_inner div {
+    float: left;
+}
+
+.spriteWeatherRadio {
+    height: 2.25em;
+    width: 2.25em;
+    margin-right: 0.2em;
+}
+
+/*
+    BOTTOM LAYER, MAIN HEADER
+
+    These styles define the bottom layer of the main header, which
+    contains the Listen Now button and the textual and graphic
+    elements of the Now Playing widget.
+
+    The bottom layer is proportionate to the overall size of the
+    container, its proportions given by 99/199.
+
+    The width of the Listen Now button container ("cm_mobHeader_listen")
+    is proportionate to the overall header width, its proportions
+    given by 125/320.
+
+    The Listen Now button consists of three elements: a "substrate",
+    a div element with rounded corners and a background color set by
+    the themes tool; an "overlay", a div element whose background
+    image is set by the themes tool; and a link that covers both,
+    sharing the dimensions of the substrate element. The overlay
+    image provides highlighting and shading on the substrate color,
+    giving the appearance of a rounded and protruding button.
+
+    The width of the Now Playing widget container ("cm_mobHeader_lsp")
+    is proportionate to the overall header width, its proportions
+    given by 195/320.
+
+    The height of the inner container for the Now Playing widget's
+    elements scales with increasing device size, but it does
+    so in such a way as to be proportionate to the increasing font
+    sizes. Since there is no overall font size for the box, this
+    can't be pegged to ems; it is therefore set explicitly with
+    media queries.
+
+    The inner container for the Now Playing widget's textual elements
+    is required to be 3px further to the right than the widget's
+    logo / button.
+
+    The artist name and song name elements in the widget's textual
+    elements have character limits, respectively 17 and 19 characters.
+    These have their overflows blocked off with ellipses in exactly
+    the same way as the station location and weather text, described
+    above.
+
+    The Now Playing logo / button is a div whose background image
+    is set by the themes tool. It is a transparent PNG.
+*/
+
+.cm_mobHeader_bottom {
+    height: 49.748744%;
+}
+
+.cm_mobHeader_listen {
+    height: 100%;
+    width: 39.0625%;
+    float: left;
+    position: relative;
+}
+
+.cm_mobHeader_listen_button_substrate
+, .cm_mobHeader_listen_button a {
+    position: absolute;
+    top: 47.979798%;
+    left: 50%;
+}
+
+.cm_mobHeader_listen_button_overlay {
+    position: absolute;
+    left: 50%;
+    top: 47.979798%;
+    z-index: 1024;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center 47.979798%;
+}
+
+
+.cm_mobHeader_listen_button_overlay {
+    height: 55.555556%;
+    width: 99.208442%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+}
+
+.cm_mobHeader_listen_button a {
+    display: block;
+    z-index: 2048;
+}
+
+.cm_mobHeader_lsp {
+    width: 60.9375%;
+    height: 100%;
+    float: left;
+    position: relative;
+}
+
+.cm_mobHeader_lsp_inner {
+    position: absolute;
+    top: 20.2%;
+    display: inline-block;
+    width: 100%;
+    margin-left: 1em;
+}
+
+.cm_mobHeader_lsp_inner {
+    height: 58.585859%;
+}
+
+.cm_mobHeader_lsp_info {
+    width: 84.615385%;
+    margin-left: 0.25em;
+    margin-bottom: 1.16666667em;
+}
+
+.cm_mobHeader_lsp_song {
+    max-width: 12.5em;
+    height: 1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cm_mobHeader_lsp_artist {
+    max-width: 13em;
+    font-weight: normal;
+    height: 1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: 0.27272727em;
+}
+
+.cm_mobHeader_lsp_logo {
+    width: 74.358974%;
+    height: 39.655172%;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+}
+
+/*
+    NAVIGATION SIDEBAR
+
+    These styles define the navigation sidebar. It fills the vertical
+    area of the screen, but its width is fixed at 171px.
+
+    The navigation sidebar contains a search box and a list of navigation
+    links. The links are generated by the treemenu app.
+
+    The sidebar is a fixed-position element that is hidden offscreen
+    by default and is moved onto the main viewport by code attached
+    to the navigation menu buttons.
+
+*/
+
+.cm_mobHeader_sidebar {
+    position: fixed;
+    top: 0;
+    width: 171px;
+    right: -171px;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: visible;
+    
+    background-size: 100% auto;
+    background-repeat: repeat-y;
+    -webkit-font-smoothing: antialiased;
+}
+
+/*
+    SEARCH BOX
+
+    The search box container ("cm_mobHeader_search") fills the full
+    width of the container and has the fixed height of 64px. It delimits
+    the dimensions of the search box by means of padding. Its background
+    is given by a tiled graphic.
+
+    The appearance of the search box is given by "cm_mobHeader_search_entry",
+    a container div giving the style of the search region. The inner
+    form element fills the available space. The input box proper is styled
+    by "cm_mobHeader_search_entry input"
+
+    The arrow button in the search field is given by "button.cm_mobHeader_search_arrow".
+    The appearance of this element is given by its background image.
+*/
+
+.cm_mobHeader_search {
+    width: 171px;
+    height: 64px;
+    padding: 19.5px 11px;
+    box-sizing: border-box;
+    background-repeat: repeat-y;
+    background-size: 100% auto;
+    position: fixed;
+    z-index: 4201;
+}
+
+.cm_mobHeader_search_entry {
+    border: none;
+    border-radius: 12.5px;
+    height: 25px;
+    width: 100%;
+    position: relative;
+    background-color: #f2f2f2;
+}
+
+.cm_mobHeader_search_form {
+    width: 100%;
+    height: 100%;
+}
+
+.cm_mobHeader_search_input {
+    border: none;
+    box-shadow: none;
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 13px;
+    padding-right: 29px;
+    height: 100%;
+    color: #c2c2c2;
+    background: transparent;
+}
+
+.cm_mobHeader_search_input:focus, input.cm_mobFocus {
+    color: #707070;
+}
+
+button.cm_mobHeader_search_arrow {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    padding: 0px;
+    top: 50%;
+    margin-top: -25px;
+    right: -10px;
+    "../images/menu_search_arrow.png");
+    background-color: transparent;
+    background-size: 9px 10px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    border: none;
+    cursor: pointer;
+}
+
+/*
+    NAVIGATION BAR
+
+    These styles define the navigation sidebar proper, the list of
+    links to other parts of the mobile site. This is filled
+    out by the treemenus app.
+
+    The navigation bar fills the entire height of its enclosing
+    container (i.e. the whole sidebar minus the search box container).
+    It fixes the dimensions of the list elements it contains
+    by means of padding.
+
+    Navigation items are divided by a line that fills the width given
+    to items.
+
+    The navigation items have a character limit of 21. These are
+    handled in the same manner as other fields (e.g. weather text)
+    with character limits, described above.
+*/
+
+.cm_mobHeader_navbar {
+    padding: 0px 11px 0px 11px;
+    position: absolute;
+    top: 64px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+li.cm_mobHeader_nav {
+    text-transform: uppercase;
+    font-weight: bold;
+    position: relative;
+}
+
+li.cm_mobHeader_nav,
+a.cm_mobHeader_nav_link,
+a.cm_mobHeader_nav_link:visited,
+a.cm_mobHeader_nav_link:link {
+    color:#707070
+}
+
+.cm_mobHeader_nav::after {
+    display: block;
+    content: " ";
+    height: 1px;
+    width: 100%;
+    clear: both;
+    background-color: #a0a0a0;
+}
+
+
+.cm_mobHeader_nav_item {
+    width: 11em;
+    float: left;
+    margin-bottom: 17px;
+    margin-top: 17px;
+    max-height: 1em;
+    margin-left: 3px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cm_mobHeader_nav_item a {
+    white-space: nowrap;
+}
+
+.cm_mobHeader_nav_arrow {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    margin-top: 17px;
+    right: 0px;
+    margin-right: 5px;
+    "../images/menu_list_arrow.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+/*
+    STICKY HEADER VARIANT
+
+    These styles define the "sticky" header, a reduced variant
+    of the header that appears when the user scrolls past the
+    full header *or* when the device is in landscape mode or
+    when the window's width is greater than its height for some
+    other reason.
+
+    The sticky header's height is fixed at 50px, but its width
+    scales to fill the window.
+
+    The sticky header starts by being off screen; it is moved
+    down (with a dropping-down animation) by scroll-triggered
+    jQuery code.
+
+    A media query to hide the main header and display the
+    sticky header from the start when the device is in landscape
+    orientation is included.
+*/
+
+.cm_mobHeader_sticky_container {
+    position: fixed;
+    z-index: 4096;
+    top: -50px;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-shadow: none;
+    -webkit-font-smoothing: antialiased;
+}
+
+.cm_mobHeader_sticky_main {
+    overflow: hidden;
+    height: 100%;
+}
+
+@media (orientation:landscape) {
+    .cm_mobHeader_sticky_container {
+        top: 0;
+    }
+    .cm_mobHeader_propfix {
+        display: none;
+    }
+}
+
+/*
+    LOGO, STICKY HEADER
+
+    These styles define the sticky header's logo box and its
+    logo element proper.
+
+    The width of the logo box is fixed at 80.5px, and the
+    inner element that contains the logo proper is 55.5px by 30px.
+
+    The logo is followed by a divide line which separates its
+    box from the rest of the sticky header. Its color is set
+    by the theme tool.
+*/
+
+.cm_mobHeader_sticky_logo {
+    position: relative;
+    float: left;
+    width: 80.5px;
+    height: 100%;
+}
+
+.cm_mobHeader_sticky_logo_inner {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% auto;
+    width: 55.5px;
+    height: 30px;
+    top: 50%;
+    position: absolute;
+    margin-top: -15px;
+    left: 50%;
+    margin-left: -27.75px;
+}
+
+.cm_mobHeader_sticky_logo::after {
+    content: " ";
+    position: absolute;
+    width: 1px;
+    right: 0px;
+    height: 100%;
+    top: 0;
+}
+
+.cm_mobHeader_sticky_main::before {
+    content: " ";
+    position: absolute;
+    width: 1px;
+    left: 0px;
+    height: 100%;
+    top: 0;
+}
+
+/*
+    LISTEN BUTTON & NOW PLAYING, STICKY HEADER
+
+    These styles define the layout of the "Now Playing" widget in the
+    sticky header, as well as the styles of the sticky header's "Listen Live"
+    button.
+
+    For the most part, the Now Playing styles are analogous to the
+    main header's Now Playing widget, with the exception that no text
+    scaling ever takes place because of the sticky header's
+    fixed dimensions.
+
+    The Listen Button works analogously to the main header's button; it
+    consists of a substrate element, an overlay element with a background
+    image, and a link, all layered together. The overlay element's graphic
+    is slightly larger than the substrate element.
+*/
+
+.cm_mobHeader_sticky_lsp {
+    position: relative;
+    height: 100%;
+    float: left;
+}
+
+.cm_mobHeader_sticky_listen_button {
+    width: 34px;
+    height: 34px;
+    position: relative;
+    top: 50%;
+    margin-top: -17px;
+    margin-left: 12.5px;
+    float: left;
+}
+
+.cm_mobHeader_sticky_listen_button_substrate {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+}
+
+.cm_mobHeader_sticky_listen_button_overlay {
+    width: 34px;
+    height: 34px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.cm_mobHeader_sticky_lsp_info {
+    margin-left: 10px;
+    position: relative;
+    float: left;
+    top: 50%;
+    transform: translate(0%, -50%);
+    -webkit-transform: translate(0%, -50%);
+}
+
+.cm_mobHeader_sticky_lsp_song {
+    margin-top: 4px;
+}
+
+.cm_mobHeader_sticky_lsp_artist {
+    margin-top: 1px;
+    margin-bottom: 6px;
+    margin-top: 3px;
+}
+
+.cm_mobHeader_sticky_lsp_song, .cm_mobHeader_sticky_lsp_artist {
+    height: 1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cm_mobHeader_sticky_menu_button {
+    width: 30px;
+    height: 100%;
+    content: " ";
+    margin-right: 12px;
+    float: right;
+    background-size: 30px 30px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+
+/*
+    STYLES PARAMETERIZED BY COLOR SCHEME
+
+    These styles implement the fixing of various colors, static images, etc.
+    by the choice of "light" or "dark" color scheme in the themes tool.
+    A single CSS class is attached to the top container element of each
+    of the three v2 header components (main, sticky, sidebar); the children
+    of these top-level elements are styled accordingly.
+*/
+
+/* TOP */
+.cm_mobHeader_theme_light .cm_mobHeader_top{background:rgba(242,242,242,0.75)}
+.cm_mobHeader_theme_light .cm_mobHeader_menu_button,
+.cm_mobHeader_theme_light .cm_mobHeader_sticky_menu_button{}
+
+.cm_mobHeader_theme_dark .cm_mobHeader_top{background:rgba(0,0,0,0.75)}
+.cm_mobHeader_theme_dark .cm_mobHeader_menu_button,
+.cm_mobHeader_theme_dark .cm_mobHeader_sticky_menu_button{}
+
+/* MIDDLE */
+.cm_mobHeader_theme_light .cm_mobHeader_middle{background:rgba(228,228,228,0.6)}
+.cm_mobHeader_theme_light .cm_mobHeader_location::after{background:rgba(131,131,131,0.18)}
+.cm_mobHeader_theme_light .cm_mobHeader_weather::before{background:rgba(255,255,255,0.34)}
+.cm_mobHeader_theme_light .cm_mobHeader_location_inner,
+.cm_mobHeader_theme_light .cm_mobHeader_weather_inner div,
+.cm_mobHeader_theme_light .cm_mobHeader_weather_inner div a{color:#4c4c4c}
+.cm_mobHeader_theme_light .spriteWeatherRadio{}
+
+.cm_mobHeader_theme_dark .cm_mobHeader_middle{background:rgba(0,0,0,0.6)}
+.cm_mobHeader_theme_dark .cm_mobHeader_location::after{background:rgba(0,0,0,0.27)}
+.cm_mobHeader_theme_dark .cm_mobHeader_weather::before{background:rgba(255,255,255,0.11)}
+.cm_mobHeader_theme_dark .cm_mobHeader_location_inner,
+.cm_mobHeader_theme_dark .cm_mobHeader_weather_inner div,
+.cm_mobHeader_theme_dark .cm_mobHeader_weather_inner div a{color:#c8c8c8}
+.cm_mobHeader_theme_dark .spriteWeatherRadio{}
+
+/* BOTTOM */
+.cm_mobHeader_theme_light .cm_mobHeader_bottom{background:rgba(255,255,255,0.45)}
+.cm_mobHeader_theme_light .cm_mobHeader_listen_button_overlay{}
+.cm_mobHeader_theme_light .cm_mobHeader_lsp_artist{color:#4c4c4c}
+.cm_mobHeader_theme_light .cm_mobHeader_lsp_logo{}
+
+.cm_mobHeader_theme_dark .cm_mobHeader_bottom{background:rgba(0,0,0,0.45)}
+.cm_mobHeader_theme_dark .cm_mobHeader_listen_button_overlay{}
+.cm_mobHeader_theme_dark .cm_mobHeader_lsp_artist{color:#c8c8c8}
+.cm_mobHeader_theme_dark .cm_mobHeader_lsp_logo{}
+
+/* SIDEBAR */
+.cm_mobHeader_theme_light.cm_mobHeader_sidebar{transition:box-shadow .2s;box-shadow:0 0 320px 150px rgba(255,255,255,0)}
+.cm_mobHeader_theme_light.cm_mobHeader_sidebar.active{transition:box-shadow .2s;box-shadow:0 0 120px 100px rgba(255,255,255,0.35)}
+.cm_mobHeader_theme_dark.cm_mobHeader_sidebar{transition:box-shadow .2s;box-shadow:0 0 320px 100px rgba(20,20,20,0)}
+.cm_mobHeader_theme_dark.cm_mobHeader_sidebar.active{transition:box-shadow .2s;box-shadow:0 0 120px 100px rgba(20,20,20,0.35)}
+
+/* STICKY */
+.cm_mobHeader_theme_light .cm_mobHeader_sticky_container{box-shadow:0 0 5px 5px rgba(80,80,80,0.15)}
+.cm_mobHeader_theme_light .cm_mobHeader_sticky_container::after{content:" ";width:100%;height:1px;background:#fcfcfc;position:absolute;top:100%;left:0}
+.cm_mobHeader_theme_light .cm_mobHeader_sticky_logo{background-color:rgba(245,245,245,0.9)}
+.cm_mobHeader_theme_light .cm_mobHeader_sticky_logo::after{background-color:#d2d2d2}
+.cm_mobHeader_theme_light .cm_mobHeader_sticky_main::before{background-color:#ffffff}
+.cm_mobHeader_theme_light .cm_mobHeader_sticky_main{background-color:rgba(236,236,236,0.93)}
+.cm_mobHeader_theme_light .cm_mobHeader_sticky_listen_button_overlay{}
+.cm_mobHeader_theme_light .cm_mobHeader_sticky_lsp::after{background:linear-gradient(180deg,rgba(0,0,0,0.25),rgba(0,0,0,0.15) 65%,rgba(0,0,0,0.25))}
+.cm_mobHeader_theme_light .cm_mobHeader_sticky_lsp_artist{color:#4c4c4c}
+
+.cm_mobHeader_theme_dark .cm_mobHeader_sticky_logo{background:rgba(25,25,25,0.93)}
+.cm_mobHeader_theme_dark .cm_mobHeader_sticky_logo::after{background-color:rgba(255,255,255,0.16)}
+.cm_mobHeader_theme_dark .cm_mobHeader_sticky_main::before{background-color:#1c1c1c}
+.cm_mobHeader_theme_dark .cm_mobHeader_sticky_main{background-color:rgba(0,0,0,0.8)}
+.cm_mobHeader_theme_dark .cm_mobHeader_sticky_listen_button_overlay{}
+.cm_mobHeader_theme_dark .cm_mobHeader_sticky_lsp_artist{color:#c8c8c8}
+
+
+.cm_mobHeader_weather_temp,
+.cm_mobHeader_weather_text,
+.cm_mobHeader_location_inner,
+.cm_mobHeader_lsp_song,
+.cm_mobHeader_sticky_lsp_song,
+.cm_mobHeader_lsp_artist,
+.cm_mobHeader_sticky_lsp_artist,
+.cm_mobHeader_search_logo,
+.cm_mobHeader_nav_link {
+    font-family: Montserrat;
+}
+
+@media screen and (min-device-width: 320px) {
+    .cm_mobHeader_propfix {
+        font-size: 12px;
+    }
+}
+@media screen and (min-device-width: 375px) {
+    .cm_mobHeader_propfix {
+        font-size: 14.0625px;
+    }
+}
+@media screen and (min-device-width: 414px) {
+    .cm_mobHeader_propfix {
+        font-size: 15.525px;
+    }
+}
+
+.cm_mobHeader_lw {
+    font-size: 0.83333333em;
+}
+
+.cm_mobHeader_lsp_song {
+    font-size: 1.3em;
+}
+
+.cm_mobHeader_lsp_artist {
+    font-size: 1.05em;
+}
+
+.cm_mobHeader_sticky_lsp_song {
+    font-size: 12px;
+    width: 11em;
+}
+
+.cm_mobHeader_sticky_lsp_artist {
+    font-size: 11px;
+    width: 10em;
+}
+
+.cm_mobHeader_search_input {
+    font-size: 11px;
+}
+
+li.cm_mobHeader_nav {
+    font-size: 11px;
+}
+
+/*
+    CONTAINERS, MAIN HEADER
+
+    These styles define the layout for the enclosing container elements
+    of the main header.
+
+    These include "cm_mobHeader_propfix" (a pure container that uses a
+    padding trick to scale the top-level container's height in proportion
+    to its width; it also holds the default background image for the
+    redesigned header) and "cm_mobHeader_artist_overlay" (a container layer
+    that holds the artist image grabbed from the "now playing" API).
+
+*/
+
+.cm_mobHeader_propfix {
+    position: relative;
+    padding-bottom: 82.8125%;
+    background-size: 100%;
+    height: 100%;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-shadow: none;
+    -webkit-font-smoothing: antialiased;
+    !important;
+}
+
+.cm_mobHeader_container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.cm_mobHeader_artist_overlay {
+    position: absolute;
+    height: 125%;
+    width: 125%;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: 50% 50%;
+    z-index: 0;
+}
+
+.no-css-filters .cm_mobHeader_artist_overlay::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%; width: 100%;
+    background-color: rgba(68,68,68,0.85);
+}
+
+.css-filters-enabled .cm_mobHeader_artist_overlay {
+    left: -12.5%;
+    top: -12.5%;
+    filter: blur(25px);
+    -webkit-filter: blur(25px);
+}
+
+.cm_mobHeader_theme_light .cm_mobHeader_artist_overlay {
+    background-color: white;
+}
+
+.cm_mobHeader_theme_dark .cm_mobHeader_artist_overlay {
+    background-color: black;
+}
+
+/*
+    LOGO-NAV HEADER LAYER, MAIN HEADER
+
+    These styles define the topmost container of the main header,
+    which contains the station logo and the navigation menu button.
+
+    The size of the top container is proportionate to the overall
+    height of the container, its proportions given as 70/199.
+
+    The height and width of the logo container are proportionate
+    to the enclosing element. The width can consistently be set
+    to 66%. Because the logo element must be centered vertically,
+    and a flexible transform-based vertical centering doesn't
+    work on Android phones, it is necessary to set fixed heights
+    and center by means of margin-top; hence these heights are
+    not set by percentages but by breakpoints.
+
+    The diameter of the navigation menu button is given as 32px
+    at min-screen-width 320px and 41px at min-screen-width 414px.
+    The diameter of 37.5px for min-width 375px has been interpolated.
+    These sizes have been specified with media queries. The button's
+    right margin of 15px at min-screen-width 320px has been scaled
+    up to 18px at min-screen-width 375px and 19.4px at min-device-width
+    414px to preserve the proportions of its layout at larger sizes.
+*/
+
+.cm_mobHeader_logo_nav {
+    height: 26.415094%;
+    width: 100%;
+    position: relative;
+}
+
+.cm_mobHeader_logo {
+    float: left;
+    width: 66%;
+    position: absolute;
+    top: 50%;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+}
+
+.cm_mobHeader_menu_button {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.cm_mobHeader_logo {
+    margin-left: 4.6875%;
+    height: 71.428571%;
+    transform: translate(0%, -50%);
+    -webkit-transform: translate(0%, -50%);
+}
+
+.cm_mobHeader_menu_button {
+    width: 10%;
+    height: 45.714286%;
+    margin-right: 4.6875%;
+    transform: translate(0%, -50%);
+    -webkit-transform: translate(0%, -50%);
+}
+
+/*
+    LOCATION / WEATHER LAYER, MAIN HEADER
+
+    These styles define the "LW" layer of the main header
+    that contains the station location text and the weather
+    text.
+
+    The LW layer's height is proportionate to the height
+    of the container, the proportion given by 30/199.
+
+    The contents of the LW layer are enclosed by an inner
+    container, .cm_mobHeader_lw_inner, whose width is
+    given by the proportion 290/320. This container is
+    centered in the LW element.
+
+    The width of the station location text's enclosing container
+    is proportionate to the width of the inner container, the
+    width given by 98/290.
+
+    The width of the weather text's enclosing container
+    is proportionate to the width of the inner container, the
+    width given by 174/290.
+
+    The station location text and weather text containers are
+    separated by a pair of lines, each 1px wide, each 1/3 of
+    the height of the LW layer container.
+
+    The text of the station location text and weather text has
+    respectively a left and right margin of 9px. It is centered
+    vertically. These text elements have a character limit of 15
+    and 24 characters. (The latter character limit is divided between
+    the temperature text, which generally contains 4 characters,
+    and the "sky" text, which contains up to 20.) Overflow hiding
+    reveals an ellipsis. The widths are calibrated in such a way
+    that the maximum number of characters are those *visible*
+    when the ellipsis is shown.
+
+    The weather text is vertically centered in the container element.
+    Its height is given as 1em, i.e. 10px, and so it is 10px from the
+    top of the container. The weather sprite element is required by
+    the spec to be 15px high and to sit 6px from the top of the container
+    at a screen width of 320px; therefore it is pulled up by 0.4em to
+    be 4px higher than the weather text.
+*/
+
+.cm_mobHeader_lw {
+    height: 11.320755%;
+    text-align: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+
+    font-family: Montserrat;
+}
+
+.cm_mobHeader_lw * {
+    font-family: inherit !important;
+}
+
+.cm_mobHeader_location {
+    position: relative;
+    margin-right: 1.25em;
+    max-width: 13em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.cm_mobHeader_weather {
+    display: table;
+    position: relative;
+    margin-left: 1.25em;
+}
+
+.cm_mobHeader_location::after {
+    content: " ";
+    position: absolute;
+    width: 1px;
+    height: 33.333333%;
+    right: 0px;
+    top: 33.333333%;
+}
+
+.cm_mobHeader_weather::before {
+    content: " ";
+    position: absolute;
+    width: 1px;
+    height: 90%;
+    left: -1.2em;
+    top: 7%;
+}
+
+.cm_mobHeader_location_inner {
+    max-width: 10em;
+    display: table-cell;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.cm_mobHeader_weather_inner {
+    display: table-cell;
+    vertical-align: middle;
+}
+.cm_mobHeader_weather_temp, .cm_mobHeader_weather_text {
+    height: 1em;
+    margin-top: 0.6em;
+}
+
+.cm_mobHeader_weather_text {
+    max-width: 10em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cm_mobHeader_weather_inner div {
+    float: left;
+}
+
+.spriteWeatherRadio {
+    height: 2.25em;
+    width: 2.25em;
+    margin-right: 0.2em;
+}
+
+/*
+    LISTEN-LSP LAYER, MAIN HEADER
+
+    These styles define the layer of the main header that
+    contains the Listen Now button and the textual and graphic
+    elements of the Now Playing widget.
+
+    The listen-lsp layer is proportionate to the overall size of the
+    container, its proportions given by 99/199.
+
+    The width of the Listen Now button container ("cm_mobHeader_listen")
+    is proportionate to the overall header width, its proportions
+    given by 125/320.
+
+    The Listen Now button consists of three elements: a "substrate",
+    a div element with rounded corners and a background color set by
+    the themes tool; an "overlay", a div element whose background
+    image is set by the themes tool; and a link that covers both,
+    sharing the dimensions of the substrate element. The overlay
+    image provides highlighting and shading on the substrate color,
+    giving the appearance of a rounded and protruding button.
+
+    The width of the Now Playing widget container ("cm_mobHeader_lsp")
+    is proportionate to the overall header width, its proportions
+    given by 195/320.
+
+    The height of the inner container for the Now Playing widget's
+    elements scales with increasing device size, but it does
+    so in such a way as to be proportionate to the increasing font
+    sizes. Since there is no overall font size for the box, this
+    can't be pegged to ems; it is therefore set explicitly with
+    media queries.
+
+    The inner container for the Now Playing widget's textual elements
+    is required to be 3px further to the right than the widget's
+    logo / button.
+
+    The artist name and song name elements in the widget's textual
+    elements have character limits, respectively 17 and 19 characters.
+    These have their overflows blocked off with ellipses in exactly
+    the same way as the station location and weather text, described
+    above.
+
+    The Now Playing logo / button is a div whose background image
+    is set by the themes tool. It is a transparent PNG.
+*/
+
+.cm_mobHeader_listen_lsp {
+    height: 62.264151%;
+    display: -webkit-box;
+
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    background-color: rgba(0,0,0,0.25);
+}
+
+.cm_mobHeader_listen_lsp .left_col {
+    display: -webkit-box;
+
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+    box-sizing: border-box;
+    padding: 1em 1em 2em 1em;
+    max-width: 50%;
+}
+
+.artist_image_propfix {
+    width: 100%;
+    padding-bottom: 100%;
+    height: 0;
+    position: relative;
+}
+
+.cm_mobHeader_listen_lsp .right_col {
+
+    display: -webkit-box;
+
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+
+.cm_mobHeader_artist_image {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-size: auto 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.cm_mobHeader_artist_image.default_artist_image {
+    !important;
+    background-size: 50%!important;
+    background-color: rgba(0,0,0,0.1)!important;
+}
+
+.cm_mobHeader_theme_light .cm_mobHeader_artist_image {
+    background-color: white;
+}
+.cm_mobHeader_theme_dark .cm_mobHeader_artist_image {
+    background-color: black;
+}
+
+.cm_mobHeader_listen_nowplaying {
+    margin-top: 6px;
+    margin-bottom: 1.5em;
+    display: -webkit-box;
+
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: flex-end;
+    align-items: flex-end;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+
+.cm_mobHeader_listen,
+.cm_mobHeader_lsp_info {
+    min-height: 1px;
+    min-width: 9.8em;
+    display: inline-block;
+    width: 14em;
+}
+
+.cm_mobHeader_listen {
+    height: 3em;
+    background-size: auto 70%;
+    background-position: 20% center;
+    background-repeat: no-repeat;
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 0.75em 0 0 0.75em;
+}
+
+.cm_mobHeader_listen svg {
+    display: block;
+    height: 105%;
+    margin-left: 0.5em;
+    margin-top: -0.15em;
+}
+
+.cm_mobHeader_lsp_info {
+    box-sizing: border-box;
+    margin-bottom: 0.75em;
+    font-family: Montserrat;
+}
+
+.cm_mobHeader_lsp_info * {
+    font-family: inherit !important;
+}
+
+.cm_mobHeader_theme_light .cm_mobHeader_lsp_info .cm_mobHeader_lsp_song,
+.cm_mobHeader_theme_light .cm_mobHeader_lsp_info .cm_mobHeader_lsp_artist,
+.cm_mobHeader_theme_dark .cm_mobHeader_lsp_info .cm_mobHeader_lsp_song,
+.cm_mobHeader_theme_dark .cm_mobHeader_lsp_info .cm_mobHeader_lsp_artist {
+    color: white;
+    text-shadow: 1px 1px 1px black;
+}
+
+.cm_mobHeader_lsp_song,
+.cm_mobHeader_lsp_artist {
+    padding-right: 0.5em;
+}
+
+.cm_mobHeader_lsp_song {
+    max-width: 13.5em;
+    line-height: 1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cm_mobHeader_lsp_artist {
+    max-width: 16em;
+    font-weight: bold;
+    line-height: 1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: 0.27272727em;
+}
+
+.cm_mobHeader_lsp_logo {
+    height: 3.5em;
+    width: 12em;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: left;
+    margin-bottom: -0.75em;
+    
+}
+
+/*
+    NAVIGATION SIDEBAR
+
+    These styles define the navigation sidebar. It fills the vertical
+    area of the screen, but its width is fixed at 171px.
+
+    The navigation sidebar contains a search box and a list of navigation
+    links. The links are generated by the treemenu app.
+
+    The sidebar is a fixed-position element that is hidden offscreen
+    by default and is moved onto the main viewport by code attached
+    to the navigation menu buttons.
+
+*/
+
+.cm_mobHeader_sidebar {
+    position: fixed;
+    top: 0;
+    width: 171px;
+    right: -171px;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: visible;
+    "../images/Menu_Tray_Backdround_Tile.jpg");
+    background-size: 100% auto;
+    background-repeat: repeat-y;
+    -webkit-font-smoothing: antialiased;
+}
+
+/*
+    SEARCH BOX
+
+    The search box container ("cm_mobHeader_search") fills the full
+    width of the container and has the fixed height of 64px. It delimits
+    the dimensions of the search box by means of padding. Its background
+    is given by a tiled graphic.
+
+    The appearance of the search box is given by "cm_mobHeader_search_entry",
+    a container div giving the style of the search region. The inner
+    form element fills the available space. The input box proper is styled
+    by "cm_mobHeader_search_entry input"
+
+    The arrow button in the search field is given by "button.cm_mobHeader_search_arrow".
+    The appearance of this element is given by its background image.
+*/
+
+.cm_mobHeader_search {
+    width: 171px;
+    height: 64px;
+    padding: 19.5px 11px;
+    box-sizing: border-box;
+    "../images/Search_Box_Backdround_Tile.jpg");
+    background-repeat: repeat-y;
+    background-size: 100% auto;
+    position: fixed;
+    z-index: 4201;
+}
+
+.cm_mobHeader_search_entry {
+    border: none;
+    border-radius: 12.5px;
+    height: 25px;
+    width: 100%;
+    position: relative;
+    background-color: #f2f2f2;
+}
+
+.cm_mobHeader_search_form {
+    width: 100%;
+    height: 100%;
+}
+
+.cm_mobHeader_search_input {
+    border: none;
+    box-shadow: none;
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 13px;
+    padding-right: 29px;
+    height: 100%;
+    color: #c2c2c2;
+    background: transparent;
+}
+
+.cm_mobHeader_search_input:focus, input.cm_mobFocus {
+    color: #707070;
+}
+
+button.cm_mobHeader_search_arrow {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    padding: 0px;
+    top: 50%;
+    margin-top: -25px;
+    right: -10px;
+    "../images/menu_search_arrow.png");
+    background-color: transparent;
+    background-size: 9px 10px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    border: none;
+    cursor: pointer;
+}
+
+/*
+    NAVIGATION BAR
+
+    These styles define the navigation sidebar proper, the list of
+    links to other parts of the mobile site. This is filled
+    out by the treemenus app.
+
+    The navigation bar fills the entire height of its enclosing
+    container (i.e. the whole sidebar minus the search box container).
+    It fixes the dimensions of the list elements it contains
+    by means of padding.
+
+    Navigation items are divided by a line that fills the width given
+    to items.
+
+    The navigation items have a character limit of 21. These are
+    handled in the same manner as other fields (e.g. weather text)
+    with character limits, described above.
+*/
+
+.cm_mobHeader_navbar {
+    padding: 0px 11px 0px 11px;
+    position: absolute;
+    top: 64px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+li.cm_mobHeader_nav {
+    text-transform: uppercase;
+    font-weight: bold;
+    position: relative;
+}
+
+li.cm_mobHeader_nav,
+a.cm_mobHeader_nav_link,
+a.cm_mobHeader_nav_link:visited,
+a.cm_mobHeader_nav_link:link {
+    color:#707070
+}
+
+.cm_mobHeader_nav::after {
+    display: block;
+    content: " ";
+    height: 1px;
+    width: 100%;
+    clear: both;
+    background-color: #a0a0a0;
+}
+
+
+.cm_mobHeader_nav_item {
+    width: 11em;
+    float: left;
+    margin-bottom: 17px;
+    margin-top: 17px;
+    max-height: 1em;
+    margin-left: 3px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cm_mobHeader_nav_item a {
+    white-space: nowrap;
+}
+
+.cm_mobHeader_nav_arrow {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    margin-top: 17px;
+    right: 0px;
+    margin-right: 5px;
+    "../images/menu_list_arrow.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+/*
+    STICKY HEADER VARIANT
+
+    These styles define the "sticky" header, a reduced variant
+    of the header that appears when the user scrolls past the
+    full header *or* when the device is in landscape mode or
+    when the window's width is greater than its height for some
+    other reason.
+
+    The sticky header's height is fixed at 50px, but its width
+    scales to fill the window.
+
+    The sticky header starts by being off screen; it is moved
+    down (with a dropping-down animation) by scroll-triggered
+    jQuery code.
+
+    A media query to hide the main header and display the
+    sticky header from the start when the device is in landscape
+    orientation is included.
+*/
+
+.cm_mobHeader_sticky_container {
+    position: fixed;
+    z-index: 4096;
+    top: -55px;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-shadow: none;
+    -webkit-font-smoothing: antialiased;
+}
+
+.cm_mobHeader_sticky_main {
+    overflow: hidden;
+    height: 100%;
+}
+
+@media (orientation:landscape) {
+    .cm_mobHeader_sticky_container {
+        top: 0;
+    }
+    .cm_mobHeader_propfix {
+        display: none;
+    }
+}
+
+/*
+    LOGO, STICKY HEADER
+
+    These styles define the sticky header's logo box and its
+    logo element proper.
+
+    The width of the logo box is fixed at 80.5px, and the
+    inner element that contains the logo proper is 55.5px by 30px.
+
+    The logo is followed by a divide line which separates its
+    box from the rest of the sticky header. Its color is set
+    by the theme tool.
+*/
+
+.cm_mobHeader_sticky_logo {
+    position: relative;
+    float: left;
+    width: 80.5px;
+    height: 100%;
+}
+
+.cm_mobHeader_sticky_logo_inner {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% auto;
+    width: 55.5px;
+    height: 30px;
+    top: 50%;
+    position: absolute;
+    margin-top: -15px;
+    left: 50%;
+    margin-left: -27.75px;
+}
+
+.cm_mobHeader_sticky_logo::after {
+    content: " ";
+    position: absolute;
+    width: 1px;
+    right: 0px;
+    height: 100%;
+    top: 0;
+}
+
+.cm_mobHeader_sticky_main::before {
+    content: " ";
+    position: absolute;
+    width: 1px;
+    left: 0px;
+    height: 100%;
+    top: 0;
+}
+
+/*
+    LISTEN BUTTON & NOW PLAYING, STICKY HEADER
+
+    These styles define the layout of the "Now Playing" widget in the
+    sticky header, as well as the styles of the sticky header's "Listen Live"
+    button.
+
+    For the most part, the Now Playing styles are analogous to the
+    main header's Now Playing widget, with the exception that no text
+    scaling ever takes place because of the sticky header's
+    fixed dimensions.
+
+    The Listen Button works analogously to the main header's button; it
+    consists of a substrate element, an overlay element with a background
+    image, and a link, all layered together. The overlay element's graphic
+    is slightly larger than the substrate element.
+*/
+
+.cm_mobHeader_sticky_lsp {
+    position: relative;
+    height: 100%;
+    float: left;
+}
+
+.cm_mobHeader_sticky_listen_button {
+    width: 34px;
+    height: 34px;
+    position: relative;
+    top: 50%;
+    margin-top: -17px;
+    margin-left: 12.5px;
+    float: left;
+}
+/*
+.cm_mobHeader_sticky_listen_button_substrate {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+}
+*/
+.cm_mobHeader_sticky_listen_button_overlay {
+    width: 34px;
+    height: 34px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.cm_mobHeader_sticky_lsp_info {
+    margin-left: 10px;
+    position: relative;
+    float: left;
+    top: 50%;
+    transform: translate(0%, -50%);
+    -webkit-transform: translate(0%, -50%);
+}
+
+.cm_mobHeader_sticky_lsp_song {
+    margin-top: 4px;
+}
+
+.cm_mobHeader_sticky_lsp_artist {
+    margin-top: 1px;
+    margin-bottom: 6px;
+    margin-top: 3px;
+}
+
+.cm_mobHeader_sticky_lsp_song, .cm_mobHeader_sticky_lsp_artist {
+    height: 1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.cm_mobHeader_sticky_menu_button {
+    width: 30px;
+    height: 100%;
+    content: " ";
+    margin-right: 12px;
+    float: right;
+    background-size: 30px 30px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+
+/*
+    STYLES PARAMETERIZED BY COLOR SCHEME
+
+    These styles implement the fixing of various colors, static images, etc.
+    by the choice of "light" or "dark" color scheme in the themes tool.
+    A single CSS class is attached to the top container element of each
+    of the three v2 header components (main, sticky, sidebar); the children
+    of these top-level elements are styled accordingly.
+*/
+
+/* TOP */
+.cm_mobHeader_theme_light .cm_mobHeader_logo_nav{background:rgba(242,242,242,0.6)}
+.cm_mobHeader_theme_light .cm_mobHeader_menu_button,
+.cm_mobHeader_theme_light .cm_mobHeader_sticky_menu_button{}
+
+.cm_mobHeader_theme_dark .cm_mobHeader_logo_nav{background:rgba(0,0,0,0.5)}
+.cm_mobHeader_theme_dark .cm_mobHeader_menu_button,
+.cm_mobHeader_theme_dark .cm_mobHeader_sticky_menu_button{}
+
+/* LOCATION / WEATHER */
+.cm_mobHeader_theme_light .cm_mobHeader_lw{background:rgba(229,229,229,0.5)}
+.cm_mobHeader_theme_light .cm_mobHeader_location::after{background:rgba(131,131,131,0.18)}
+.cm_mobHeader_theme_light .cm_mobHeader_weather::before{background:rgba(68, 68, 68, 0.35)}
+.cm_mobHeader_theme_light .cm_mobHeader_location,
+.cm_mobHeader_theme_light .cm_mobHeader_location_inner,
+.cm_mobHeader_theme_light .cm_mobHeader_weather_inner div,
+.cm_mobHeader_theme_light .cm_mobHeader_weather_inner div a{color:#4c4c4c}
+.cm_mobHeader_theme_light .spriteWeatherRadio{}
+
+.cm_mobHeader_theme_dark .cm_mobHeader_lw{background:rgba(0,0,0,0.4)}
+.cm_mobHeader_theme_dark .cm_mobHeader_location::after{background:rgba(0,0,0,0.27)}
+.cm_mobHeader_theme_dark .cm_mobHeader_weather::before{background:rgba(255,255,255,0.11)}
+.cm_mobHeader_theme_dark .cm_mobHeader_location,
+.cm_mobHeader_theme_dark .cm_mobHeader_location_inner,
+.cm_mobHeader_theme_dark .cm_mobHeader_weather_inner div,
+.cm_mobHeader_theme_dark .cm_mobHeader_weather_inner div a{color:#c8c8c8}
+.cm_mobHeader_theme_dark .spriteWeatherRadio{}
+
+/* LISTEN-LSP */
+.no-css-filters.cm_mobHeader_theme_light .cm_mobHeader_listen_lsp{background:rgba(255,255,255,0.80)}
+.cm_mobHeader_theme_light .cm_mobHeader_listen_button_overlay{}
+.cm_mobHeader_theme_light .cm_mobHeader_lsp_artist{color:#4c4c4c}
+/*.cm_mobHeader_theme_light .cm_mobHeader_lsp_logo{}*/
+
+.no-css-filters.cm_mobHeader_theme_dark .cm_mobHeader_listen_lsp{background:rgba(0,0,0,0.45)}
+.cm_mobHeader_theme_dark .cm_mobHeader_listen_button_overlay{}
+.cm_mobHeader_theme_dark .cm_mobHeader_lsp_artist{color:#c8c8c8}
+/*.cm_mobHeader_theme_dark .cm_mobHeader_lsp_logo{}*/
+
+/* SIDEBAR */
+.cm_mobHeader_theme_light.cm_mobHeader_sidebar{transition:box-shadow .2s;box-shadow:0 0 320px 150px rgba(255,255,255,0)}
+.cm_mobHeader_theme_light.cm_mobHeader_sidebar.active{transition:box-shadow .2s;box-shadow:0 0 120px 100px rgba(255,255,255,0.35)}
+.cm_mobHeader_theme_dark.cm_mobHeader_sidebar{transition:box-shadow .2s;box-shadow:0 0 320px 100px rgba(20,20,20,0)}
+.cm_mobHeader_theme_dark.cm_mobHeader_sidebar.active{transition:box-shadow .2s;box-shadow:0 0 120px 100px rgba(20,20,20,0.35)}
+
+/* STICKY */
+.cm_mobHeader_theme_light .cm_mobHeader_sticky_container{box-shadow:0 0 5px 5px rgba(80,80,80,0.15)}
+.cm_mobHeader_theme_light .cm_mobHeader_sticky_container::after{content:" ";width:100%;height:1px;background:#fcfcfc;position:absolute;top:100%;left:0}
+.cm_mobHeader_theme_light .cm_mobHeader_sticky_logo{background-color:rgba(245,245,245,0.9)}
+.cm_mobHeader_theme_light .cm_mobHeader_sticky_logo::after{background-color:#d2d2d2}
+.cm_mobHeader_theme_light .cm_mobHeader_sticky_main::before{background-color:#ffffff}
+.cm_mobHeader_theme_light .cm_mobHeader_sticky_main{background-color:rgba(236,236,236,0.93)}
+.cm_mobHeader_theme_light .cm_mobHeader_sticky_listen_button_overlay{}
+.cm_mobHeader_theme_light .cm_mobHeader_sticky_lsp::after{background:linear-gradient(180deg,rgba(0,0,0,0.25),rgba(0,0,0,0.15) 65%,rgba(0,0,0,0.25))}
+.cm_mobHeader_theme_light .cm_mobHeader_sticky_lsp_artist{color:#4c4c4c}
+
+.cm_mobHeader_theme_dark .cm_mobHeader_sticky_logo{background:rgba(25,25,25,0.93)}
+.cm_mobHeader_theme_dark .cm_mobHeader_sticky_logo::after{background-color:rgba(255,255,255,0.16)}
+.cm_mobHeader_theme_dark .cm_mobHeader_sticky_main::before{background-color:#1c1c1c}
+.cm_mobHeader_theme_dark .cm_mobHeader_sticky_main{background-color:rgba(0,0,0,0.8)}
+.cm_mobHeader_theme_dark .cm_mobHeader_sticky_listen_button_overlay{}
+.cm_mobHeader_theme_dark .cm_mobHeader_sticky_lsp_artist{color:#c8c8c8}
+.spriteWeatherRadio {
+    background-size: 200% 4500%;
+    background-repeat: no-repeat;
+}
+
+.spriteWeatherRadio._1 {
+    background-position: 0 0;
+}
+.spriteWeatherRadio._2 {
+    background-position: 0% 2.27272727273%;
+}
+.spriteWeatherRadio._3 {
+    background-position: 0% 4.54545454545%;
+}
+.spriteWeatherRadio._4 {
+    background-position: 0% 6.81818181818%;
+}
+.spriteWeatherRadio._5 {
+    background-position: 0% 9.09090909091%;
+}
+.spriteWeatherRadio._6 {
+    background-position: 0% 11.3636363636%;
+}
+.spriteWeatherRadio._7 {
+    background-position: 0% 13.6363636364%;
+}
+.spriteWeatherRadio._8 {
+    background-position: 0% 15.9090909091%;
+}
+.spriteWeatherRadio._9 {
+    background-position: 0% 18.1818181818%;
+}
+.spriteWeatherRadio._10 {
+    background-position: 0% 20.4545454545%;
+}
+.spriteWeatherRadio._11 {
+    background-position: 0% 22.7272727273%;
+}
+.spriteWeatherRadio._12 {
+    background-position: 0% 25%;
+}
+.spriteWeatherRadio._13 {
+    background-position: 0% 27.34%;
+}
+.spriteWeatherRadio._14 {
+    background-position: 0% 29.5454545455%;
+}
+.spriteWeatherRadio._15 {
+    background-position: 0% 31.8181818182%;
+}
+.spriteWeatherRadio._16 {
+    background-position: 0% 34.0909090909%;
+}
+.spriteWeatherRadio._17 {
+    background-position: 0% 36.3636363636%;
+}
+.spriteWeatherRadio._18 {
+    background-position: 0% 38.6363636364%;
+}
+.spriteWeatherRadio._19 {
+    background-position: 0% 40.9090909091%;
+}
+.spriteWeatherRadio._20 {
+    background-position: 0% 43.1818181818%;
+}
+
+.spriteWeatherRadio._21 {
+    background-position: 100% 0%;
+}
+.spriteWeatherRadio._22 {
+    background-position: 100% 2.27272727273%;
+}
+.spriteWeatherRadio._23 {
+    background-position: 100% 4.54545454545%;
+}
+.spriteWeatherRadio._24 {
+    background-position: 100% 6.81818181818%;
+}
+.spriteWeatherRadio._25 {
+    background-position: 100% 9.09090909091%;
+}
+.spriteWeatherRadio._26 {
+    background-position: 100% 11.3636363636%;
+}
+.spriteWeatherRadio._27 {
+    background-position: 100% 13.6363636364%;
+}
+.spriteWeatherRadio._28 {
+    background-position: 100% 15.9090909091%;
+}
+.spriteWeatherRadio._29 {
+    background-position: 100% 18.1818181818%;
+}
+.spriteWeatherRadio._30 {
+    background-position: 100% 20.4545454545%;
+}
+.spriteWeatherRadio._31 {
+    background-position: 100% 22.7272727273%;
+}
+.spriteWeatherRadio._32 {
+    background-position: 100% 25%;
+}
+.spriteWeatherRadio._33 {
+    background-position: 100% 27.34%;
+}
+.spriteWeatherRadio._34 {
+    background-position: 100% 29.5454545455%;
+}
+.spriteWeatherRadio._35 {
+    background-position: 100% 31.8181818182%;
+}
+.spriteWeatherRadio._36 {
+    background-position: 100% 34.0909090909%;
+}
+.spriteWeatherRadio._37 {
+    background-position: 100% 36.3636363636%;
+}
+.spriteWeatherRadio._38 {
+    background-position: 100% 38.6363636364%;
+}
+.spriteWeatherRadio._39 {
+    background-position: 100% 40.9090909091%;
+}
+.spriteWeatherRadio._40 {
+    background-position: 100% 43.1818181818%;
+}
+
+.spriteWeatherRadio._41 {
+    background-position: 0% 45.4545454545%;
+}
+.spriteWeatherRadio._42 {
+    background-position: 0% 47.7272727273%;
+}
+.spriteWeatherRadio._43 {
+    background-position: 0% 50%;
+}
+.spriteWeatherRadio._44 {
+    background-position: 0% 52.2727272727%;
+}
+.spriteWeatherRadio._45 {
+    background-position: 0% 54.5454545455%;
+}
+.spriteWeatherRadio._46 {
+    background-position: 0% 56.8181818182%;
+}
+.spriteWeatherRadio._47 {
+    background-position: 0% 59.0909090909%;
+}
+.spriteWeatherRadio._48 {
+    background-position: 0% 61.3636363636%;
+}
+.spriteWeatherRadio._49 {
+    background-position: 0% 63.6363636364%;
+}
+.spriteWeatherRadio._50 {
+    background-position: 0% 65.9090909091%;
+}
+.spriteWeatherRadio._51 {
+    background-position: 0% 68.1818181818%;
+}
+.spriteWeatherRadio._52 {
+    background-position: 0% 70.4545454545%;
+}
+.spriteWeatherRadio._53 {
+    background-position: 0% 72.7272727273%;
+}
+.spriteWeatherRadio._54 {
+    background-position: 0% 75%;
+}
+.spriteWeatherRadio._55 {
+    background-position: 0% 77.2727272727%;
+}
+.spriteWeatherRadio._56 {
+    background-position: 0% 79.5454545455%;
+}
+.spriteWeatherRadio._57 {
+    background-position: 0% 81.8181818182%;
+}
+.spriteWeatherRadio._58 {
+    background-position: 0% 84.0909090909%;
+}
+.spriteWeatherRadio._59 {
+    background-position: 0% 86.3636363636%;
+}
+.spriteWeatherRadio._60 {
+    background-position: 0% 88.6363636364%;
+}
+.spriteWeatherRadio._61 {
+    background-position: 0% 90.9090909091%;
+}
+.spriteWeatherRadio._62 {
+    background-position: 0% 93.1818181818%;
+}
+.spriteWeatherRadio._63 {
+    background-position: 0% 95.4545454545%;
+}
+.spriteWeatherRadio._64 {
+    background-position: 0% 97.7272727273%;
+}
+
+.spriteWeatherRadio._71 {
+    background-position: 100% 45.4545454545%;
+}
+.spriteWeatherRadio._72 {
+    background-position: 100% 47.7272727273%;
+}
+.spriteWeatherRadio._73 {
+    background-position: 100% 50%;
+}
+.spriteWeatherRadio._74 {
+    background-position: 100% 52.2727272727%;
+}
+.spriteWeatherRadio._75 {
+    background-position: 100% 54.5454545455%;
+}
+.spriteWeatherRadio._76 {
+    background-position: 100% 56.8181818182%;
+}
+.spriteWeatherRadio._77 {
+    background-position: 100% 59.0909090909%;
+}
+.spriteWeatherRadio._78 {
+    background-position: 100% 61.3636363636%;
+}
+.spriteWeatherRadio._79 {
+    background-position: 100% 63.6363636364%;
+}
+.spriteWeatherRadio._80 {
+    background-position: 100% 65.9090909091%;
+}
+.spriteWeatherRadio._81 {
+    background-position: 100% 68.1818181818%;
+}
+.spriteWeatherRadio._82 {
+    background-position: 100% 70.4545454545%;
+}
+.spriteWeatherRadio._83 {
+    background-position: 100% 72.7272727273%;
+}
+.spriteWeatherRadio._84 {
+    background-position: 100% 75%;
+}
+.spriteWeatherRadio._85 {
+    background-position: 100% 77.2727272727%;
+}
+.spriteWeatherRadio._86 {
+    background-position: 100% 79.5454545455%;
+}
+.spriteWeatherRadio._87 {
+    background-position: 100% 81.8181818182%;
+}
+.spriteWeatherRadio._88 {
+    background-position: 100% 84.0909090909%;
+}
+.spriteWeatherRadio._89 {
+    background-position: 100% 86.3636363636%;
+}
+.spriteWeatherRadio._90 {
+    background-position: 100% 88.6363636364%;
+}
+.spriteWeatherRadio._91 {
+    background-position: 100% 90.9090909091%;
+}
+.spriteWeatherRadio._92 {
+    background-position: 100% 93.1818181818%;
+}
+.spriteWeatherRadio._93 {
+    background-position: 100% 95.4545454545%;
+}
+.spriteWeatherRadio._94 {
+    background-position: 100% 97.7272727273%;
+}
+
+/* Redesigned radio mobile site body layout styles*/
+
+/*
+    OVERRIDES
+*/
+
+.cm_mobRadioV2Body .cm_mobBodyWrap {
+    overflow: hidden;
+}
+
+.cm_mobRadioV2Body .cm_mobBodyWrap > img[src*="http://googleads"] {
+    /*
+        To make tracking pixel nigh-invisible and prevent it from breaking
+        layout flow.
+    */
+    position: absolute;
+    opacity: 0.01;
+}
+
+.cm_mobRadioV2Body .adgeletti-ad-div {
+    margin: 0 0 0 -10px;
+}
+
+.cm_mobRadioV2Body .cm_mobBodyHeaderAd .adgeletti-ad-div,
+.cm_mobRadioV2Body .cm_mobBodyFooterAd .adgeletti-ad-div {
+    /*
+        To center the top ad banner.
+    */
+    text-align: center;
+}
+
+.cm_mobRadioV2Body .cm_mobSubHeaderWrap {
+    padding: 0!important;
+}
+
+/*
+    MARGIN ADJUSTMENTS
+
+    Various elements need to have negative margins in order to be allowed
+    to spill out of their boxes.
+
+    This behavior differs somewhat between list grid objects and non-list
+    grid objects.cm_mobRadioV2Body In the case of grids, the .cm_mobManualTeaseCollection
+    container can be allowed to keep its normal margins (0), but the
+    .cm_mobTopPhotoTease element inside it has its margins adjusted.cm_mobRadioV2Body Hence
+    the h2.cm_mobTeaseHeading element *above* .cm_mobManualTeaseCollection
+    needs to also have its margins adjusted.
+
+    With non-list elements, it is necessary to put a wrapper around the top
+    photo element in order to adjust the margins as they need to be adjusted.
+*/
+
+.cm_mobRadioV2Body #cmGridObject h2.cm_mobTeaseHeading,
+.cm_mobRadioV2Body #cmGridObject h2.cmModuleHeader,
+.cm_mobRadioV2Body #cmGridObject .cm_mobTopPhoto_marginHelper {
+    margin-left: -10px;
+    margin-right: -10px;
+}
+
+.cm_mobRadioV2Body #cmGridObject .cm_mobManualListTease.cm_mobClearfix.cm_mobTopPhotoTease,
+.cm_mobRadioV2Body #cmGridObject .cmTease.cmClearfix.cmTeaseCol6.cmTeasePhotoTop {
+    padding-top: 0;
+}
+
+/*
+    HEADERS
+*/
+
+.cm_mobRadioV2Body h1, h2, h3, h4, h5, h6 {
+    font-family: Montserrat!important;
+}
+
+.cm_mobRadioV2Body #cmGridObject h2.cm_mobTeaseHeading,
+.cm_mobRadioV2Body #cmGridObject h2.cmModuleHeader {
+    text-transform: uppercase;
+    font-weight: normal;
+    padding: 10px 12.5px;
+}
+
+.cm_mobRadioV2Body #cmGridObject h2.cm_mobTeaseHeading,
+.cm_mobRadioV2Body #cmGridObject h2.cm_mobTeaseHeading a,
+.cm_mobRadioV2Body #cmGridObject h2.cmModuleHeader,
+.cm_mobRadioV2Body #cmGridObject h2.cmModuleHeader a {
+    color: white;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.7) !important;
+}
+
+.cm_mobRadioV2Body #cmGridObject .cmTeasePhotoTop h2.cm_mobTeaseHeading {
+    margin-bottom: 0;
+}
+
+/*
+    2nd-TIER HEADER & BODY
+*/
+
+.cm_mobRadioV2Body .cmTeasePhoto {
+    border: 1px solid #444;
+}
+
+.cm_mobRadioV2Body #cmGridObject > div > .cmTease {
+    border: none;
+}
+
+.cm_mobRadioV2Body .cm_mobManualListTease {
+    border: none;
+}
+
+.cm_mobRadioV2Body .cm_mobManualListTease + .cm_mobManualListTease {
+    border-top: 1px solid #B9B9B7;
+}
+
+.cm_mobRadioV2Body .cm_mobManualListTease h2,
+.cm_mobRadioV2Body .cmTease h2 {
+    font-family: Roboto Slab;
+    line-height: 1.5em;
+    margin-bottom: 0.5em;
+    color: #444;
+}
+
+.cm_mobRadioV2Body .cm_mobManualListTease h2 *,
+.cm_mobRadioV2Body .cmTease h2 * {
+    font-family: inherit;
+    color: inherit;
+}
+
+.cm_mobRadioV2Body .cm_mobManualListTease h2 a {
+    font-family: inherit;
+    color: #444;
+}
+
+.cm_mobRadioV2Body .cm_mobBodyWrap .cm_mobTeaseSummary {
+    /*
+        The additional selector here is to prevent specificity issues.
+    */
+    font-family: Montserrat;
+    line-height: 1.3em;
+    font-size:  12px;
+    color: #444;
+}
+
+.cm_mobRadioV2Body .cm_mobTeaseSummary * {
+    font-family: inherit;
+    line-height: inherit;
+    font-size: inherit;
+    color: inherit;
+}
+
+/*
+    FOOTER
+*/
+
+.cm_mobRadioV2Body .cm_mobFooterWrap.cm_mobFooter {
+    border-top: none;
+}
+
+.cm_mobRadioV2Body #cm_mobFooterNav {
+    font-family: Montserrat;
+}
+
+.cm_mobRadioV2Body .cm_mobFooterNavItem {
+    border-bottom: 1px solid white!important;
+}
+
+.cm_mobRadioV2Body .cm_mobFooterNavItem:first-child {
+    border-top: 1px solid white!important;
+}
+
+.cm_mobRadioV2Body #cm_mobFooterNav *,
+.cm_mobRadioV2Body .cm_mobFooterPageNavItem * {
+    font-family: inherit !important;
+    font-weight: inherit !important;
+    text-transform: uppercase;
+}
+
+.cm_mobRadioV2Body .cm_mobFooterPageNavItem {
+    width: 50%;
+    float: left;
+    box-sizing: border-box;
+    border: 10px solid white;
+    font-family: Montserrat;
+    font-weight: bold;
+    background: #ccc!important;
+}
+
+.cm_mobRadioV2Body .cm_mobFooterPageNavItem a {
+    color: #444!important;
+}
+
+.cm_mobRadioV2Body .cm_mobFooterPageNavItem:first-child {
+    border-top: 10px solid white;
+    border-right: 2.5px solid white;
+}
+
+.cm_mobRadioV2Body .cm_mobFooterPageNavItem:last-child {
+    border-left: 2.5px solid white;
+}
+
+.cm_mobRadioV2Body .cm_mobCopyright {
+    color: #444 !important;
+    font-family: Montserrat;
+}
+
+.cm_mobRadioV2Body .cm_mobCopyright * {
+    color: inherit !important;
+}
+
+.cm_mobRadioV2Body .cm_mobCopyright a {
+    font-weight: bold;
+}
+
+/*
+    IMAGE CAROUSEL
+*/
+
+/*
+    OVERRIDES
+*/
+
+.cm_mobRadioV2Body .cm_mobImageSlider{margin-left:-30px;overflow:hidden;position:relative;width:100%;max-width:100%;margin:0 auto;height:185px;}
+.cm_mobRadioV2Body .cm_mobTeaseImageSliderListItemLink{position:absolute;bottom:0;background:#000;background:rgba(0,0,0,0.7);width:100%;box-sizing:border-box;padding:10px 22px;margin-left:0;margin-bottom:0;}
+.cm_mobRadioV2Body ul.cm_mobImageSliderList{position:absolute;display:block;width:999999px;height:auto;left:auto;}
+
+.cm_mobRadioV2Body .cm_mobImageSlider {
+    width: 100%;
+    height: 0;
+    padding-bottom: 48.75%;
+    overflow: visible;
+    margin-bottom: 7%;
+}
+
+.cm_mobRadioV2Body .cm_mobImageSliderList li {
+    overflow: hidden;
+}
+
+.cm_mobRadioV2Body .cm_mobTeaseImageSliderListItemLink {
+    margin-bottom: 0!important;
+}
+
+.cm_mobRadioV2Body .cm_mobTeaseImageSliderListItemLink a {
+    color: white;
+}
+
+.cm_mobRadioV2Body .cm_mobImageSlider {
+    max-width: 100%;
+}
+
+.cm_mobRadioV2Body .cm_mobTeaseImageSliderListItemPhoto {
+    width: 100%;
+    height: 0;
+    padding-bottom: 48.75%;
+}
+
+.cm_mobRadioV2Body .cm_mobTeaseImageSliderListItemPhoto a {
+    display: block;
+}
+
+.cm_mobRadioV2Body .cm_mobTeaseImageSliderListItemPhoto img {
+    width: 100%;
+    height: 100%;
+}
+
+.cm_mobRadioV2Body .cm_mobImageSliderControls {
+    margin-top: 50%!important;
+}
+
+/*
+    TOP PHOTOS
+*/
+
+.cm_mobRadioV2Body #cmGridObject .cmTease.cmTeaseCol6.cmTeaseListHeadline.cm_mobTopPhotoTeaseList > h2 {
+    margin-bottom: 0;
+}
+
+.cm_mobRadioV2Body #cmGridObject .cm_mobTeasePhoto.cmRelatedImage.cm_mobTopPhoto,
+.cm_mobRadioV2Body #cmGridObject .cm_mobTeasePhoto.cm_mobTopPhoto,
+.cm_mobRadioV2Body #cmGridObject .cmTeasePhoto.cmRelatedImage.cm_mobTopPhoto {
+    width: 100%;
+    position: relative;
+    margin-bottom: 1em;
+}
+
+.cm_mobRadioV2Body #cmGridObject .cm_mobTeasePhoto.cmRelatedImage.cm_mobTopPhoto > a,
+.cm_mobRadioV2Body #cmGridObject .cm_mobTeasePhoto.cm_mobTopPhoto > a,
+.cm_mobRadioV2Body #cmGridObject .cmTeasePhoto.cmRelatedImage.cm_mobTopPhoto > a {
+    display: block;
+    width: 100%;
+    height: 0;
+    padding-bottom: 50%;
+    background-color: black;
+    overflow: hidden;
+}
+
+.cm_mobRadioV2Body #cmGridObject .cm_mobTeasePhoto.cmRelatedImage.cm_mobTopPhoto > a > .cm_mobTopPhotoPropfixWrapper > img,
+.cm_mobRadioV2Body #cmGridObject .cm_mobTeasePhoto.cm_mobTopPhoto > a > .cm_mobTopPhotoPropfixWrapper > img,
+.cm_mobRadioV2Body #cmGridObject .cmTeasePhoto.cmRelatedImage.cm_mobTopPhoto > a > .cm_mobTopPhotoPropfixWrapper > img {
+    width: auto;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+
+.cm_mobRadioV2Body #cmGridObject .cm_mobTeasePhoto.cmRelatedImage.cm_mobTopPhoto > h2,
+.cm_mobRadioV2Body #cmGridObject .cm_mobTeasePhoto.cm_mobTopPhoto > h2,
+.cm_mobRadioV2Body #cmGridObject .cmTeasePhoto.cmRelatedImage.cm_mobTopPhoto > h2 {
+    padding: 1em;
+    box-sizing: border-box;
+    margin: 0;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: inline-block;
+    /* Generated by http://www.colorzilla.com/gradient-editor/ */
+    background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 50%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(50%,rgba(0,0,0,0.65)));
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 50%);
+    background: -o-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 50%);
+    background: -ms-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 50%);
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 50%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=0 );
+}
+
+.cm_mobRadioV2Body #cmGridObject .cm_mobTeasePhoto.cmRelatedImage.cm_mobTopPhoto > h2 > a,
+.cm_mobRadioV2Body #cmGridObject .cm_mobTeasePhoto.cm_mobTopPhoto > h2 > a,
+.cm_mobRadioV2Body #cmGridObject .cmTeasePhoto.cmRelatedImage.cm_mobTopPhoto > h2 > a {
+    color: white;
+    height: auto;
+}
+
+/*
+    LIST ELEMENTS
+*/
+
+.cm_mobRadioV2Body .cm_mobManualListTeaseMore li {
+    overflow: hidden;
+}
+
+.cm_mobRadioV2Body .cm_mobManualListTeaseMore li a {
+    color: white;
+    float: right;
+    padding: 0.35em 0.5em;
+}
+
+.cm_mobRadioV2Body .cm_mobManualListTeaseMore {
+    border: none;
+}
+
+#cm_mobBaseBody {
+    overflow-x: hidden;
+}
+
+.cm_mobHeaderWrap.cm_mobHeader {
+    background-color: white!important;
+    border:none!important;
+}
+
+.cm_mobBody {
+    width: 500px;
+}
+
+
