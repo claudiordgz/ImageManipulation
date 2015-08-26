@@ -512,7 +512,6 @@ button.cm_mobHeader_search_arrow {
     top: 50%;
     margin-top: -25px;
     right: -10px;
-    "../images/menu_search_arrow.png");
     background-color: transparent;
     background-size: 9px 10px;
     background-repeat: no-repeat;
@@ -594,7 +593,6 @@ a.cm_mobHeader_nav_link:link {
     margin-top: 17px;
     right: 0px;
     margin-right: 5px;
-    "../images/menu_list_arrow.png");
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
@@ -1426,7 +1424,6 @@ li.cm_mobHeader_nav {
     height: 100%;
     overflow-y: scroll;
     overflow-x: visible;
-    "../images/Menu_Tray_Backdround_Tile.jpg");
     background-size: 100% auto;
     background-repeat: repeat-y;
     -webkit-font-smoothing: antialiased;
@@ -1454,7 +1451,6 @@ li.cm_mobHeader_nav {
     height: 64px;
     padding: 19.5px 11px;
     box-sizing: border-box;
-    "../images/Search_Box_Backdround_Tile.jpg");
     background-repeat: repeat-y;
     background-size: 100% auto;
     position: fixed;
@@ -1499,7 +1495,6 @@ button.cm_mobHeader_search_arrow {
     top: 50%;
     margin-top: -25px;
     right: -10px;
-    "../images/menu_search_arrow.png");
     background-color: transparent;
     background-size: 9px 10px;
     background-repeat: no-repeat;
@@ -1581,7 +1576,6 @@ a.cm_mobHeader_nav_link:link {
     margin-top: 17px;
     right: 0px;
     margin-right: 5px;
-    "../images/menu_list_arrow.png");
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
