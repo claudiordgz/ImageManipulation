@@ -111,23 +111,82 @@ var image_list = [
     'http://cps-static.rovicorp.com/3/JPG_400/MI0001/401/MI0001401588.jpg?partner=allrovi.com' ];
 
 
-function appendElement(card, element, policy) {
-    var el = element({
-        'image':image_list[i],
+function createClass(name,rules){
+    var style = document.createElement('style');
+    style.type = 'text/css';
+    document.getElementsByTagName('head')[0].appendChild(style);
+    if(!(style.sheet||{}).insertRule)
+        (style.styleSheet || style.sheet).addRule(name, rules);
+    else
+        style.sheet.insertRule(name+"{"+rules+"}",0);
+}
+
+if (!String.format) {
+    String.format = function(format) {
+        var args = Array.prototype.slice.call(arguments, 1);
+        return format.replace(/{(\d+)}/g, function(match, number) {
+            return typeof args[number] != 'undefined'
+                ? args[number]
+                : match
+                ;
+        });
+    };
+}
+
+// cm_mobHeader_artist_overlay - The full header background div
+// cm_mobHeader_artist_image - The circle div that will contain the image
+// cm_mobHeader_artist-overlay--style - We will put everything related to the background of artist_overlay in here
+// cm_mobHeader_artist-image--style - We will put everything related to background of artist_image in here
+function defaultPolicy(index, element, imgUrl) {
+    var ovalBackgroundClassName = String.format('cm_mobHeader_artist-image--style-{0}', index);
+    var overlayClassName = String.format('cm_mobHeader_artist-overlay--style-{0}', index);
+
+    var overlayBackground = String.format('background-image: url(\'{0}\'); background-color: transparent;', imgUrl);
+    var ovalBackground = String.format('background-image: url(\'{0}\');', imgUrl);
+
+    createClass('.' + overlayClassName, overlayBackground);
+    createClass('.' + ovalBackgroundClassName, ovalBackground);
+
+    var overlayImg = new Image();
+    overlayImg.element = element;
+    overlayImg.overlayClassName = overlayClassName;
+    overlayImg.onload = function() {
+        this.element.find('.cm_mobHeader_artist_overlay').addClass(this.overlayClassName);
+        console.log('overlay added');
+    };
+    overlayImg.src = imgUrl;
+
+    var ovalImg = new Image();
+    ovalImg.element = element;
+    ovalImg.ovalBackgroundClassName = ovalBackgroundClassName;
+    ovalImg.onload = function() {
+        this.element.find('.cm_mobHeader_artist_image').addClass(this.ovalBackgroundClassName);
+        console.log('image added');
+    };
+    ovalImg.src = imgUrl;
+}
+
+function trackingJsPolicy() {
+
+}
+
+function appendElement(index, imageUrl, row, element, policy) {
+    var card = element({
         'songName': 'Song Name',
         'artistName': 'Artist Name'
     });
-    $(card).append(el);
+    policy(index, card, imageUrl);
+    $(row).append(card);
 }
 
-$(document).ready(function() {
-    for(i = 0; i !== image_list.length; ++i) {
-        var card = ich.elRow();
-        appendElement(card, ich.element, null);
-        appendElement(card, ich.element, null);
-        appendElement(card, ich.element, null);
-        $(".mass").append(card);
-    }
 
-    aload();
+$(document).one('ready', function() {
+    for(i = 0; i !== image_list.length; ++i) {
+        var row = ich.elRow();
+        var indexString = i.toString();
+        appendElement(indexString+'-a', image_list[i], row, ich.element, defaultPolicy);
+        appendElement(indexString+'-b', image_list[i], row, ich.element, defaultPolicy);
+        appendElement(indexString+'-c', image_list[i], row, ich.element, defaultPolicy);
+        $(".mass").append(row);
+    }
 });
