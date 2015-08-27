@@ -137,7 +137,7 @@ if (!String.format) {
 // cm_mobHeader_artist_image - The circle div that will contain the image
 // cm_mobHeader_artist-overlay--style - We will put everything related to the background of artist_overlay in here
 // cm_mobHeader_artist-image--style - We will put everything related to background of artist_image in here
-function defaultPolicy(index, element, imgUrl) {
+function defaultPolicy(index, element, imgUrl, policy) {
     var ovalBackgroundClassName = String.format('cm_mobHeader_artist-image--style-{0}', index);
     var overlayClassName = String.format('cm_mobHeader_artist-overlay--style-{0}', index);
 
@@ -152,30 +152,40 @@ function defaultPolicy(index, element, imgUrl) {
     overlayImg.overlayClassName = overlayClassName;
     overlayImg.onload = function() {
         this.element.find('.cm_mobHeader_artist_overlay').addClass(this.overlayClassName);
-        console.log('overlay added');
     };
     overlayImg.src = imgUrl;
 
     var ovalImg = new Image();
     ovalImg.element = element;
     ovalImg.ovalBackgroundClassName = ovalBackgroundClassName;
+    ovalImg.policy = policy;
     ovalImg.onload = function() {
         this.element.find('.cm_mobHeader_artist_image').addClass(this.ovalBackgroundClassName);
-        console.log('image added');
+        if(this.policy) {
+            this.policy();
+        }
     };
     ovalImg.src = imgUrl;
 }
 
-function trackingJsPolicy() {
-
+function currentPolicy() {
+    console.log('Current Policy');
 }
 
-function appendElement(index, imageUrl, row, element, policy) {
+function trackingJsPolicy() {
+    console.log('Tracking JS Policy');
+}
+
+function imageAsBackgroundPolicy() {
+    console.log('Image as Background Policy');
+}
+
+function appendElement(index, imageUrl, row, element, policy, subPolicy) {
     var card = element({
         'songName': 'Song Name',
         'artistName': 'Artist Name'
     });
-    policy(index, card, imageUrl);
+    policy(index, card, imageUrl, subPolicy);
     $(row).append(card);
 }
 
@@ -184,9 +194,9 @@ $(document).one('ready', function() {
     for(i = 0; i !== image_list.length; ++i) {
         var row = ich.elRow();
         var indexString = i.toString();
-        appendElement(indexString+'-a', image_list[i], row, ich.element, defaultPolicy);
-        appendElement(indexString+'-b', image_list[i], row, ich.element, defaultPolicy);
-        appendElement(indexString+'-c', image_list[i], row, ich.element, defaultPolicy);
+        appendElement(indexString+'-a', image_list[i], row, ich.element, defaultPolicy, currentPolicy);
+        appendElement(indexString+'-b', image_list[i], row, ich.element, defaultPolicy, trackingJsPolicy);
+        appendElement(indexString+'-c', image_list[i], row, ich.element, defaultPolicy, imageAsBackgroundPolicy);
         $(".mass").append(row);
     }
 });
