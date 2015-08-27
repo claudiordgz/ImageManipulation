@@ -112,7 +112,11 @@ var image_list = [
 
 $(document).ready(function() {
     for(i = 0; i !== image_list.length; ++i) {
-        var card = ich.elRow({'image':image_list[i]});
+        var card = ich.elRow({
+            'image':image_list[i],
+            'songName': 'Song Name',
+            'artistName': 'Artist Name'
+        });
         $(".mass").append(card);
     }
 
