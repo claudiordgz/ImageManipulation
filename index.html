@@ -5,9 +5,9 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/extra.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="https://cdn.rawgit.com/HenrikJoreteg/ICanHaz.js/master/ICanHaz.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="vendor/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="vendor/ICanHaz.min.js"></script>
     <script>
         function aload(t){"use strict";t=t||window.document.querySelectorAll("[data-aload]"),void 0===t.length&&(t=[t]);var a,e=0,r=t.length;for(e;r>e;e+=1)a=t[e],a["LINK"!==a.tagName?"src":"href"]=a.getAttribute("data-aload"),a.removeAttribute("data-aload");return t}
     </script>
@@ -24,7 +24,7 @@
                 <header>
                     <div class="cm_mobHeader_propfix" style="display: block;">
                         <div class="cm_mobHeader_container">
-                            <div data-aload class="cm_mobHeader_artist_overlay" style="background-image: url({{image}}); background-color: transparent;"></div>
+                            <div class="cm_mobHeader_artist_overlay"></div>
                             <div class="cm_mobHeader_container">
                                 <div class="cm_mobHeader_logo_nav">
                                     <div class="cm_mobHeader_logo">
@@ -35,11 +35,9 @@
                                 <div class="cm_mobHeader_listen_lsp">
                                     <div class="left_col">
                                         <div class="artist_image_propfix">
-                                            <a href="http://m.fe60.k923orlando.com/stream/">
-                                                <div class="cm_mobHeader_artist_image_background">
-                                                    <div data-aload class="cm_mobHeader_artist_image" style="background-image: url({{image}});"></div>
-                                                </div>
-                                            </a>
+                                            <div class="cm_mobHeader_artist_image_background">
+                                                <div class="cm_mobHeader_artist_image"></div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="right_col">
