@@ -110,13 +110,22 @@ var image_list = [
     'http://cps-static.rovicorp.com/3/JPG_400/MI0001/399/MI0001399345.jpg?partner=allrovi.com',
     'http://cps-static.rovicorp.com/3/JPG_400/MI0001/401/MI0001401588.jpg?partner=allrovi.com' ];
 
+
+function appendElement(card, element, policy) {
+    var el = element({
+        'image':image_list[i],
+        'songName': 'Song Name',
+        'artistName': 'Artist Name'
+    });
+    $(card).append(el);
+}
+
 $(document).ready(function() {
     for(i = 0; i !== image_list.length; ++i) {
-        var card = ich.elRow({
-            'image':image_list[i],
-            'songName': 'Song Name',
-            'artistName': 'Artist Name'
-        });
+        var card = ich.elRow();
+        appendElement(card, ich.element, null);
+        appendElement(card, ich.element, null);
+        appendElement(card, ich.element, null);
         $(".mass").append(card);
     }
 
