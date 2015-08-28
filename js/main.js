@@ -142,10 +142,7 @@ function defaultPolicy(index, element, imgUrl, policy) {
     var overlayClassName = String.format('cm_mobHeader_artist-overlay--style-{0}', index);
 
     var overlayBackground = String.format('background-image: url(\'{0}\'); background-color: transparent;', imgUrl);
-    var ovalBackground = String.format('background-image: url(\'{0}\');', imgUrl);
-
     createClass('.' + overlayClassName, overlayBackground);
-    createClass('.' + ovalBackgroundClassName, ovalBackground);
 
     var overlayImg = new Image();
     overlayImg.element = element;
@@ -157,27 +154,33 @@ function defaultPolicy(index, element, imgUrl, policy) {
 
     var ovalImg = new Image();
     ovalImg.element = element;
-    ovalImg.ovalBackgroundClassName = ovalBackgroundClassName;
+    ovalImg.className = ovalBackgroundClassName;
+    ovalImg.imageSrc = imgUrl;
     ovalImg.policy = policy;
     ovalImg.onload = function() {
-        this.element.find('.cm_mobHeader_artist_image').addClass(this.ovalBackgroundClassName);
         if(this.policy) {
-            this.policy();
+            var style = this.policy(this.element, this.imageSrc, this.width, this.height, this.className);
+            console.log(style);
+            createClass('.' + this.className, style);
+            this.element.find('.cm_mobHeader_artist_image').addClass(this.className);
         }
     };
     ovalImg.src = imgUrl;
 }
 
-function currentPolicy() {
-    console.log('Current Policy');
+function currentPolicy(element, imgUrl, width, height, imgClass) {
+    console.log('Current Policy ' + width.toString() + 'x' + height.toString() +  ' ' + imgClass);
+    return String.format('background-image: url(\'{0}\');', imgUrl);
 }
 
-function trackingJsPolicy() {
-    console.log('Tracking JS Policy');
+function trackingJsPolicy(element, imgUrl,  width, height, imgClass) {
+    console.log('Tracking JS Policy ' + width.toString() + 'x' + height.toString() +  ' ' + imgClass);
+    return String.format('background-image: url(\'{0}\');', imgUrl);
 }
 
-function imageAsBackgroundPolicy() {
-    console.log('Image as Background Policy');
+function imageAsBackgroundPolicy(element, imgUrl,  width, height, imgClass) {
+    console.log('Image as Background Policy ' + width.toString() + 'x' + height.toString() +  ' ' + imgClass );
+    return String.format('background-image: url(\'{0}\');', imgUrl);
 }
 
 function appendElement(index, imageUrl, row, element, policy, subPolicy) {
