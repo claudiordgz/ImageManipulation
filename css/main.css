@@ -2478,7 +2478,8 @@ a.cm_mobHeader_nav_link:link {
 }
 
 .cm_mobBody {
-    width: 500px;
+    width: 99%;
+    margin: 0 auto;
 }
 
 
