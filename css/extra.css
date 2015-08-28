@@ -1,5 +1,14 @@
 [data-aload] { background-image: none !important; }
 
+.row.no-pad {
+    margin-right:0;
+    margin-left:0;
+}
+.row.no-pad > [class*='col-'] {
+    padding-right:0;
+    padding-left:0;
+}
+
 .col-md-4  {
     padding-bottom: 10px;
 }
