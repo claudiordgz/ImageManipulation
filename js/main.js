@@ -1,3 +1,6 @@
+/*  The test bed
+    Images were pulled from several sites
+ */
 var image_list = [
     'https://cps-static.rovicorp.com/3/JPG_400/MI0003/848/MI0003848198.jpg?partner=allrovi.com',
     'https://a248.e.akamai.net/f/1726/3609/1m/media.cmgdigital.com/shared/img/photos/2014/06/20/ad/bb/Jeanne_Headshot_2.jpg',
@@ -111,6 +114,9 @@ var image_list = [
     'https://cps-static.rovicorp.com/3/JPG_400/MI0001/401/MI0001401588.jpg?partner=allrovi.com' ];
 
 
+/*
+
+ */
 function createClass(name,rules){
     var style = document.createElement('style');
     style.type = 'text/css';
@@ -155,7 +161,6 @@ function defaultPolicy(index, element, imgUrl, policy) {
     var ovalImg = new Image();
     ovalImg.element = element;
     ovalImg.className = ovalBackgroundClassName;
-    ovalImg.crossOrigin = "Anonymous";
     ovalImg.imageSrc = imgUrl;
     ovalImg.policy = policy;
     ovalImg.onload = function() {
