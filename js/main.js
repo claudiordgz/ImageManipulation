@@ -159,6 +159,7 @@ function defaultPolicy(index, element, imgUrl, policy) {
     overlayImg.src = imgUrl;
 
     var ovalImg = new Image();
+
     ovalImg.element = element;
     ovalImg.className = ovalBackgroundClassName;
     ovalImg.imageSrc = imgUrl;
@@ -182,15 +183,12 @@ function currentPolicy(imageElement, element, imgUrl, width, height, imgClass) {
 
 function trackingJsPolicy(imageElement, element, imgUrl,  width, height, imgClass) {
     console.log('Tracking JS Policy ' + width.toString() + 'x' + height.toString() +  ' ' + imgClass);
-    var tracker = new tracking.ObjectTracker(['face']);
-    tracker.setStepSize(1.7);
-    tracking.track(imageElement, tracker);
-    tracker.on('track', function(event) {
-        event.data.forEach(function(rect) {
-            console.log(rect);
-        });
-    });
-    return String.format('background-image: url(\'{0}\'); background-size: 100% auto;', imgUrl);
+    var canvas = document.createElement('canvas');
+
+    var context = canvas.getContext('2d');
+
+    context.drawImage(imageElement,0,0);
+    return String.format('background-image: url(\'{0}\'); background-size: 100% auto;', canvas.toDataURL());
 }
 
 function imageAsBackgroundPolicy(imageElement, element, imgUrl,  width, height, imgClass) {
@@ -212,8 +210,8 @@ $(document).one('ready', function() {
     for(i = 0; i !== image_list.length; ++i) {
         var row = ich.elRow();
         var indexString = i.toString();
-        appendElement(indexString+'-a', image_list[i], row, ich.element, defaultPolicy, currentPolicy);
-        appendElement(indexString+'-b', image_list[i], row, ich.element, defaultPolicy, trackingJsPolicy);
+        appendElement(indexString+'-a', image_list[i], row, ich.element, defaultPolicy, trackingJsPolicy);
+        appendElement(indexString+'-b', image_list[i], row, ich.element, defaultPolicy, currentPolicy);
         appendElement(indexString+'-c', image_list[i], row, ich.element, defaultPolicy, imageAsBackgroundPolicy);
         $(".mass").append(row);
     }
