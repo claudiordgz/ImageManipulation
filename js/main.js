@@ -191,8 +191,16 @@ function trackingJsPolicy(imageElement, element, imgUrl,  width, height, imgClas
     return String.format('background-image: url(\'{0}\'); background-size: 100% auto;', canvas.toDataURL());
 }
 
-function imageAsBackgroundPolicy(imageElement, element, imgUrl,  width, height, imgClass) {
+function trackingJsFromImage(imageElement, element, imgUrl,  width, height, imgClass) {
     console.log('Image as Background Policy ' + width.toString() + 'x' + height.toString() +  ' ' + imgClass );
+    var tracker = new tracking.ObjectTracker(['face']);
+    tracker.setStepSize(1.7);
+    tracking.track(imageElement, tracker);
+    tracker.on('track', function(event) {
+        event.data.forEach(function(rect) {
+            console.log(rect);
+        });
+    });
     return String.format('background-image: url(\'{0}\');', imgUrl);
 }
 
@@ -205,14 +213,35 @@ function appendElement(index, imageUrl, row, element, policy, subPolicy) {
     $(row).append(card);
 }
 
+function fromFile() {
+    var items = null;
+    $.ajaxSetup({async: false});
+    $.get("http://localhost:63342/trackingjs-playground/js/assets/images.txt", function(data) {
+        items = data.split('\n');
+    });
+    return items;
+}
 
-$(document).one('ready', function() {
-    for(i = 0; i !== image_list.length; ++i) {
+function fromDirectory() {
+
+}
+
+function main() {
+    var items = fromFile();
+
+    for(i = 0; i !== items.length; ++i) {
         var row = ich.elRow();
         var indexString = i.toString();
-        appendElement(indexString+'-a', image_list[i], row, ich.element, defaultPolicy, trackingJsPolicy);
+        appendElement(indexString+'-a', image_list[i], row, ich.element, defaultPolicy, currentPolicy);
         appendElement(indexString+'-b', image_list[i], row, ich.element, defaultPolicy, currentPolicy);
-        appendElement(indexString+'-c', image_list[i], row, ich.element, defaultPolicy, imageAsBackgroundPolicy);
+        appendElement(indexString+'-c', image_list[i], row, ich.element, defaultPolicy, currentPolicy);
         $(".mass").append(row);
     }
+}
+
+$(document).one('ready', function() {
+    main();
+
+
+
 });
