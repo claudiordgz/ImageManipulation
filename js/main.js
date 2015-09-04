@@ -216,7 +216,7 @@ function appendElement(index, imageUrl, row, element, policy, subPolicy) {
 function fromFile() {
     var items = null;
     $.ajaxSetup({async: false});
-    $.get("http://localhost:63342/trackingjs-playground/js/assets/images.txt", function(data) {
+    $.get("js/assets/images.txt", function(data) {
         items = data.split('\n');
     });
     return items;
@@ -240,8 +240,31 @@ function main() {
 }
 
 $(document).one('ready', function() {
-    main();
+    //main();
 
+    var get_data = function get_data () {
+        var api_url = 'http://m.lsp.powerathens.com/api/v1/station/now-playing/';
+        var ajax_obj = {
+            url: api_url,
+            data: {
+                callback: 'cmg.radioheader.lsploop_callbacks.callback0'
+            },
+            success: function() {
+                console.log('success');
+            },
+            method: 'GET',
+            error: function () {
+                console.log('Error polling LSP API:', arguments);
+            }
+        };
+        try {
+            $.ajax(ajax_obj);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    get_data();
 
 
 });
