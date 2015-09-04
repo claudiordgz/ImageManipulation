@@ -243,7 +243,7 @@ $(document).one('ready', function() {
     //main();
 
     var get_data = function get_data () {
-        var api_url = 'http://m.lsp.powerathens.com/api/v1/station/now-playing/';
+        var api_url = 'http://lsp.powerathens.com/api/v1/station/now-playing/';
         var ajax_obj = {
             url: api_url,
             data: {
