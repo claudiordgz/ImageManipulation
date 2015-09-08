@@ -223,18 +223,31 @@ function fromFile() {
 }
 
 function fromDirectory() {
+    var items = null;
+    $.ajaxSetup({async: false});
+    $.get("js/assets/list.txt", function(data) {
+        items = data.split('\n');
+    });
+    return items;
+}
 
+function completeAssetWithPath(images) {
+    for(var i = 0; i !== images.length; ++i) {
+        images[i] = '../trackingjs-playground/js/assets/img/' + images[i];
+    }
 }
 
 function main() {
-    var items = fromFile();
+    var items = fromDirectory();
+    completeAssetWithPath(items);
+    console.log(items);
 
     for(i = 0; i !== items.length; ++i) {
         var row = ich.elRow();
         var indexString = i.toString();
-        appendElement(indexString+'-a', image_list[i], row, ich.element, defaultPolicy, currentPolicy);
-        appendElement(indexString+'-b', image_list[i], row, ich.element, defaultPolicy, currentPolicy);
-        appendElement(indexString+'-c', image_list[i], row, ich.element, defaultPolicy, currentPolicy);
+        appendElement(indexString+'-a', items[i], row, ich.element, defaultPolicy, currentPolicy);
+        appendElement(indexString+'-b', items[i], row, ich.element, defaultPolicy, currentPolicy);
+        appendElement(indexString+'-c', items[i], row, ich.element, defaultPolicy, currentPolicy);
         $(".mass").append(row);
     }
 }
