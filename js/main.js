@@ -230,13 +230,21 @@ function fromFile() {
     return items;
 }
 
-function fromDirectory() {
+function retrieveFromFile(fileName){
     var items = null;
     $.ajaxSetup({async: false});
-    $.get("js/assets/list.txt", function(data) {
+    $.get(String.format("js/assets/{0}", fileName), function(data) {
         items = data.split('\n');
     });
     return items;
+}
+
+function fromDirectorySmallSubset() {
+    return retrieveFromFile('small_image_testbed.txt');
+}
+
+function fromDirectory() {
+    return retrieveFromFile('list.txt');
 }
 
 function completeAssetWithPath(images) {
@@ -246,7 +254,7 @@ function completeAssetWithPath(images) {
 }
 
 function main() {
-    var items = fromDirectory();
+    var items = fromDirectorySmallSubset();
     completeAssetWithPath(items);
 
     for(i = 0; i !== items.length; ++i) {
