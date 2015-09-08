@@ -167,7 +167,7 @@ function defaultPolicy(index, element, imgUrl, policy) {
     ovalImg.onload = function() {
         if(this.policy) {
             var style = this.policy(this, this.element, this.imageSrc, this.width, this.height, this.className);
-            console.log(style);
+//            console.log(style);
             createClass('.' + this.className, style);
             this.element.find('.cm_mobHeader_artist_image').addClass(this.className);
         }
@@ -176,7 +176,7 @@ function defaultPolicy(index, element, imgUrl, policy) {
 }
 
 function currentPolicy(imageElement, element, imgUrl, width, height, imgClass) {
-    console.log('Current Policy ' + width.toString() + 'x' + height.toString() +  ' ' + imgClass);
+//    console.log('Current Policy ' + width.toString() + 'x' + height.toString() +  ' ' + imgClass);
     return String.format('background-image: url(\'{0}\');', imgUrl);
 }
 
@@ -192,14 +192,22 @@ function trackingJsPolicy(imageElement, element, imgUrl,  width, height, imgClas
 }
 
 function trackingJsFromImage(imageElement, element, imgUrl,  width, height, imgClass) {
-    console.log('Image as Background Policy ' + width.toString() + 'x' + height.toString() +  ' ' + imgClass );
+//    console.log('Image as Background Policy ' + width.toString() + 'x' + height.toString() +  ' ' + imgClass );
     var tracker = new tracking.ObjectTracker(['face']);
+    tracker.sourceElement = {
+        width: width,
+        height: height
+    };
     tracker.setStepSize(1.7);
     tracking.track(imageElement, tracker);
     tracker.on('track', function(event) {
-        event.data.forEach(function(rect) {
-            console.log(rect);
-        });
+        if (event.data.length === 0) {
+            console.log('No elements found');
+        } else {
+            event.data.forEach(function(data) {
+                console.log(data);
+            });
+        }
     });
     return String.format('background-image: url(\'{0}\');', imgUrl);
 }
@@ -240,12 +248,11 @@ function completeAssetWithPath(images) {
 function main() {
     var items = fromDirectory();
     completeAssetWithPath(items);
-    console.log(items);
 
     for(i = 0; i !== items.length; ++i) {
         var row = ich.elRow();
         var indexString = i.toString();
-        appendElement(indexString+'-a', items[i], row, ich.element, defaultPolicy, currentPolicy);
+        appendElement(indexString+'-a', items[i], row, ich.element, defaultPolicy, trackingJsFromImage);
         appendElement(indexString+'-b', items[i], row, ich.element, defaultPolicy, currentPolicy);
         appendElement(indexString+'-c', items[i], row, ich.element, defaultPolicy, currentPolicy);
         $(".mass").append(row);
