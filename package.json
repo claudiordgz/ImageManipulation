@@ -1,5 +1,5 @@
 {
-  "name": "trackingjs-playground",
+  "name": "ImageManipulation",
   "version": "0.1.0",
   "description": "R&D of tracking JS library",
   "main": "index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/claudiordgz/trackingjs-playground"
+    "url": "https://github.com/claudiordgz/ImageManipulation"
   },
   "keywords": [
     "javascript",
@@ -25,9 +25,9 @@
   "author": "claudiordgz",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/claudiordgz/trackingjs-playground/issues"
+    "url": "https://github.com/claudiordgz/ImageManipulation/issues"
   },
-  "homepage": "https://github.com/claudiordgz/trackingjs-playground",
+  "homepage": "https://claudiordgz.github.io/ImageManipulation",
   "devDependencies": {
     "bootstrap": "3.3.5",
     "browserify": "11.0.1",
