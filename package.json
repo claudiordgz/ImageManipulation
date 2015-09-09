@@ -4,7 +4,10 @@
   "description": "R&D of tracking JS library",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:js:main:debug": "browserify -d src/main.js -o js/index.js",
+    "build:js:main": "browserify src/main.js | uglifyjs > js/index.js",
+    "build:js:debug": "npm run build:js:main:debug",
+    "build:js": "npm run build:js:main"
   },
   "repository": {
     "type": "git",
@@ -24,5 +27,13 @@
   "bugs": {
     "url": "https://github.com/claudiordgz/trackingjs-playground/issues"
   },
-  "homepage": "https://github.com/claudiordgz/trackingjs-playground"
+  "homepage": "https://github.com/claudiordgz/trackingjs-playground",
+  "devDependencies": {
+    "bootstrap": "3.3.5",
+    "browserify": "11.0.1",
+    "icanhaz": "0.10.3",
+    "jquery": "2.1.4",
+    "tracking": "1.1.1",
+    "uglifyjs": "2.4.10"
+  }
 }
