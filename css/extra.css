@@ -20,3 +20,10 @@
 .cm_mobHeader_weather_text {
     height: 1.6em;
 }
+
+.rect {
+    border: 2px solid #a64ceb;
+    left: -1000px;
+    position: absolute;
+    top: -1000px;
+}
