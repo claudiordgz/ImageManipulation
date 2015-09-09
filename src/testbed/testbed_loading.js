@@ -21,7 +21,7 @@ function retrieveFromFile(fileName){
 
 function completeAssetWithPath(images) {
     for(var i = 0; i !== images.length; ++i) {
-        images[i] = '../trackingjs-playground/js/assets/img/' + images[i];
+        images[i] = '../ImageManipulation/js/assets/img/' + images[i];
     }
 }
 
