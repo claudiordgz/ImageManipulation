@@ -113,7 +113,6 @@ var image_list = [
     'https://cps-static.rovicorp.com/3/JPG_400/MI0001/399/MI0001399345.jpg?partner=allrovi.com',
     'https://cps-static.rovicorp.com/3/JPG_400/MI0001/401/MI0001401588.jpg?partner=allrovi.com' ];
 
-
 /*
 
  */
@@ -164,24 +163,26 @@ function defaultPolicy(index, element, imgUrl, policy) {
     ovalImg.className = ovalBackgroundClassName;
     ovalImg.imageSrc = imgUrl;
     ovalImg.policy = policy;
+    ovalImg.self = ovalImg;
     ovalImg.onload = function() {
         if(this.policy) {
-            var style = this.policy(this, this.element, this.imageSrc, this.width, this.height, this.className);
+            var container = this.element.find('.cm_mobHeader_artist_image');
+            var style = this.policy(this.self, this.element, container, this.imageSrc, this.width, this.height, this.className);
 //            console.log(style);
             createClass('.' + this.className, style);
-            this.element.find('.cm_mobHeader_artist_image').addClass(this.className);
+            container.addClass(this.className);
         }
     };
     ovalImg.src = imgUrl;
 }
 
-function currentPolicy(imageElement, element, imgUrl, width, height, imgClass) {
+function currentPolicy(imageElement, element, imageContainer, imgUrl, width, height, imgClass) {
 //    console.log('Current Policy ' + width.toString() + 'x' + height.toString() +  ' ' + imgClass);
     return String.format('background-image: url(\'{0}\');', imgUrl);
 }
 
 
-function trackingJsPolicy(imageElement, element, imgUrl,  width, height, imgClass) {
+function trackingJsPolicy(imageElement, element, imageContainer, imgUrl,  width, height, imgClass) {
     console.log('Tracking JS Policy ' + width.toString() + 'x' + height.toString() +  ' ' + imgClass);
     var canvas = document.createElement('canvas');
 
@@ -191,21 +192,29 @@ function trackingJsPolicy(imageElement, element, imgUrl,  width, height, imgClas
     return String.format('background-image: url(\'{0}\'); background-size: 100% auto;', canvas.toDataURL());
 }
 
-function trackingJsFromImage(imageElement, element, imgUrl,  width, height, imgClass) {
+function trackingJsFromImage(imageElement, element, imageContainer, imgUrl,  width, height, imgClass) {
 //    console.log('Image as Background Policy ' + width.toString() + 'x' + height.toString() +  ' ' + imgClass );
+    var containerHeight = Math.max(imageContainer[0].clientHeight,imageContainer[0].offsetHeight, imageContainer[0].scrollHeight);
+    var containerWidth = Math.max(imageContainer[0].clientWidth,imageContainer[0].offsetWidth, imageContainer[0].scrollWidth);
     var tracker = new tracking.ObjectTracker(['face']);
     tracker.sourceElement = {
         width: width,
-        height: height
+        height: height,
+        element: element,
+        imageElement: imageElement,
+        imgClass: imgClass
     };
     tracker.setStepSize(1.7);
     tracking.track(imageElement, tracker);
     tracker.on('track', function(event) {
+        event.sourceElement = this.sourceElement;
         if (event.data.length === 0) {
             console.log('No elements found');
         } else {
-            event.data.forEach(function(data) {
-                console.log(data);
+            event.data.forEach(function(rect) {
+                console.log(event.sourceElement.imgClass);
+                window.plot(event.sourceElement.imageElement, '.' + event.sourceElement.imgClass,
+                    rect.x, rect.y, rect.width, rect.height);
             });
         }
     });
@@ -287,6 +296,17 @@ var get_data = function get_data () {
     } catch (err) {
         console.log(err);
     }
+};
+
+window.plot = function(imageElement, className, x, y, w, h) {
+    var rect = document.createElement('div');
+    document.querySelector(className).appendChild(rect);
+    rect.classList.add('rect');
+    rect.style.width = w + 'px';
+    rect.style.height = h + 'px';
+    console.log(imageElement.offsetLeft + ' ' + imageElement.offsetTop);
+    rect.style.left = (imageElement.offsetLeft + x) + 'px';
+    rect.style.top = (imageElement.offsetTop + y) + 'px';
 };
 
 $(document).one('ready', function() {
