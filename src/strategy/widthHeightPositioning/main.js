@@ -1,7 +1,6 @@
 util = require('../../util');
 
-function currentPolicy(imageElement, element, imageContainer, imgUrl, width, height, imgClass) {
-//    console.log('Current Policy ' + width.toString() + 'x' + height.toString() +  ' ' + imgClass);
+function currentPolicy(imageElement, imageContainer, imgUrl, width, height, imgClass) {
     return util.format('background-image: url(\'{0}\');', imgUrl);
 }
 
