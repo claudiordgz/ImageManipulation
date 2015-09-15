@@ -24,7 +24,28 @@ format = function(format) {
     });
 };
 
+function getWidth(element) {
+    var containerWidth = Math.max(element.clientWidth,element.offsetWidth,element.scrollWidth);
+    console.log(containerWidth);
+}
+
+function getHeight(element) {
+    var containerHeight = Math.max(element.clientHeight,element.offsetHeight,element.scrollHeight);
+    console.log(containerHeight);
+}
+
+var getProperty = {
+    width: getWidth,
+    height: getHeight
+};
+
+function getProperties(element){
+    getProperty.width(element);
+    getProperty.height(element);
+}
+
 module.exports = {
     createClass: createClass,
-    format: format
+    format: format,
+    getProperties: getProperties
 };
