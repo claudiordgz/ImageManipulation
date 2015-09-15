@@ -1,13 +1,16 @@
+var util = require('../../util');
 
-function plotSquare(imageElement, className, x, y, w, h) {
+function plotSquare(imageElement, x, y, w, h) {
     var rect = document.createElement('div');
-    document.querySelector(className).appendChild(rect);
+    document.querySelector(imageElement.imageClassName).appendChild(rect);
+    console.log(x + ',' + y + ',' + w + ',' + h);
+    console.log(imageElement);
+    console.log(util.getProperties(imageElement.elementContainingImage[0]));
     rect.classList.add('rect');
     rect.style.width = w + 'px';
     rect.style.height = h + 'px';
-    console.log(imageElement.offsetLeft + ' ' + imageElement.offsetTop);
-    rect.style.left = (imageElement.offsetLeft + x) + 'px';
-    rect.style.top = (imageElement.offsetTop + y) + 'px';
+    rect.style.left = (x) + 'px';
+    rect.style.top = (y) + 'px';
 }
 
 module.exports = {
