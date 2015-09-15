@@ -25,13 +25,11 @@ format = function(format) {
 };
 
 function getWidth(element) {
-    var containerWidth = Math.max(element.clientWidth,element.offsetWidth,element.scrollWidth);
-    console.log(containerWidth);
+    return Math.max(element.clientWidth,element.offsetWidth,element.scrollWidth);
 }
 
 function getHeight(element) {
-    var containerHeight = Math.max(element.clientHeight,element.offsetHeight,element.scrollHeight);
-    console.log(containerHeight);
+    return Math.max(element.clientHeight,element.offsetHeight,element.scrollHeight);
 }
 
 var getProperty = {
@@ -40,8 +38,10 @@ var getProperty = {
 };
 
 function getProperties(element){
-    getProperty.width(element);
-    getProperty.height(element);
+    return {
+        width: getProperty.width(element),
+        height: getProperty.height(element)
+    }
 }
 
 module.exports = {
