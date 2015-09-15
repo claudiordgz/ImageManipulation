@@ -1,5 +1,5 @@
 util = require('../util');
-policies = require('./policies')
+policies = require('./policies');
 
 // cm_mobHeader_artist_overlay - The full header background div
 // cm_mobHeader_artist_image - The circle div that will contain the image
@@ -29,7 +29,10 @@ function defaultPolicy(index, element, imgUrl, policy) {
     ovalImg.self = ovalImg;
     ovalImg.onload = function() {
         if(this.policy) {
-            var container = this.element.find('.cm_mobHeader_artist_image');
+            var imageContainerClassName = '.cm_mobHeader_artist_image';
+            var container = this.element.find(imageContainerClassName);
+            console.log(container.width);
+            console.log(container.height);
             var style = this.policy(this.self, this.element, container, this.imageSrc, this.width, this.height, this.className);
             util.createClass('.' + this.className, style);
             container.addClass(this.className);
