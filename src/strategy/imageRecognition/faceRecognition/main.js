@@ -27,13 +27,23 @@ function faceTracking(faceRecognizedEvent, imagePack){
             imagePack.width,imagePack.height,
             containerProperties.width, containerProperties.height));
     }
-    faces.sort(function(a, b) {
-        return a.vertices.OO.x - b.vertices.OO.x;
-    });
-    faces.sort(function(a, b) {
-        return a.vertices.OO.y - b.vertices.OO.y;
-    });
-
+    var minX = faces[0].vertices.OO.x || 0,
+        maxX = faces[0].vertices.OA.x || 0,
+        minY = faces[0].vertices.OO.y || 0,
+        maxY = faces[0].vertices.OC.y || 0;
+    if(faces.length > 1) {
+        faces.sort(function(a, b) {
+            return a.vertices.OO.x - b.vertices.OO.x;
+        });
+        minX = faces[0].vertices.OO.x || 0;
+        maxX = faces[faces.length-1].vertices.OA.x || 0;
+        faces.sort(function(a, b) {
+            return a.vertices.OO.y - b.vertices.OO.y;
+        });
+        minY = faces[0].vertices.OO.y || 0;
+        maxY = faces[faces.length-1].vertices.OC.y || 0;
+    }
+    console.log('minX:' + minX + ' maxX:' + maxX + ' minY:' + minY + ' maxY:' + maxY);
 }
 
 module.exports = {
