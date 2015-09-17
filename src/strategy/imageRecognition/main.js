@@ -48,10 +48,11 @@ function trackingJsFromLocalImage(imageElement, imageContainer, imgUrl,  width, 
         if (event.data.length === 0) {
             console.log('No elements found');
         } else {
-            event.data.forEach(function(rect) {
-                console.log(event.sourceElement.imageClassName);
+            for(var i = 0; i != event.data.length; ++i) {
+                var rect = event.data[i];
                 plot.plotSquare(event.sourceElement, rect.x, rect.y, rect.width, rect.height);
-            });
+            }
+
         }
     });
     return util.format('background-image: url(\'{0}\');  no-repeat center center fixed; \
