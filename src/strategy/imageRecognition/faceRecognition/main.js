@@ -46,6 +46,8 @@ function faceTracking(faceRecognizedEvent, imagePack){
             containerProperties.width, containerProperties.height));
     }
     var encompassingContainer = calculateBigBoxEncompassingFaces(faces);
+    encompassingContainer.recalculateVerticesWithOffset();
+    console.log(encompassingContainer);
 }
 
 module.exports = {
