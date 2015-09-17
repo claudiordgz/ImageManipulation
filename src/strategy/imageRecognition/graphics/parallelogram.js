@@ -2,6 +2,7 @@ vertex = require('./vertex');
 
 
 function ParallelogramVertexSet(width, height) {
+    this.pMembers = ['OO','OA','OB','OC'];
     this.OO = new vertex.Vertex2D(0, 0);
     this.OA = new vertex.Vertex2D(0 + width, 0);
     this.OB = new vertex.Vertex2D(0, 0 + height);

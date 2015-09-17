@@ -7,11 +7,6 @@ function setupImageFaceInsideContainer(width, height, offsetX, offsetY,
                                        containerWidth, containerHeight){
     var rectangleFace = new graphics.FaceContainer(width, height, offsetX, offsetY, imageWidth, imageHeight, containerWidth, containerHeight);
     rectangleFace.recalculateVerticesWithOffset();
-    rectangleFace.resetVertices();
-    rectangleFace.recalculateVerticesWithOffset();
-    rectangleFace.resetVertices();
-    rectangleFace.recalculateVerticesWithOffset();
-    rectangleFace.resetVertices();
     return rectangleFace;
 }
 
@@ -32,7 +27,13 @@ function faceTracking(faceRecognizedEvent, imagePack){
             imagePack.width,imagePack.height,
             containerProperties.width, containerProperties.height));
     }
-    console.log(faces);
+    faces.sort(function(a, b) {
+        return a.vertices.OO.x - b.vertices.OO.x;
+    });
+    faces.sort(function(a, b) {
+        return a.vertices.OO.y - b.vertices.OO.y;
+    });
+
 }
 
 module.exports = {

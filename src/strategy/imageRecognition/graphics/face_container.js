@@ -14,7 +14,8 @@ function FaceContainer(width, height, offsetX, offsetY, imageWidth, imageHeight,
 }
 
 function recalculateVertices(parallelogramVertexSet, offsetX, offsetY) {
-    for (var key in parallelogramVertexSet) {
+    for (var i=0; i!=parallelogramVertexSet.pMembers.length;++i) {
+        var key = parallelogramVertexSet.pMembers[i];
         if (parallelogramVertexSet.hasOwnProperty(key)) {
             parallelogramVertexSet[key].x += offsetX;
             parallelogramVertexSet[key].y += offsetY;
@@ -24,11 +25,7 @@ function recalculateVertices(parallelogramVertexSet, offsetX, offsetY) {
 
 FaceContainer.prototype.recalculateVerticesWithOffset = function() {
     this.backupVertices(this.vertices);
-    for (var key in this.vertices) {
-        if (this.vertices.hasOwnProperty(key)) {
-            recalculateVertices(this.vertices, this.offsetX, this.offsetY);
-        }
-    }
+    recalculateVertices(this.vertices, this.offsetX, this.offsetY);
 };
 
 module.exports = {
