@@ -10,7 +10,8 @@
     "build:js": "npm run build:js:main",
     "build": "npm run build:js",
     "build:debug": "npm run build:js:debug",
-    "build:watch": "watch 'npm run build' ."
+    "build:watch": "watch 'npm run build' .",
+    "build:watch:debug": "watch 'npm run build:debug' ."
   },
   "repository": {
     "type": "git",
