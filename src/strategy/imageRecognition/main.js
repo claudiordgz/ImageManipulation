@@ -59,43 +59,57 @@ function Parallelogram(width, height) {
     this.height = height;
     this.vertices = new ParallelogramVertexSet(width, height);
     this.__previousStateVertices = new ParallelogramVertexSet(width, height);
-    this.resetVertices = function() {
-        this.vertices = this.__previousStateVertices;
-    };
-    this.backupVertices = function (vertices) {
-        if(!this.__previousStateVertices.equals(vertices)){
-            this.__previousStateVertices.copy(vertices);
+}
+
+Parallelogram.prototype.resetVertices = function() {
+    if(!this.vertices.equals(this.__previousStateVertices)){
+        var localCopy = this.vertices;
+        this.vertices.copy(this.__previousStateVertices);
+        this.__previousStateVertices.copy(localCopy);
+    }
+};
+
+Parallelogram.prototype.backupVertices = function (vertices) {
+    if(!this.__previousStateVertices.equals(vertices)){
+        this.__previousStateVertices.copy(vertices);
+    }
+};
+
+FaceContainer.prototype = Object.create(Parallelogram.prototype);
+FaceContainer.prototype.constructor = FaceContainer;
+
+function FaceContainer(width, height, offsetX, offsetY, imageWidth, imageHeight, containerWidth, containerHeight) {
+    Parallelogram.call(this, width, height);
+    this.offsetX = offsetX;
+    this.offsetY = offsetY;
+    this.sourceWidth = imageWidth;
+    this.sourceHeight = imageHeight;
+    this.targetWidth = containerWidth;
+    this.targetHeight = containerHeight;
+}
+
+FaceContainer.prototype.recalculateVerticesWithOffset = function() {
+    this.backupVertices(this.vertices);
+    for (var key in this.vertices) {
+        if (this.vertices.hasOwnProperty(key)) {
+            recalculateVertices(this.vertices, this.offsetX, this.offsetY);
         }
     }
-}
+};
 
 /*
  */
 function setupImageFaceInsideContainer(width, height, offsetX, offsetY,
                                        imageWidth, imageHeight,
                                        containerWidth, containerHeight){
-    var rectangle = new Parallelogram(width, height);
-    rectangle.offsetX = offsetX;
-    rectangle.offsetY = offsetY;
-    rectangle.sourceWidth = imageWidth;
-    rectangle.sourceHeight = imageHeight;
-    rectangle.targetWidth = containerWidth;
-    rectangle.targetHeight = containerHeight;
-    rectangle.recalculateVerticesWithOffset = function() {
-        this.backupVertices(this.vertices);
-        for (var key in this.vertices) {
-            if (this.vertices.hasOwnProperty(key)) {
-                recalculateVertices(this.vertices, this.offsetX, this.offsetY);
-            }
-        }
-    };
-    rectangle.recalculateVerticesWithOffset();
-    rectangle.resetVertices();
-    rectangle.recalculateVerticesWithOffset();
-    rectangle.resetVertices();
-    rectangle.recalculateVerticesWithOffset();
-    rectangle.resetVertices();
-    return rectangle;
+    var rectangleFace = new FaceContainer(width, height, offsetX, offsetY, imageWidth, imageHeight, containerWidth, containerHeight);
+    rectangleFace.recalculateVerticesWithOffset();
+    rectangleFace.resetVertices();
+    rectangleFace.recalculateVerticesWithOffset();
+    rectangleFace.resetVertices();
+    rectangleFace.recalculateVerticesWithOffset();
+    rectangleFace.resetVertices();
+    return rectangleFace;
 }
 
 function isPointInsideSpace() {
