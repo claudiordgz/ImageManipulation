@@ -34,7 +34,7 @@ function Parallelogram(width, height) {
     }
 }
 
-function isPointInsideSquare() {
+function isPointInsideSpace() {
 
 }
 
@@ -44,15 +44,23 @@ function trackingJsFromLocalImage(imageElement, imageContainer, imgUrl,  width, 
     tracker.setStepSize(1.7);
     tracking.track(imageElement, tracker);
     tracker.on('track', function(event) {
-        event.sourceElement = this.sourceElement;
         if (event.data.length === 0) {
             console.log('No elements found');
         } else {
+            var faces = [];
             for(var i = 0; i != event.data.length; ++i) {
-                var rect = event.data[i];
-                plot.plotSquare(event.sourceElement, rect.x, rect.y, rect.width, rect.height);
+                var data = event.data[i];
+                var rectangle = new Parallelogram(data.width, data.height);
+                rectangle.offsetX = data.x;
+                rectangle.offsetY = data.y;
+                rectangle.sourceWidth = this.sourceElement.width;
+                rectangle.sourceHeight = this.sourceElement.height;
+                var containerProperties = util.getProperties(this.sourceElement.elementContainingImage[0]);
+                rectangle.targetWidth = containerProperties.width;
+                rectangle.targetHeight = containerProperties.height;
+                faces.push(rectangle);
             }
-
+            console.log(faces);
         }
     });
     return util.format('background-image: url(\'{0}\');  no-repeat center center fixed; \
