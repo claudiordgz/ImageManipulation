@@ -53,6 +53,18 @@ function isPointInsideSpace() {
 
 }
 
+function faceTracking(event, imagePack){
+    var faces = [];
+    for(var i = 0; i != event.data.length; ++i) {
+        var data = event.data[i];
+        var containerProperties = util.getProperties(imagePack.elementContainingImage[0]);
+        faces.push(setupImageFaceInsideContainer(data.width, data.height, data.x, data.y,
+            imagePack.width,imagePack.height,
+            containerProperties.width, containerProperties.height));
+    }
+    console.log(faces);
+}
+
 function trackingJsFromLocalImage(imageElement, imageContainer, imgUrl,  width, height, imgClass) {
     var tracker = new tracking.ObjectTracker(['face']);
     tracker.sourceElement = new ImagePack(width, height, '.' + imgClass, imageContainer);
@@ -62,15 +74,7 @@ function trackingJsFromLocalImage(imageElement, imageContainer, imgUrl,  width, 
         if (event.data.length === 0) {
             console.log('No elements found');
         } else {
-            var faces = [];
-            for(var i = 0; i != event.data.length; ++i) {
-                var data = event.data[i];
-                var containerProperties = util.getProperties(this.sourceElement.elementContainingImage[0]);
-                faces.push(setupImageFaceInsideContainer(data.width, data.height, data.x, data.y,
-                    this.sourceElement.width,this.sourceElement.height,
-                    containerProperties.width, containerProperties.height));
-            }
-            console.log(faces);
+            faceTracking(event, this.sourceElement);
         }
     });
     return util.format('background-image: url(\'{0}\');  no-repeat center center fixed; \
