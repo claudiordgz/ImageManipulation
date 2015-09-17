@@ -8,6 +8,32 @@ function ImagePack (width, height, imageClassName, elementContainingImage) {
     this.elementContainingImage = elementContainingImage;
 }
 
+/* @class Vertex2D
+    As it name implies a vertex structure
+    for 2 Dimensional Polygons */
+function Vertex2D(x, y) {
+    this.x = x;
+    this.y = y;
+}
+
+/* @class Parallelogram with the following
+   vertices
+  OO _______ OA
+    |       |
+    |_______|
+  OB         OC */
+function Parallelogram(width, height) {
+    this.width = width;
+    this.height = height;
+    this.vertices = function() {
+        var OO = new Vertex2D(0, 0), //Origin
+            OA = new Vertex2D(0 + this.width, 0),
+            OB = new Vertex2D(0, 0 + this.height),
+            OC = new Vertex2D(0 + this.width, 0 + this.height);
+        return [OO, OA, OB, OC]
+    }
+}
+
 function isPointInsideSquare() {
 
 }
