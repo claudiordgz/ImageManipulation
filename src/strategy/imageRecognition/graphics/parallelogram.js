@@ -33,7 +33,8 @@ function Parallelogram(width, height) {
 
 Parallelogram.prototype.resetVertices = function() {
     if(!this.vertices.equals(this.__previousStateVertices)){
-        var localCopy = this.vertices;
+        var localCopy = new ParallelogramVertexSet(this.width, this.height);
+        localCopy.copy(this.vertices);
         this.vertices.copy(this.__previousStateVertices);
         this.__previousStateVertices.copy(localCopy);
     }
