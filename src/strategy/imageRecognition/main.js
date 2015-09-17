@@ -14,6 +14,9 @@ function ImagePack (width, height, imageClassName, elementContainingImage) {
 function Vertex2D(x, y) {
     this.x = x;
     this.y = y;
+    this.equals = function(other) {
+        return other.x == this.x && other.y == this.y;
+    };
 }
 
 function ParallelogramVertexSet(width, height) {
@@ -21,6 +24,18 @@ function ParallelogramVertexSet(width, height) {
     this.OA = new Vertex2D(0 + width, 0);
     this.OB = new Vertex2D(0, 0 + height);
     this.OC = new Vertex2D(0 + width, 0 + height);
+    this.equals = function(other) {
+        return other.OO.equals(this.OO) && other.OA.equals(this.OA) && other.OB.equals(this.OB) && other.OC.equals(this.OC);
+    };
+}
+
+function recalculateVertices(parallelogramVertexSet, offsetX, offsetY) {
+    for (var key in parallelogramVertexSet) {
+        if (parallelogramVertexSet.hasOwnProperty(key)) {
+            parallelogramVertexSet[key].x += offsetX;
+            parallelogramVertexSet[key].y += offsetY;
+        }
+    }
 }
 
 /* @class Parallelogram with the following
@@ -33,6 +48,10 @@ function Parallelogram(width, height) {
     this.width = width;
     this.height = height;
     this.vertices = new ParallelogramVertexSet(width, height);
+    this.__previousStateVertices = null;
+    this.resetVertices = function() {
+        this.vertices = this.__previousStateVertices;
+    };
 }
 
 /*
@@ -47,6 +66,18 @@ function setupImageFaceInsideContainer(width, height, offsetX, offsetY,
     rectangle.sourceHeight = imageHeight;
     rectangle.targetWidth = containerWidth;
     rectangle.targetHeight = containerHeight;
+    rectangle.recalculateVerticesWithOffset = function() {
+        if(!this.__previousStateVertices.equals(this.vertices)){
+            this.__previousStateVertices = this.vertices;
+        }
+        for (var key in this.vertices) {
+            if (this.vertices.hasOwnProperty(key)) {
+                recalculateVertices(this.vertices, this.offsetX, this.offsetY);
+            }
+        }
+
+    };
+    rectangle.recalculateVerticesWithOffset();
     return rectangle;
 }
 
