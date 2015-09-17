@@ -16,6 +16,13 @@ function Vertex2D(x, y) {
     this.y = y;
 }
 
+function ParallelogramVertexSet(width, height) {
+    this.OO = new Vertex2D(0, 0);
+    this.OA = new Vertex2D(0 + width, 0);
+    this.OB = new Vertex2D(0, 0 + height);
+    this.OC = new Vertex2D(0 + width, 0 + height);
+}
+
 /* @class Parallelogram with the following
    vertices
   OO _______ OA
@@ -25,13 +32,7 @@ function Vertex2D(x, y) {
 function Parallelogram(width, height) {
     this.width = width;
     this.height = height;
-    this.vertices = function() {
-        var OO = new Vertex2D(0, 0), //Origin
-            OA = new Vertex2D(0 + this.width, 0),
-            OB = new Vertex2D(0, 0 + this.height),
-            OC = new Vertex2D(0 + this.width, 0 + this.height);
-        return [OO, OA, OB, OC]
-    }
+    this.vertices = new ParallelogramVertexSet(width, height);
 }
 
 /*
@@ -53,6 +54,10 @@ function isPointInsideSpace() {
 
 }
 
+function calculateOverlay(){
+
+}
+
 function faceTracking(event, imagePack){
     var faces = [];
     for(var i = 0; i != event.data.length; ++i) {
@@ -62,6 +67,7 @@ function faceTracking(event, imagePack){
             imagePack.width,imagePack.height,
             containerProperties.width, containerProperties.height));
     }
+
     console.log(faces);
 }
 
