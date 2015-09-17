@@ -8,6 +8,10 @@ function ImagePack (width, height, imageClassName, elementContainingImage) {
     this.elementContainingImage = elementContainingImage;
 }
 
+function isPointInsideSquare() {
+
+}
+
 function trackingJsFromLocalImage(imageElement, imageContainer, imgUrl,  width, height, imgClass) {
     var tracker = new tracking.ObjectTracker(['face']);
     tracker.sourceElement = new ImagePack(width, height, '.' + imgClass, imageContainer);
@@ -24,7 +28,11 @@ function trackingJsFromLocalImage(imageElement, imageContainer, imgUrl,  width, 
             });
         }
     });
-    return util.format('background-image: url(\'{0}\');', imgUrl);
+    return util.format('background-image: url(\'{0}\');  no-repeat center center fixed; \
+        -webkit-background-size: cover; \
+        -moz-background-size: cover; \
+        -o-background-size: cover; \
+        background-size: cover;', imgUrl);
 }
 
 module.exports = {
