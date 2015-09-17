@@ -17,6 +17,10 @@ function Vertex2D(x, y) {
     this.equals = function(other) {
         return other.x == this.x && other.y == this.y;
     };
+    this.copy = function(other) {
+        this.x = other.x;
+        this.y = other.y;
+    }
 }
 
 function ParallelogramVertexSet(width, height) {
@@ -27,6 +31,12 @@ function ParallelogramVertexSet(width, height) {
     this.equals = function(other) {
         return other.OO.equals(this.OO) && other.OA.equals(this.OA) && other.OB.equals(this.OB) && other.OC.equals(this.OC);
     };
+    this.copy = function(other) {
+        this.OO.copy(other.OO);
+        this.OA.copy(other.OA);
+        this.OB.copy(other.OB);
+        this.OC.copy(other.OC);
+    }
 }
 
 function recalculateVertices(parallelogramVertexSet, offsetX, offsetY) {
@@ -48,10 +58,15 @@ function Parallelogram(width, height) {
     this.width = width;
     this.height = height;
     this.vertices = new ParallelogramVertexSet(width, height);
-    this.__previousStateVertices = null;
+    this.__previousStateVertices = new ParallelogramVertexSet(width, height);
     this.resetVertices = function() {
         this.vertices = this.__previousStateVertices;
     };
+    this.backupVertices = function (vertices) {
+        if(!this.__previousStateVertices.equals(vertices)){
+            this.__previousStateVertices.copy(vertices);
+        }
+    }
 }
 
 /*
@@ -67,17 +82,19 @@ function setupImageFaceInsideContainer(width, height, offsetX, offsetY,
     rectangle.targetWidth = containerWidth;
     rectangle.targetHeight = containerHeight;
     rectangle.recalculateVerticesWithOffset = function() {
-        if(!this.__previousStateVertices.equals(this.vertices)){
-            this.__previousStateVertices = this.vertices;
-        }
+        this.backupVertices(this.vertices);
         for (var key in this.vertices) {
             if (this.vertices.hasOwnProperty(key)) {
                 recalculateVertices(this.vertices, this.offsetX, this.offsetY);
             }
         }
-
     };
     rectangle.recalculateVerticesWithOffset();
+    rectangle.resetVertices();
+    rectangle.recalculateVerticesWithOffset();
+    rectangle.resetVertices();
+    rectangle.recalculateVerticesWithOffset();
+    rectangle.resetVertices();
     return rectangle;
 }
 
