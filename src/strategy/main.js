@@ -31,16 +31,7 @@ function defaultPolicy(index, element, imgUrl, policy) {
         if(this.policy) {
             var imageContainerClassName = '.cm_mobHeader_artist_image';
             var container = this.element.find(imageContainerClassName);
-            var containerProperties = util.getProperties(container[0]);
-            var imageOrientation = 'square';
-            if (this.width !== this.height) {
-                if(this.width >  this.height) {
-                    imageOrientation = 'landscape';
-                } else {
-                    imageOrientation = 'portrait';
-                }
-            }
-            console.log(imageOrientation);
+                container.containerProperties = util.getProperties(container[0]);
             var style = this.policy(this.self, container, this.imageSrc, this.width, this.height, this.className);
             util.createClass('.' + this.className, style);
             container.addClass(this.className);
