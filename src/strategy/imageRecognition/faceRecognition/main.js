@@ -14,19 +14,7 @@ function isPointInsideSpace() {
 
 }
 
-function calculateOverlay(){
-
-}
-
-function faceTracking(faceRecognizedEvent, imagePack){
-    var faces = [];
-    for(var i = 0; i != faceRecognizedEvent.data.length; ++i) {
-        var data = faceRecognizedEvent.data[i];
-        var containerProperties = util.getProperties(imagePack.elementContainingImage[0]);
-        faces.push(setupImageFaceInsideContainer(data.width, data.height, data.x, data.y,
-            imagePack.width,imagePack.height,
-            containerProperties.width, containerProperties.height));
-    }
+function calculateBigBoxEncompassingFaces(faces){
     var minX = faces[0].vertices.OO.x || 0,
         maxX = faces[0].vertices.OA.x || 0,
         minY = faces[0].vertices.OO.y || 0,
@@ -43,7 +31,21 @@ function faceTracking(faceRecognizedEvent, imagePack){
         minY = faces[0].vertices.OO.y || 0;
         maxY = faces[faces.length-1].vertices.OC.y || 0;
     }
-    console.log('minX:' + minX + ' maxX:' + maxX + ' minY:' + minY + ' maxY:' + maxY);
+    return new graphics.FaceContainer(maxX - minX, maxY - minY, minX, minY,
+        faces[0].sourceWidth, faces[0].sourceHeight,
+        faces[0].targetWidth, faces[0].targetHeight);
+}
+
+function faceTracking(faceRecognizedEvent, imagePack){
+    var faces = [];
+    for(var i = 0; i != faceRecognizedEvent.data.length; ++i) {
+        var data = faceRecognizedEvent.data[i];
+        var containerProperties = util.getProperties(imagePack.elementContainingImage[0]);
+        faces.push(setupImageFaceInsideContainer(data.width, data.height, data.x, data.y,
+            imagePack.width,imagePack.height,
+            containerProperties.width, containerProperties.height));
+    }
+    var encompassingContainer = calculateBigBoxEncompassingFaces(faces);
 }
 
 module.exports = {
