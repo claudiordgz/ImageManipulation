@@ -23,10 +23,10 @@ function calculateOverlay(){
 
 }
 
-function faceTracking(event, imagePack){
+function faceTracking(faceRecognizedEvent, imagePack){
     var faces = [];
-    for(var i = 0; i != event.data.length; ++i) {
-        var data = event.data[i];
+    for(var i = 0; i != faceRecognizedEvent.data.length; ++i) {
+        var data = faceRecognizedEvent.data[i];
         var containerProperties = util.getProperties(imagePack.elementContainingImage[0]);
         faces.push(setupImageFaceInsideContainer(data.width, data.height, data.x, data.y,
             imagePack.width,imagePack.height,
