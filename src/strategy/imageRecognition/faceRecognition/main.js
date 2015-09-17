@@ -1,6 +1,5 @@
 var graphics = require('../graphics/main');
 
-
 /*
  */
 function setupImageFaceInsideContainer(width, height, offsetX, offsetY,
@@ -35,3 +34,7 @@ function faceTracking(event, imagePack){
     }
     console.log(faces);
 }
+
+module.exports = {
+    faceTracking: faceTracking
+};
