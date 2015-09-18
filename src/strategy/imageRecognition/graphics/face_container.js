@@ -28,6 +28,16 @@ FaceContainer.prototype.recalculateVerticesWithOffset = function() {
     recalculateVertices(this.vertices, this.offsetX, this.offsetY);
 };
 
+FaceContainer.prototype.copy = function() {
+    return new FaceContainer(this.width, this.height, this.offsetX, this.offsetY,
+        this.sourceWidth, this.sourceHeight,
+        this.targetWidth, this.targetHeight);
+};
+
+FaceContainer.prototype.isFaceInsideImage = function() {
+    var vectorOriginOO = this.vertices.OO.x;
+};
+
 module.exports = {
     FaceContainer: FaceContainer
 };
