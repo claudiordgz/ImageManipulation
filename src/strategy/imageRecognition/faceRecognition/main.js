@@ -46,7 +46,17 @@ function retrieveFacesInImage(faceRecognizedEvent, imagePack) {
 
 function faceTracking(faceRecognizedEvent, imagePack){
     var faces = retrieveFacesInImage(faceRecognizedEvent, imagePack);
+    console.log(faces);
     var encompassingContainer = calculateBigBoxEncompassingFaces(faces);
+    findFacesQuadrant(encompassingContainer);
+}
+
+/* @function findFacesQuadrant
+ * We partition the image in four quadrants and find the percentages
+ * and quadrants being touched by the faces container
+ * @param (FaceContainer) The one box to hold all faces in the image
+ */
+function findFacesQuadrant(encompassingContainer) {
 
 }
 
