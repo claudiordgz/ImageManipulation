@@ -4,12 +4,20 @@ FaceContainer.prototype = Object.create(parallelogram.Parallelogram.prototype);
 FaceContainer.prototype.constructor = FaceContainer;
 
 /* @class FaceContainer
+ * @constructor
+ * @extends Parallelogram
  * As it name implies a vertex or point
  * structure for 2 Dimensional Polygons
- * @property {number} width The width of the image from the source before any transformation
- * @property {number} height The height of the image from the source before any transformation
- * @property {string} imageClassName The class name style we have to alter
- * @property {Object} elementContainingImage The dom object that contains the image background
+ * @public @property {number} width (inherited)
+ * @public @property {number} height (inherited)
+ * @public @property {ParallelogramVertexSet} vertices The points in space of our rectangle (inherited)
+ * @public @property {number} offsetX The offset in X-axis to the face in the natural size of the image
+ * @public @property {number} offsetY The offset in Y-axis to the face in the natural size of the image
+ * @public @property {number} sourceWidth Original natural width
+ * @public @property {number} sourceHeight Original natural height
+ * @public @property {number} targetWidth The container width in which we must fit the image
+ * @public @property {number} targetHeight The container height in which we must fit the image
+ * @private @property {ParallelogramVertexSet} __previousStateVertices
  * */
 function FaceContainer(width, height, offsetX, offsetY, imageWidth, imageHeight, containerWidth, containerHeight) {
     parallelogram.Parallelogram.call(this, width, height);

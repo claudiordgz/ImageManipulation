@@ -47,8 +47,8 @@ function ParallelogramVertexSet(width, height) {
  OB         OC
  * @public @property {number} width
  * @public @property {number} height
- * @public @property {number} vertices The points in space of our rectangle
- * @private @property {number} __previousStateVertices
+ * @public @property {ParallelogramVertexSet} vertices The points in space of our rectangle
+ * @private @property {ParallelogramVertexSet} __previousStateVertices
  */
 function Parallelogram(width, height) {
     this.width = width;
