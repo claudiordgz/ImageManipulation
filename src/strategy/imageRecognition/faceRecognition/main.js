@@ -10,10 +10,6 @@ function setupImageFaceInsideContainer(width, height, offsetX, offsetY,
     return rectangleFace;
 }
 
-function isPointInsideSpace() {
-
-}
-
 function calculateBigBoxEncompassingFaces(faces){
     var minX = faces[0].vertices.OO.x || 0,
         maxX = faces[0].vertices.OA.x || 0,
@@ -36,7 +32,7 @@ function calculateBigBoxEncompassingFaces(faces){
         faces[0].targetWidth, faces[0].targetHeight);
 }
 
-function faceTracking(faceRecognizedEvent, imagePack){
+function retrieveFacesInImage(faceRecognizedEvent, imagePack) {
     var faces = [];
     for(var i = 0; i != faceRecognizedEvent.data.length; ++i) {
         var data = faceRecognizedEvent.data[i];
@@ -45,9 +41,13 @@ function faceTracking(faceRecognizedEvent, imagePack){
             imagePack.width,imagePack.height,
             containerProperties.width, containerProperties.height));
     }
+    return faces;
+}
+
+function faceTracking(faceRecognizedEvent, imagePack){
+    var faces = retrieveFacesInImage(faceRecognizedEvent, imagePack);
     var encompassingContainer = calculateBigBoxEncompassingFaces(faces);
-    encompassingContainer.recalculateVerticesWithOffset();
-    console.log(encompassingContainer);
+
 }
 
 module.exports = {
