@@ -1,5 +1,5 @@
 
-/**
+/*
  * @class ImagePack
  * A utility class to save information about an image
  * retrieved from the web and the element to which we
@@ -15,6 +15,16 @@ function ImagePack (width, height, imageClassName, elementContainingImage) {
     this.imageClassName = imageClassName;
     this.elementContainingImage = elementContainingImage;
 }
+
+ImagePack.prototype.getOrientation = function() {
+    var orientation = 'square';
+    if (this.width > this.height) {
+        orientation = 'landscape';
+    } else if (this.width < this.height) {
+        orientation = 'portrait';
+    }
+    return orientation;
+};
 
 module.exports = {
   ImagePack: ImagePack
