@@ -50,6 +50,16 @@ FaceContainer.prototype.copy = function() {
         this.targetWidth, this.targetHeight);
 };
 
+FaceContainer.prototype.getOrientation = function() {
+    var orientation = 'square';
+    if (this.sourceWidth > this.sourceHeight) {
+        orientation = 'landscape';
+    } else if (this.sourceWidth < this.sourceHeight) {
+        orientation = 'portrait';
+    }
+    return orientation;
+};
+
 FaceContainer.prototype.isFaceInsideImage = function() {
 
 };

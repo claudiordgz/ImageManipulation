@@ -16,15 +16,6 @@ function ImagePack (width, height, imageClassName, elementContainingImage) {
     this.elementContainingImage = elementContainingImage;
 }
 
-ImagePack.prototype.getOrientation = function() {
-    var orientation = 'square';
-    if (this.width > this.height) {
-        orientation = 'landscape';
-    } else if (this.width < this.height) {
-        orientation = 'portrait';
-    }
-    return orientation;
-};
 
 module.exports = {
   ImagePack: ImagePack
