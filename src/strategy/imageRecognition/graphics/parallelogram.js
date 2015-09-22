@@ -1,15 +1,35 @@
 vertex = require('./vertex');
 
-
+/* @class FaceContainer
+ * @constructor
+ * A Parallelogram Vertex set is a set of points that
+ * together form a Parallelogram
+ * @property {number} OO The width of the image from the source before any transformation
+ * @property {number} OA The height of the image from the source before any transformation
+ * @property {number} OB The class name style we have to alter
+ * @property {number} OC The dom object that contains the image background
+ */
 function ParallelogramVertexSet(width, height) {
     this.pMembers = ['OO','OA','OB','OC'];
     this.OO = new vertex.Vertex2D(0, 0);
     this.OA = new vertex.Vertex2D(0 + width, 0);
     this.OB = new vertex.Vertex2D(0, 0 + height);
     this.OC = new vertex.Vertex2D(0 + width, 0 + height);
+
+    /* @public
+     * @function equals
+     * Check if two objects of ParallelogramVertexSet are equal
+     * @memberOf ParallelogramVertexSet
+     */
     this.equals = function(other) {
         return other.OO.equals(this.OO) && other.OA.equals(this.OA) && other.OB.equals(this.OB) && other.OC.equals(this.OC);
     };
+
+    /* @public
+     * @function copy
+     * Copy constructor
+     * @memberOf ParallelogramVertexSet
+     */
     this.copy = function(other) {
         this.OO.copy(other.OO);
         this.OA.copy(other.OA);
@@ -24,7 +44,12 @@ function ParallelogramVertexSet(width, height) {
  OO _______ OA
  |       |
  |_______|
- OB         OC */
+ OB         OC
+ * @public @property {number} width
+ * @public @property {number} height
+ * @public @property {number} vertices The points in space of our rectangle
+ * @private @property {number} __previousStateVertices
+ */
 function Parallelogram(width, height) {
     this.width = width;
     this.height = height;

@@ -3,6 +3,14 @@ parallelogram = require('./parallelogram');
 FaceContainer.prototype = Object.create(parallelogram.Parallelogram.prototype);
 FaceContainer.prototype.constructor = FaceContainer;
 
+/* @class FaceContainer
+ * As it name implies a vertex or point
+ * structure for 2 Dimensional Polygons
+ * @property {number} width The width of the image from the source before any transformation
+ * @property {number} height The height of the image from the source before any transformation
+ * @property {string} imageClassName The class name style we have to alter
+ * @property {Object} elementContainingImage The dom object that contains the image background
+ * */
 function FaceContainer(width, height, offsetX, offsetY, imageWidth, imageHeight, containerWidth, containerHeight) {
     parallelogram.Parallelogram.call(this, width, height);
     this.offsetX = offsetX;
@@ -35,7 +43,7 @@ FaceContainer.prototype.copy = function() {
 };
 
 FaceContainer.prototype.isFaceInsideImage = function() {
-    var vectorOriginOO = this.vertices.OO.x;
+
 };
 
 module.exports = {

@@ -1,6 +1,9 @@
 /* @class Vertex2D
- As it name implies a vertex structure
- for 2 Dimensional Polygons */
+ * As it name implies a vertex or point
+ * structure for 2 Dimensional Polygons
+ * @property {number} x The x-axis position of the point
+ * @property {number} y The y-axis position of the point
+ * */
 function Vertex2D(x, y) {
     this.x = x;
     this.y = y;
