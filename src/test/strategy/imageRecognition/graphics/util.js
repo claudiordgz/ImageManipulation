@@ -1,6 +1,6 @@
 /*globals require, describe, it*/
 var expect    = require("chai").expect;
-var converter = require("../app/converter");
+var utilities = require("faces/strategy/imageRecognition/graphics/util");
 
 describe("Color Code Converter", function() {
     'use strict';
