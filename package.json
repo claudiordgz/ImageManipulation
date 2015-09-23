@@ -6,14 +6,16 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha src/test/ --reporter spec",
     "test:watch": "npm run test -- -w",
-    "build:js:main:debug": "browserify -d src/main.js -o js/index.js",
-    "build:js:main": "browserify src/main.js | uglifyjs > js/index.js",
+    "build:js:main:debug": "browserify -d src/app/main.js -o js/index.js",
+    "build:js:main": "browserify src/app/main.js | uglifyjs > js/index.js",
     "build:js:debug": "npm run build:js:main:debug",
     "build:js": "npm run build:js:main",
     "build": "npm run build:js",
     "build:debug": "npm run build:js:debug",
     "build:watch": "watch 'npm run build' .",
-    "build:watch:debug": "watch 'npm run build:debug' ."
+    "build:watch:debug": "watch 'npm run build:debug' .",
+    "link:unix": "(cd node_modules && ln -s ../src/app imagemanipulation)",
+    "link:windows": "mklink /D src/app node_modules"
   },
   "repository": {
     "type": "git",
