@@ -1,5 +1,5 @@
 {
-  "name": "ImageManipulation",
+  "name": "faces",
   "version": "0.1.0",
   "description": "R&D of tracking JS library",
   "main": "index.js",
@@ -14,12 +14,11 @@
     "build:debug": "npm run build:js:debug",
     "build:watch": "watch 'npm run build' .",
     "build:watch:debug": "watch 'npm run build:debug' .",
-    "link:unix": "(cd node_modules && ln -s ../src/app imagemanipulation)",
-    "link:windows": "mklink /D src/app node_modules"
+    "link:unix": "(cd node_modules && ln -s ../src/app faces)"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/claudiordgz/ImageManipulation"
+    "url": "https://github.com/claudiordgz/faces"
   },
   "keywords": [
     "javascript",
@@ -33,9 +32,9 @@
   "author": "claudiordgz",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/claudiordgz/ImageManipulation/issues"
+    "url": "https://github.com/claudiordgz/faces/issues"
   },
-  "homepage": "https://claudiordgz.github.io/ImageManipulation",
+  "homepage": "https://claudiordgz.github.io/faces",
   "devDependencies": {
     "bootstrap": "3.3.5",
     "browserify": "11.0.1",
