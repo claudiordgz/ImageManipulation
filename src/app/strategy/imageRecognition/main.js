@@ -4,6 +4,7 @@ var image = require('../shared/image/main');
 var faceRecognition = require('./faceRecognition/main');
 
 function trackingJsFromLocalImage(imageElement, imageContainer, imgUrl,  width, height, imgClass) {
+    'use strict';
     var tracker = new tracking.ObjectTracker(['face']);
     tracker.sourceElement = new image.ImagePack(width, height, '.' + imgClass, imageContainer);
     tracker.setStepSize(1.7);
