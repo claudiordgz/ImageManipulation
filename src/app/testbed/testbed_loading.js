@@ -1,5 +1,5 @@
 /*globals require, module, $*/
-var util = require('../util');
+var util = require('faces/util');
 
 function fromFile() {
     'use strict';
@@ -25,7 +25,7 @@ function retrieveFromFile(fileName){
 function completeAssetWithPath(images) {
     'use strict';
     for(var i = 0; i !== images.length; ++i) {
-        images[i] = '../ImageManipulation/js/assets/img/' + images[i];
+        images[i] = '../faces/js/assets/img/' + images[i];
     }
 }
 

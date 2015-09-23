@@ -1,5 +1,5 @@
 /*globals require, module*/
-var vertex = require('./vertex');
+var vertex = require('faces/strategy/imageRecognition/graphics/vertex');
 
 /* @class FaceContainer
  * @constructor

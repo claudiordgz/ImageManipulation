@@ -1,5 +1,5 @@
 /*globals module, $, console*/
-var getData = function get_data () {
+var getData = function () {
     'use strict';
     var apiUrl = 'http://lsp.powerathens.com/api/v1/station/now-playing/';
     var ajaxObj = {

@@ -1,8 +1,8 @@
 /*globals require, module*/
-var faceContainer = require('./faceContainer');
-var parallelogram = require('./parallelogram');
-var vertex = require('./vertex');
-var util = require('./util');
+var faceContainer = require('faces/strategy/imageRecognition/graphics/faceContainer');
+var parallelogram = require('faces/strategy/imageRecognition/graphics/parallelogram');
+var vertex = require('faces/strategy/imageRecognition/graphics/vertex');
+var util = require('faces/strategy/imageRecognition/graphics/util');
 
 module.exports = {
     FaceContainer: faceContainer.FaceContainer,

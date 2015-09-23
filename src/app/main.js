@@ -1,6 +1,6 @@
 /*globals require, $*/
-var testbed = require('./testbed/main');
-var imageProcessing = require('./strategy/main');
+var testbed = require('faces/testbed/main');
+var imageProcessing = require('faces/strategy/main');
 
 function main() {
     'use strict';

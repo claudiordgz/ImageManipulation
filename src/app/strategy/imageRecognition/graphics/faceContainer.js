@@ -1,5 +1,5 @@
 /*globals require, module*/
-var parallelogram = require('./parallelogram');
+var parallelogram = require('faces/strategy/imageRecognition/graphics/parallelogram');
 
 FaceContainer.prototype = Object.create(parallelogram.Parallelogram.prototype);
 FaceContainer.prototype.constructor = FaceContainer;

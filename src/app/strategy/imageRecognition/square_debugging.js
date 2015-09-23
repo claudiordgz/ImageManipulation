@@ -1,5 +1,5 @@
 /*globals require, module, console*/
-var util = require('../../util');
+var util = require('faces/util');
 
 function plotSquare(imageElement, x, y, w, h) {
     'use strict';

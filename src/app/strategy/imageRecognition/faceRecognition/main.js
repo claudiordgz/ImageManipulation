@@ -1,6 +1,6 @@
 /*globals require, console, module*/
-var graphics = require('../graphics/main');
-var util = require('../../../util');
+var graphics = require('faces/strategy/imageRecognition/graphics/main');
+var util = require('faces/util');
 
 /*
  */

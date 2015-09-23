@@ -1,6 +1,6 @@
 /*globals require,module, ich, $*/
-var util = require('../util');
-var policies = require('./policies');
+var util = require('faces/util');
+var policies = require('faces/strategy/policies');
 
 // cm_mobHeader_artist_overlay - The full header background div
 // cm_mobHeader_artist_image - The circle div that will contain the image

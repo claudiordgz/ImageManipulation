@@ -1,5 +1,5 @@
 /*globals require, module*/
-var util = require('../../util');
+var util = require('faces/util');
 
 function currentPolicy(imageElement, imageContainer, imgUrl, width, height, imgClass) {
     'use strict';

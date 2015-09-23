@@ -1,7 +1,7 @@
 /*globals require, module, tracking*/
-var util = require('../../util');
-var image = require('../shared/image/main');
-var faceRecognition = require('./faceRecognition/main');
+var util = require('faces/util');
+var image = require('faces/strategy/shared/image/main');
+var faceRecognition = require('faces/strategy/imageRecognition/faceRecognition/main');
 
 function trackingJsFromLocalImage(imageElement, imageContainer, imgUrl,  width, height, imgClass) {
     'use strict';
