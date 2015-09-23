@@ -1,4 +1,4 @@
-
+/*globals module*/
 function partitionSquareIntoFour(square){
     'use strict';
     var R1 = {
@@ -36,5 +36,6 @@ function squareOverlap(originalImage, faceBox) {
 }
 
 module.exports = {
-    squareOverlap: squareOverlap
+    squareOverlap: squareOverlap,
+    partitionSquareIntoFour: partitionSquareIntoFour
 };
