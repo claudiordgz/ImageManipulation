@@ -1,11 +1,13 @@
-util = require('../util');
-policies = require('./policies');
+/*globals require,module, ich, $*/
+var util = require('../util');
+var policies = require('./policies');
 
 // cm_mobHeader_artist_overlay - The full header background div
 // cm_mobHeader_artist_image - The circle div that will contain the image
 // cm_mobHeader_artist-overlay--style - We will put everything related to the background of artist_overlay in here
 // cm_mobHeader_artist-image--style - We will put everything related to background of artist_image in here
 function defaultPolicy(index, element, imgUrl, policy) {
+    'use strict';
     var ovalBackgroundClassName = util.format('cm_mobHeader_artist-image--style-{0}', index);
 
     var overlayClassName = util.format('cm_mobHeader_artist-overlay--style-{0}', index);
@@ -41,6 +43,7 @@ function defaultPolicy(index, element, imgUrl, policy) {
 }
 
 function appendElement(index, imageUrl, row, element, policy, subPolicy) {
+    'use strict';
     var card = element({
         'songName': 'Song Name',
         'artistName': 'Artist Name'
@@ -50,7 +53,8 @@ function appendElement(index, imageUrl, row, element, policy, subPolicy) {
 }
 
 function processImages(images){
-    for(i = 0; i !== images.length; ++i) {
+    'use strict';
+    for(var i = 0; i !== images.length; ++i) {
         var row = ich.elRow();
         var indexString = i.toString();
         appendElement(indexString+'-a', images[i], row, ich.element, defaultPolicy, policies.trackingJs);

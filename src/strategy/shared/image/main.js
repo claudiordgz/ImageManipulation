@@ -1,4 +1,4 @@
-
+/*globals module*/
 /*
  * @class ImagePack
  * A utility class to save information about an image
@@ -10,6 +10,7 @@
  * @property {Object} elementContainingImage The dom object that contains the image background
  */
 function ImagePack (width, height, imageClassName, elementContainingImage) {
+    'use strict';
     this.width = width;
     this.height = height;
     this.imageClassName = imageClassName;

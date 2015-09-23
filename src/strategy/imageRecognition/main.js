@@ -1,3 +1,4 @@
+/*globals require, module, tracking*/
 var util = require('../../util');
 var image = require('../shared/image/main');
 var faceRecognition = require('./faceRecognition/main');

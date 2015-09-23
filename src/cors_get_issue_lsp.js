@@ -1,8 +1,9 @@
-
-var get_data = function get_data () {
-    var api_url = 'http://lsp.powerathens.com/api/v1/station/now-playing/';
-    var ajax_obj = {
-        url: api_url,
+/*globals module, $, console*/
+var getData = function get_data () {
+    'use strict';
+    var apiUrl = 'http://lsp.powerathens.com/api/v1/station/now-playing/';
+    var ajaxObj = {
+        url: apiUrl,
         data: {
             callback: 'cmg.radioheader.lsploop_callbacks.callback0'
         },
@@ -15,12 +16,12 @@ var get_data = function get_data () {
         }
     };
     try {
-        $.ajax(ajax_obj);
+        $.ajax(ajaxObj);
     } catch (err) {
         console.log(err);
     }
 };
 
 module.exports = {
-    get_data: get_data
+    getData: getData
 };

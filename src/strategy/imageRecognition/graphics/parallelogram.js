@@ -1,4 +1,5 @@
-vertex = require('./vertex');
+/*globals require, module*/
+var vertex = require('./vertex');
 
 /* @class FaceContainer
  * @constructor
@@ -10,6 +11,7 @@ vertex = require('./vertex');
  * @property {number} OC The dom object that contains the image background
  */
 function ParallelogramVertexSet(width, height) {
+    'use strict';
     this.pMembers = ['OO','OA','OB','OC'];
     this.OO = new vertex.Vertex2D(0, 0);
     this.OA = new vertex.Vertex2D(0 + width, 0);
@@ -35,7 +37,7 @@ function ParallelogramVertexSet(width, height) {
         this.OA.copy(other.OA);
         this.OB.copy(other.OB);
         this.OC.copy(other.OC);
-    }
+    };
 }
 
 
@@ -51,6 +53,7 @@ function ParallelogramVertexSet(width, height) {
  * @private @property {ParallelogramVertexSet} __previousStateVertices
  */
 function Parallelogram(width, height) {
+    'use strict';
     this.width = width;
     this.height = height;
     this.vertices = new ParallelogramVertexSet(width, height);
@@ -58,6 +61,7 @@ function Parallelogram(width, height) {
 }
 
 Parallelogram.prototype.resetVertices = function() {
+    'use strict';
     if(!this.vertices.equals(this.__previousStateVertices)){
         var localCopy = new ParallelogramVertexSet(this.width, this.height);
         localCopy.copy(this.vertices);
@@ -67,6 +71,7 @@ Parallelogram.prototype.resetVertices = function() {
 };
 
 Parallelogram.prototype.backupVertices = function (vertices) {
+    'use strict';
     if(!this.__previousStateVertices.equals(vertices)){
         this.__previousStateVertices.copy(vertices);
     }

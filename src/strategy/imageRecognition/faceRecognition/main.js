@@ -1,16 +1,20 @@
+/*globals require, console, module*/
 var graphics = require('../graphics/main');
+var util = require('../../../util');
 
 /*
  */
 function setupImageFaceInsideContainer(width, height, offsetX, offsetY,
                                        imageWidth, imageHeight,
                                        containerWidth, containerHeight){
+    'use strict';
     var rectangleFace = new graphics.FaceContainer(width, height, offsetX, offsetY, imageWidth, imageHeight, containerWidth, containerHeight);
     rectangleFace.recalculateVerticesWithOffset();
     return rectangleFace;
 }
 
 function calculateBigBoxEncompassingFaces(faces){
+    'use strict';
     var minX = faces[0].vertices.OO.x || 0,
         maxX = faces[0].vertices.OA.x || 0,
         minY = faces[0].vertices.OO.y || 0,
@@ -33,8 +37,9 @@ function calculateBigBoxEncompassingFaces(faces){
 }
 
 function retrieveFacesInImage(faceRecognizedEvent, imagePack) {
+    'use strict';
     var faces = [];
-    for(var i = 0; i != faceRecognizedEvent.data.length; ++i) {
+    for(var i = 0; i !== faceRecognizedEvent.data.length; ++i) {
         var data = faceRecognizedEvent.data[i];
         var containerProperties = util.getProperties(imagePack.elementContainingImage[0]);
         faces.push(setupImageFaceInsideContainer(data.width, data.height, data.x, data.y,
@@ -45,6 +50,7 @@ function retrieveFacesInImage(faceRecognizedEvent, imagePack) {
 }
 
 function faceTracking(faceRecognizedEvent, imagePack){
+    'use strict';
     var faces = retrieveFacesInImage(faceRecognizedEvent, imagePack);
     console.log(faces);
     var encompassingContainer = calculateBigBoxEncompassingFaces(faces);
@@ -57,6 +63,7 @@ function faceTracking(faceRecognizedEvent, imagePack){
  * @param (FaceContainer) The one box to hold all faces in the image
  */
 function findFacesQuadrant(encompassingContainer) {
+    'use strict';
 
 }
 

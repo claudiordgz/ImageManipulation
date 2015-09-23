@@ -1,8 +1,6 @@
-/**
- * Created by crodriguez2 on 9/9/15.
- */
-imageRecognition = require('./imageRecognition/main');
-widthHeightPositioning = require('./widthHeightPositioning/main');
+/*globals module, require*/
+var imageRecognition = require('./imageRecognition/main');
+var widthHeightPositioning = require('./widthHeightPositioning/main');
 
 module.exports = {
     trackingJs: imageRecognition.policy,

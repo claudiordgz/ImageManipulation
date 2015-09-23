@@ -1,4 +1,5 @@
-parallelogram = require('./parallelogram');
+/*globals require, module*/
+var parallelogram = require('./parallelogram');
 
 FaceContainer.prototype = Object.create(parallelogram.Parallelogram.prototype);
 FaceContainer.prototype.constructor = FaceContainer;
@@ -20,6 +21,7 @@ FaceContainer.prototype.constructor = FaceContainer;
  * @private @property {ParallelogramVertexSet} __previousStateVertices
  * */
 function FaceContainer(width, height, offsetX, offsetY, imageWidth, imageHeight, containerWidth, containerHeight) {
+    'use strict';
     parallelogram.Parallelogram.call(this, width, height);
     this.offsetX = offsetX;
     this.offsetY = offsetY;
@@ -30,6 +32,7 @@ function FaceContainer(width, height, offsetX, offsetY, imageWidth, imageHeight,
 }
 
 function recalculateVertices(parallelogramVertexSet, offsetX, offsetY) {
+    'use strict';
     for (var i=0; i!=parallelogramVertexSet.pMembers.length;++i) {
         var key = parallelogramVertexSet.pMembers[i];
         if (parallelogramVertexSet.hasOwnProperty(key)) {
@@ -40,17 +43,20 @@ function recalculateVertices(parallelogramVertexSet, offsetX, offsetY) {
 }
 
 FaceContainer.prototype.recalculateVerticesWithOffset = function() {
+    'use strict';
     this.backupVertices(this.vertices);
     recalculateVertices(this.vertices, this.offsetX, this.offsetY);
 };
 
 FaceContainer.prototype.copy = function() {
+    'use strict';
     return new FaceContainer(this.width, this.height, this.offsetX, this.offsetY,
         this.sourceWidth, this.sourceHeight,
         this.targetWidth, this.targetHeight);
 };
 
 FaceContainer.prototype.getOrientation = function() {
+    'use strict';
     var orientation = 'square';
     if (this.sourceWidth > this.sourceHeight) {
         orientation = 'landscape';

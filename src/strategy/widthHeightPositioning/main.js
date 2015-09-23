@@ -1,6 +1,8 @@
-util = require('../../util');
+/*globals require, module*/
+var util = require('../../util');
 
 function currentPolicy(imageElement, imageContainer, imgUrl, width, height, imgClass) {
+    'use strict';
     return util.format('background-image: url(\'{0}\');', imgUrl);
 }
 

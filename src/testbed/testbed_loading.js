@@ -1,6 +1,8 @@
-util = require('../util');
+/*globals require, module, $*/
+var util = require('../util');
 
 function fromFile() {
+    'use strict';
     var items = null;
     $.ajaxSetup({async: false});
     $.get("js/assets/images.txt", function(data) {
@@ -10,6 +12,7 @@ function fromFile() {
 }
 
 function retrieveFromFile(fileName){
+    'use strict';
     var items = null;
     $.ajaxSetup({async: false});
     var pathAndFileName = util.format("js/assets/{0}", fileName);
@@ -20,18 +23,21 @@ function retrieveFromFile(fileName){
 }
 
 function completeAssetWithPath(images) {
+    'use strict';
     for(var i = 0; i !== images.length; ++i) {
         images[i] = '../ImageManipulation/js/assets/img/' + images[i];
     }
 }
 
 function fromDirectorySmallSubset() {
+    'use strict';
     var items = retrieveFromFile('small_image_testbed.txt');
     completeAssetWithPath(items);
     return items;
 }
 
 function fromDirectory() {
+    'use strict';
     var items = retrieveFromFile('list.txt');
     completeAssetWithPath(items);
     return items;

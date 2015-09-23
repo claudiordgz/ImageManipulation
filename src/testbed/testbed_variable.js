@@ -1,7 +1,8 @@
+/*globals module*/
 /*  The test bed
  Images were pulled from several sites
  */
-var image_list = [
+var imageList = [
     'https://cps-static.rovicorp.com/3/JPG_400/MI0003/848/MI0003848198.jpg?partner=allrovi.com',
     'https://a248.e.akamai.net/f/1726/3609/1m/media.cmgdigital.com/shared/img/photos/2014/06/20/ad/bb/Jeanne_Headshot_2.jpg',
     'https://a248.e.akamai.net/f/1726/3609/1m/media.cmgdigital.com/shared/lt/lt_cache/thumbnail/292/img/staff/2014/386998_512092287718_750833973_n.jpg',
@@ -114,5 +115,5 @@ var image_list = [
     'https://cps-static.rovicorp.com/3/JPG_400/MI0001/401/MI0001401588.jpg?partner=allrovi.com' ];
 
 module.exports = {
-    image_list: image_list
+    imageList: imageList
 };

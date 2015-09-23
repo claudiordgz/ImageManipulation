@@ -1,6 +1,8 @@
+/*globals require, module, console*/
 var util = require('../../util');
 
 function plotSquare(imageElement, x, y, w, h) {
+    'use strict';
     var rect = document.createElement('div');
     document.querySelector(imageElement.imageClassName).appendChild(rect);
     console.log(x + ',' + y + ',' + w + ',' + h);

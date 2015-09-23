@@ -1,7 +1,8 @@
-faceContainer = require('./faceContainer');
-parallelogram = require('./parallelogram');
-vertex = require('./vertex');
-util = require('./util');
+/*globals require, module*/
+var faceContainer = require('./faceContainer');
+var parallelogram = require('./parallelogram');
+var vertex = require('./vertex');
+var util = require('./util');
 
 module.exports = {
     FaceContainer: faceContainer.FaceContainer,
