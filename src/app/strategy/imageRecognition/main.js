@@ -1,7 +1,7 @@
 /*globals require, module, tracking, console*/
 var util = require('faces/util');
 var graphics = require('graphics');
-var faceRecognition = require('faces/strategy/imageRecognition/faceRecognition/main');
+var faces = require('faceCentering');
 
 function trackingJsFromLocalImage(imageElement, imageContainer, imgUrl,  width, height, imgClass) {
     'use strict';
@@ -13,7 +13,7 @@ function trackingJsFromLocalImage(imageElement, imageContainer, imgUrl,  width, 
         if (event.data.length === 0) {
             console.log('No elements found');
         } else {
-            faceRecognition.faceTracking(event, this.sourceElement);
+            faces.faceCentering(event, this.sourceElement);
         }
     });
     /*jshint multistr: true */
