@@ -1,6 +1,6 @@
 /*globals module, console, require*/
 var Victor = require('victor');
-var parallelograms = require('./objects/parallelogram');
+var parallelograms = require('graphics');
 
 /*  @function partitionSquareIntoFour
     Cuts the parallelogram into four pieces, origin 0,0 is the top-left corner
@@ -9,10 +9,10 @@ var parallelograms = require('./objects/parallelogram');
  */
 function partitionSquareIntoFour(parallelogram){
     'use strict';
-    var R1 = new parallelograms.ParallelogramVertexSetFromVertices(0, parallelogram.width/2, 0, parallelogram.height/2),
-        R2 = new parallelograms.ParallelogramVertexSetFromVertices(parallelogram.width/2, parallelogram.width,0, parallelogram.height/2),
-        R3 = new parallelograms.ParallelogramVertexSetFromVertices(0,parallelogram.width/2, parallelogram.height/2, parallelogram.height),
-        R4 = new parallelograms.ParallelogramVertexSetFromVertices(parallelogram.width/2, parallelogram.width, parallelogram.height/2, parallelogram.height);
+    var R1 = new parallelograms.ParallelogramVertexSet().fromVertices(0, parallelogram.width/2, 0, parallelogram.height/2),
+        R2 = new parallelograms.ParallelogramVertexSet().fromVertices(parallelogram.width/2, parallelogram.width,0, parallelogram.height/2),
+        R3 = new parallelograms.ParallelogramVertexSet().fromVertices(0,parallelogram.width/2, parallelogram.height/2, parallelogram.height),
+        R4 = new parallelograms.ParallelogramVertexSet().fromVertices(parallelogram.width/2, parallelogram.width, parallelogram.height/2, parallelogram.height);
     return [
         R1, R2, R3, R4
     ];
@@ -53,9 +53,10 @@ function assembleVectorsFromVertices(subSquares, faceBox) {
     for(var i=0; i!==faceBox.vertices.pMembers.length;++i){
         if(faceBox.vertices.hasOwnProperty(faceBox.vertices.pMembers[i])){
             var vertex = faceBox.vertices[faceBox.vertices.pMembers[i]];
-            console.log(vertex);
+            //console.log(vertex);
             for(var j=0;j!==subSquares.length;++j){
-                console.log('sub square: '+ subSquares[j].X1 + ' ' + subSquares[j].X2+ ' ' + subSquares[j].Y1+ ' ' + subSquares[j].Y2);
+                var a = 0;
+                //console.log('sub square: '+ subSquares[j].X1 + ' ' + subSquares[j].X2+ ' ' + subSquares[j].Y1+ ' ' + subSquares[j].Y2);
                 //console.log(getVector({x:subSquares[j].X1, y:subSquares[j].Y1},{x:vertex.x, y:vertex.y}));
             }
         }

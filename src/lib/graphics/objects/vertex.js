@@ -16,6 +16,10 @@ function Vertex2D(x, y) {
         this.x = other.x;
         this.y = other.y;
     };
+    this.reset = function(x, y) {
+        this.x = x;
+        this.y = y;
+    };
 }
 
 module.exports = {
