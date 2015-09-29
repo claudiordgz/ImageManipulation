@@ -1,0 +1,26 @@
+{
+  "name": "graphics",
+  "version": "0.1.0",
+  "description": "Library for pallalelogram collisions",
+  "main": "graphics.js",
+  "scripts": {
+    "test": "../../../node_modules/.bin/mocha test/ --recursive --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/claudiordgz/faces"
+  },
+  "keywords": [
+    "javascript",
+    "js"
+  ],
+  "author": "claudiordgz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/claudiordgz/faces/issues"
+  },
+  "homepage": "https://claudiordgz.github.io/faces",
+  "dependencies": {
+    "victor": "^1.1.0"
+  }
+}

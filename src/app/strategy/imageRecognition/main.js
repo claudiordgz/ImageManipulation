@@ -1,12 +1,12 @@
-/*globals require, module, tracking*/
+/*globals require, module, tracking, console*/
 var util = require('faces/util');
-var image = require('faces/strategy/shared/image/main');
+var graphics = require('graphics');
 var faceRecognition = require('faces/strategy/imageRecognition/faceRecognition/main');
 
 function trackingJsFromLocalImage(imageElement, imageContainer, imgUrl,  width, height, imgClass) {
     'use strict';
     var tracker = new tracking.ObjectTracker(['face']);
-    tracker.sourceElement = new image.ImagePack(width, height, '.' + imgClass, imageContainer);
+    tracker.sourceElement = new graphics.ImagePack(width, height, '.' + imgClass, imageContainer);
     tracker.setStepSize(1.7);
     tracking.track(imageElement, tracker);
     tracker.on('track', function(event) {
@@ -16,6 +16,7 @@ function trackingJsFromLocalImage(imageElement, imageContainer, imgUrl,  width, 
             faceRecognition.faceTracking(event, this.sourceElement);
         }
     });
+    /*jshint multistr: true */
     return util.format('background-image: url(\'{0}\');  no-repeat center center fixed; \
         -webkit-background-size: cover; \
         -moz-background-size: cover; \

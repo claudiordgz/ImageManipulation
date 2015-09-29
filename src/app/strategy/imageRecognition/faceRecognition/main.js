@@ -1,5 +1,5 @@
 /*globals require, console, module*/
-var graphics = require('faces/strategy/imageRecognition/graphics/main');
+var graphics = require('graphics');
 var util = require('faces/util');
 
 /*
@@ -49,22 +49,22 @@ function retrieveFacesInImage(faceRecognizedEvent, imagePack) {
     return faces;
 }
 
-function faceTracking(faceRecognizedEvent, imagePack){
-    'use strict';
-    var faces = retrieveFacesInImage(faceRecognizedEvent, imagePack);
-    console.log(faces);
-    var encompassingContainer = calculateBigBoxEncompassingFaces(faces);
-    findFacesQuadrant(encompassingContainer);
-}
 
 /* @function findFacesQuadrant
  * We partition the image in four quadrants and find the percentages
  * and quadrants being touched by the faces container
- * @param (FaceContainer) The one box to hold all faces in the image
+ * @param {FaceContainer} The one box to hold all faces in the image
  */
-function findFacesQuadrant(encompassingContainer) {
+function quadrantsPercentagesPerFaceArea(encompassingContainer) {
     'use strict';
+    console.log(encompassingContainer);
+}
 
+function faceTracking(faceRecognizedEvent, imagePack){
+    'use strict';
+    var faces = retrieveFacesInImage(faceRecognizedEvent, imagePack);
+    var encompassingContainer = calculateBigBoxEncompassingFaces(faces);
+    quadrantsPercentagesPerFaceArea(encompassingContainer);
 }
 
 module.exports = {

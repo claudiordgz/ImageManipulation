@@ -1,5 +1,5 @@
 /*globals require, module*/
-var parallelogram = require('faces/strategy/imageRecognition/graphics/parallelogram');
+var parallelogram = require('./parallelogram');
 
 FaceContainer.prototype = Object.create(parallelogram.Parallelogram.prototype);
 FaceContainer.prototype.constructor = FaceContainer;
@@ -33,7 +33,7 @@ function FaceContainer(width, height, offsetX, offsetY, imageWidth, imageHeight,
 
 function recalculateVertices(parallelogramVertexSet, offsetX, offsetY) {
     'use strict';
-    for (var i=0; i!=parallelogramVertexSet.pMembers.length;++i) {
+    for (var i=0; i!==parallelogramVertexSet.pMembers.length;++i) {
         var key = parallelogramVertexSet.pMembers[i];
         if (parallelogramVertexSet.hasOwnProperty(key)) {
             parallelogramVertexSet[key].x += offsetX;
@@ -64,10 +64,6 @@ FaceContainer.prototype.getOrientation = function() {
         orientation = 'portrait';
     }
     return orientation;
-};
-
-FaceContainer.prototype.isFaceInsideImage = function() {
-
 };
 
 module.exports = {
