@@ -60,7 +60,7 @@ function quadrantsPercentagesPerFaceArea(encompassingContainer) {
     console.log(encompassingContainer);
 }
 
-function faceTracking(faceRecognizedEvent, imagePack){
+function faceCentering(faceRecognizedEvent, imagePack){
     'use strict';
     var faces = retrieveFacesInImage(faceRecognizedEvent, imagePack);
     var encompassingContainer = calculateBigBoxEncompassingFaces(faces);
@@ -68,5 +68,5 @@ function faceTracking(faceRecognizedEvent, imagePack){
 }
 
 module.exports = {
-    faceTracking: faceTracking
+    faceCentering: faceCentering
 };

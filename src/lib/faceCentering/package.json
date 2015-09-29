@@ -1,0 +1,23 @@
+{
+  "name": "faceCentering",
+  "version": "0.1.4",
+  "description": "Library for centering faces found",
+  "main": "faceCentering.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/claudiordgz/faces"
+  },
+  "keywords": [
+    "javascript",
+    "js"
+  ],
+  "author": "claudiordgz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/claudiordgz/faces/issues"
+  },
+  "homepage": "https://claudiordgz.github.io/faces",
+  "dependencies": {
+    "graphics": "file:../graphics/"
+  }
+}
