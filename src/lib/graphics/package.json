@@ -3,9 +3,6 @@
   "version": "0.1.4",
   "description": "Library for pallalelogram collisions",
   "main": "graphics.js",
-  "scripts": {
-    "test": "../../../node_modules/.bin/mocha test/ --recursive --reporter spec"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/claudiordgz/faces"
