@@ -1,6 +1,7 @@
 /*globals require, module*/
 var faceContainer = require('./objects/faceContainer');
 var parallelogram = require('./objects/parallelogram');
+var vertices = require('./objects/parallelogramVertexSet');
 var vertex = require('./objects/vertex');
 var imagePack = require('./objects/imagePack');
 
@@ -9,5 +10,5 @@ module.exports = {
     Parallelogram: parallelogram.Parallelogram,
     Vertex2D: vertex.Vertex2D,
     ImagePack: imagePack.ImagePack,
-    ParallelogramVertexSet:parallelogram.ParallelogramVertexSet
+    ParallelogramVertexSet:vertices.ParallelogramVertexSet
 };
