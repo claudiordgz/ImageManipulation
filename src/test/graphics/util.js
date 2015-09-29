@@ -1,34 +1,30 @@
-/*globals require, describe, it*/
-var expect    = require("chai").expect;
-var utilities = require("graphics/util");
+/*globals require, describe, it, console, assert*/
+var chai    = require("chai");
+var utilities = require("graphics/collision");
 var graphics = require('graphics');
 
-var R1 = new graphics.ParallelogramVertexSetFromVertices(0, parallelogram.width/2, 0, parallelogram.height/2),
-    R2 = new graphics.ParallelogramVertexSetFromVertices(parallelogram.width/2, parallelogram.width,0, parallelogram.height/2),
-    R3 = new graphics.ParallelogramVertexSetFromVertices(0,parallelogram.width/2, parallelogram.height/2, parallelogram.height);
-
-var results100by200 = [
-    {X1: 0,X2: 50,Y1: 0,Y2: 100},
-    {X1: 50,X2: 100,Y1: 0,Y2: 100},
-    {X1: 0,X2: 50,Y1: 100,Y2: 200},
-    {X1: 50,X2: 100,Y1: 100,Y2: 200}
-];
-var results200by100 = [
-    {X1: 0,X2: 100,Y1: 0,Y2: 50},
-    {X1: 100,X2: 200,Y1: 0,Y2: 50},
-    {X1: 0,X2: 100,Y1: 50,Y2: 100},
-    {X1: 100,X2: 200,Y1: 50,Y2: 100}
-];
-var results200by200 = [
-    {X1: 0,X2: 100,Y1: 0,Y2: 100},
-    {X1: 100,X2: 200,Y1: 0,Y2: 100},
-    {X1: 0,X2: 100,Y1: 100,Y2: 200},
-    {X1: 100,X2: 200,Y1: 100,Y2: 200}
-];
+var results100by200 = {
+    TopLeft: new graphics.ParallelogramVertexSet().fromVertices(0, 50, 0, 100),
+    TopRight: new graphics.ParallelogramVertexSet().fromVertices(50, 100, 0, 100),
+    LowerLeft: new graphics.ParallelogramVertexSet().fromVertices(0, 50, 100, 200),
+    LowerRight: new graphics.ParallelogramVertexSet().fromVertices(50, 100, 100, 200)
+};
+var results200by100 = {
+    TopLeft: new graphics.ParallelogramVertexSet().fromVertices(0, 100, 0, 50),
+    TopRight: new graphics.ParallelogramVertexSet().fromVertices(100, 200, 0, 50),
+    LowerLeft: new graphics.ParallelogramVertexSet().fromVertices(0, 100, 50, 100),
+    LowerRight: new graphics.ParallelogramVertexSet().fromVertices(100, 200, 50, 100)
+};
+var results200by200 = {
+    TopLeft: new graphics.ParallelogramVertexSet().fromVertices(0, 100, 0, 100),
+    TopRight: new graphics.ParallelogramVertexSet().fromVertices(100, 200, 0, 100),
+    LowerLeft: new graphics.ParallelogramVertexSet().fromVertices(0, 100, 100, 200),
+    LowerRight: new graphics.ParallelogramVertexSet().fromVertices(100, 200, 100, 200)
+};
 
 describe("Image partitioning process", function() {
     'use strict';
-    describe("partitionSquareIntoFour", function() {
+    describe("partitionParallelogramIntoFour", function() {
         it("Returns 4 parallelograms in the form of a ParallelogramVertexSet", function() {
             var portraitParallelograms = utilities.partitionSquareIntoFour({width: 100, height: 200});
             var landscapeParallelograms = utilities.partitionSquareIntoFour({width: 200, height: 100});
@@ -38,13 +34,9 @@ describe("Image partitioning process", function() {
             for(var j = 0;j !== testbed.length; ++j) {
                 var currentTest = testbed[j];
                 var currentResults = results[j];
-                for (var i = 0; i !== currentResults.length; ++i) {
-                    var resultParallelogram = currentResults[i];
-                    var parallelogram = currentTest[i];
-                    for (var key in resultParallelogram) {
-                        if (resultParallelogram.hasOwnProperty(key)) {
-                            expect(parallelogram[key]).to.equal(resultParallelogram[key]);
-                        }
+                for (var key in currentResults) {
+                    if(currentResults.hasOwnProperty(key) && currentTest.hasOwnProperty(key)){
+                        chai.assert.ok(currentTest[key].equals(currentResults[key]));
                     }
                 }
             }
