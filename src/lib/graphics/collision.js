@@ -13,9 +13,9 @@ function partitionSquareIntoFour(parallelogram){
         R2 = new parallelograms.ParallelogramVertexSet().fromVertices(parallelogram.width/2, parallelogram.width,0, parallelogram.height/2),
         R3 = new parallelograms.ParallelogramVertexSet().fromVertices(0,parallelogram.width/2, parallelogram.height/2, parallelogram.height),
         R4 = new parallelograms.ParallelogramVertexSet().fromVertices(parallelogram.width/2, parallelogram.width, parallelogram.height/2, parallelogram.height);
-    return [
-        R1, R2, R3, R4
-    ];
+    return {
+        TopLeft: R1, TopRight: R2, LowerLeft: R3, LowerRight: R4
+    };
 }
 
 /*  @function squareOverlap
@@ -54,8 +54,10 @@ function assembleVectorsFromVertices(subSquares, faceBox) {
         if(faceBox.vertices.hasOwnProperty(faceBox.vertices.pMembers[i])){
             var vertex = faceBox.vertices[faceBox.vertices.pMembers[i]];
             //console.log(vertex);
-            for(var j=0;j!==subSquares.length;++j){
-                var a = 0;
+            for(var key in subSquares){
+                if(subSquares.hasOwnProperty(key)){
+                    var a = 0;
+                }
                 //console.log('sub square: '+ subSquares[j].X1 + ' ' + subSquares[j].X2+ ' ' + subSquares[j].Y1+ ' ' + subSquares[j].Y2);
                 //console.log(getVector({x:subSquares[j].X1, y:subSquares[j].Y1},{x:vertex.x, y:vertex.y}));
             }
