@@ -3,10 +3,10 @@ var vertices = require('./parallelogramVertexSet');
 
 /* @class Parallelogram with the following
  vertices
- OO _______ OA
- |       |
- |_______|
- OB         OC
+ A _______ B
+  |       |
+  |_______|
+ D         C
  * @public @property {number} width
  * @public @property {number} height
  * @public @property {ParallelogramVertexSet} vertices The points in space of our rectangle

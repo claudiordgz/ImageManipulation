@@ -6,18 +6,18 @@ var vertex = require('./vertex');
  * @constructor
  * A Parallelogram Vertex set is a set of points that
  * together form a Parallelogram
- * @property {number} OO The width of the image from the source before any transformation
- * @property {number} OA The height of the image from the source before any transformation
- * @property {number} OB The class name style we have to alter
- * @property {number} OC The dom object that contains the image background
+ * @property {number} A Top Right corner
+ * @property {number} B Top Left corner
+ * @property {number} C Lower Right corner
+ * @property {number} D Lower Left corner
  */
 function ParallelogramVertexSet() {
     'use strict';
-    this.pMembers = ['OO','OA','OB','OC'];
-    this.OO = new vertex.Vertex2D(0, 0);
-    this.OA = new vertex.Vertex2D(0, 0);
-    this.OB = new vertex.Vertex2D(0, 0);
-    this.OC = new vertex.Vertex2D(0, 0);
+    this.pMembers = ['A','B','C','D'];
+    this.A = new vertex.Vertex2D(0, 0);
+    this.B = new vertex.Vertex2D(0, 0);
+    this.C = new vertex.Vertex2D(0, 0);
+    this.D = new vertex.Vertex2D(0, 0);
 }
 
 /* @class ParallelogramVertexSet
@@ -28,10 +28,10 @@ function ParallelogramVertexSet() {
  */
 ParallelogramVertexSet.prototype.fromWidthAndHeight = function(width, height) {
     'use strict';
-    this.OO.reset(0, 0);
-    this.OA.reset(0 + width, 0);
-    this.OB.reset(0, 0 + height);
-    this.OC.reset(0 + width, 0 + height);
+    this.A.reset(0, 0);
+    this.B.reset(0 + width, 0);
+    this.C.reset(0, 0 + height);
+    this.D.reset(0 + width, 0 + height);
     return this;
 };
 
@@ -45,10 +45,10 @@ ParallelogramVertexSet.prototype.fromWidthAndHeight = function(width, height) {
  */
 ParallelogramVertexSet.prototype.fromVertices = function(X1, X2, Y1, Y2) {
     'use strict';
-    this.OO.reset(X1, Y1);
-    this.OA.reset(X2, Y1);
-    this.OB.reset(X1, Y2);
-    this.OC.reset(X2, Y2);
+    this.A.reset(X1, Y1);
+    this.B.reset(X2, Y1);
+    this.C.reset(X1, Y2);
+    this.D.reset(X2, Y2);
     return this;
 };
 
@@ -60,7 +60,7 @@ ParallelogramVertexSet.prototype.fromVertices = function(X1, X2, Y1, Y2) {
  */
 ParallelogramVertexSet.prototype.equals = function(other) {
     "use strict";
-    return other.OO.equals(this.OO) && other.OA.equals(this.OA) && other.OB.equals(this.OB) && other.OC.equals(this.OC);
+    return other.A.equals(this.A) && other.B.equals(this.B) && other.C.equals(this.C) && other.D.equals(this.D);
 };
 
 /* @public
@@ -70,10 +70,10 @@ ParallelogramVertexSet.prototype.equals = function(other) {
  */
 ParallelogramVertexSet.prototype.copy = function(other) {
     'use strict';
-    this.OO.copy(other.OO);
-    this.OA.copy(other.OA);
-    this.OB.copy(other.OB);
-    this.OC.copy(other.OC);
+    this.A.copy(other.A);
+    this.B.copy(other.A);
+    this.C.copy(other.C);
+    this.D.copy(other.D);
 };
 
 module.exports = {
