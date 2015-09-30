@@ -22,7 +22,8 @@ FaceContainer.prototype.constructor = FaceContainer;
  * */
 function FaceContainer(width, height, offsetX, offsetY, imageWidth, imageHeight, containerWidth, containerHeight) {
     'use strict';
-    parallelogram.Parallelogram.call(this, width, height);
+    parallelogram.Parallelogram.call(this);
+    this.fromWidthAndHeight(width, height);
     this.offsetX = offsetX;
     this.offsetY = offsetY;
     this.sourceWidth = imageWidth;
