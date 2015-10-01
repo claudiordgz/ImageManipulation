@@ -4,6 +4,11 @@ var vertex = require('./vertex');
 
 /* @class ParallelogramVertexSet
  * @constructor
+ *  vertices
+     A _______ B
+     |       |
+     |_______|
+     D         C
  * A Parallelogram Vertex set is a set of points that
  * together form a Parallelogram
  * @property {number} A Top Right corner
@@ -30,8 +35,8 @@ ParallelogramVertexSet.prototype.fromWidthAndHeight = function(width, height) {
     'use strict';
     this.A.reset(0, 0);
     this.B.reset(0 + width, 0);
-    this.C.reset(0, 0 + height);
-    this.D.reset(0 + width, 0 + height);
+    this.C.reset(0 + width, 0 + height);
+    this.D.reset(0, 0 + height);
     return this;
 };
 
@@ -47,8 +52,8 @@ ParallelogramVertexSet.prototype.fromVertices = function(X1, X2, Y1, Y2) {
     'use strict';
     this.A.reset(X1, Y1);
     this.B.reset(X2, Y1);
-    this.C.reset(X1, Y2);
-    this.D.reset(X2, Y2);
+    this.C.reset(X2, Y2);
+    this.D.reset(X1, Y2);
     return this;
 };
 
