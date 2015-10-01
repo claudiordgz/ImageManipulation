@@ -42,8 +42,7 @@ Parallelogram.prototype.innerVectors = function(){
 };
 
 /** @function isPointInside
- * Whatever vectors we need to do our algorithm to find a point inside
- * the Parallelogram
+ * Check if point is inside the parallelogram
  * (0<AM⋅AB<AB⋅AB)∧(0<AM⋅AD<AD⋅AD)
  * @param {Point} point The point we want to check if it is inside or not
  * @return {Boolean} Whether it is inside or not
@@ -53,7 +52,11 @@ Parallelogram.prototype.isPointInside = function(point){
     var returnValue = false;
     if(this.__isReady) {
         var AM = vectorOps.getVector(this.vertices.A, point);
-        if(0 < AM.dot(this.AB) < this.AB.dot(this.AB) && 0 < AM.dot(this.AD) < this.AD.dot(this.AD)) {
+        var AMAB = AM.dot(this.AB);
+        var ABAB = this.AB.dot(this.AB);
+        var AMAD = AM.dot(this.AD);
+        var ADAD = this.AD.dot(this.AD);
+        if(((0 < AMAB) && (AMAB < ABAB)) && ((0 < AMAD) && (AMAD < ADAD))) {
             returnValue = true;
         }
     } else {
