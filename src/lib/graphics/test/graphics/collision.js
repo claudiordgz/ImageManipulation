@@ -1,7 +1,7 @@
 /*globals require, describe, it, console, assert*/
 var chai    = require("chai");
-var utilities = require("graphics/collision");
-var graphics = require('graphics');
+var utilities = require("../..//collision");
+var graphics = require('../../graphics');
 
 var results100by200 = {
     TopLeft: new graphics.Parallelogram().fromVertices(0, 50, 0, 100),
@@ -46,7 +46,6 @@ describe("Image partitioning process", function() {
     describe("squareOverlap", function() {
         it("Checks overlapping squares of a concentric square", function() {
             var faceBox = new graphics.FaceContainer(100, 50, 50, 50, 200, 150, 100, 100);
-            console.log(faceBox);
             utilities.squareOverlap(faceBox);
         });
     });
