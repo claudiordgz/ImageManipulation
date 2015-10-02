@@ -30,40 +30,45 @@ function squareOverlap(faceBox) {
     concentricParallelogramCollision(subSquares, faceBox);
 }
 
-/*  @function concentricParallelogramCollision
-
- */
-function concentricParallelogramCollision(subSquares, faceBox) {
+function range(start, count) {
     'use strict';
-    assembleVectorsFromVertices(subSquares, faceBox);
+    return Array.apply(0, new Array(count))
+        .map(function (element, index) {
+            return index + start;
+        });
 }
 
-
-function getVectorsPerSquare(squareVertices, targetVertex) {
-    'use strict';
-    console.log(squareVertices.OO.x, squareVertices.OO.y);
-    console.log(squareVertices.OA.x, squareVertices.OA.y);
-    console.log(squareVertices.OB.x, squareVertices.OB.y);
-    console.log(squareVertices.OC.x, squareVertices.OC.y);
-}
-
-/* @function assembleVectorsFromVertices
+/* @function concentricParallelogramCollision
  * Iterate through all the faceBox vertices and calculate the vectors between them.
  *
  */
-function assembleVectorsFromVertices(subSquares, faceBox) {
+function concentricParallelogramCollision(subSquares, faceBox) {
     'use strict';
     faceBox.recalculateVerticesWithOffset();
-    for(var i=0; i!==faceBox.vertices.pMembers.length;++i){
-        if(faceBox.vertices.hasOwnProperty(faceBox.vertices.pMembers[i])){
-            var vertex = faceBox.vertices[faceBox.vertices.pMembers[i]];
-            for(var key in subSquares){
-                if(subSquares.hasOwnProperty(key)){
-                    getVectorsPerSquare(subSquares[key].vertices, vertex);
+    var quadrantsPack = {};
+    var vertices = range(0, faceBox.vertices.pMembers.length);
+    for(var key in subSquares){
+        if(subSquares.hasOwnProperty(key)){
+            if(!quadrantsPack.hasOwnProperty(key)){
+                quadrantsPack[key] = [];
+            }
+            for(var i=0; i!==vertices.length;++i){
+                if(faceBox.vertices.hasOwnProperty(faceBox.vertices.pMembers[i])){
+                    var vertex = faceBox.vertices[faceBox.vertices.pMembers[vertices[i]]];
+                    var isInside = subSquares[key].isPointInside(vertex);
+                    if(isInside) {
+                        vertices.splice(i,1);
+                        quadrantsPack[key].push(vertex);
+                        break;
+                    }
                 }
+            }
+            if(!vertices.length) {
+                break;
             }
         }
     }
+    console.log(quadrantsPack);
 }
 
 module.exports = {
