@@ -1,0 +1,37 @@
+{
+  "name": "faces",
+  "version": "0.1.0",
+  "description": "R&D of tracking JS library",
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/claudiordgz/faces"
+  },
+  "keywords": [
+    "javascript",
+    "face",
+    "recognition",
+    "color",
+    "palette",
+    "tracking",
+    "js"
+  ],
+  "author": "claudiordgz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/claudiordgz/faces/issues"
+  },
+  "homepage": "https://claudiordgz.github.io/faces",
+  "dependencies": {
+    "faceCentering": "file:../lib/faceCentering/",
+    "bootstrap": "3.3.5",
+    "browserify": "11.0.1",
+    "chai": "3.3.0",
+    "icanhaz": "0.10.3",
+    "jquery": "2.1.4",
+    "mocha": "2.3.3",
+    "tracking": "1.1.1",
+    "uglifyjs": "2.4.10",
+    "watch": "0.16.0"
+  }
+}
