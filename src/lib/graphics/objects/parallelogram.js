@@ -44,6 +44,7 @@ Parallelogram.prototype.innerVectors = function(){
 /** @function isPointInside
  * Check if point is inside the parallelogram
  * (0<AM⋅AB<AB⋅AB)∧(0<AM⋅AD<AD⋅AD)
+ * NOTE: If it touches the edges it will return true
  * @param {Point} point The point we want to check if it is inside or not
  * @return {Boolean} Whether it is inside or not
  */
@@ -56,7 +57,7 @@ Parallelogram.prototype.isPointInside = function(point){
         var ABAB = this.AB.dot(this.AB);
         var AMAD = AM.dot(this.AD);
         var ADAD = this.AD.dot(this.AD);
-        if(((0 < AMAB) && (AMAB < ABAB)) && ((0 < AMAD) && (AMAD < ADAD))) {
+        if(((0 <= AMAB) && (AMAB <= ABAB)) && ((0 <= AMAD) && (AMAD <= ADAD))) {
             returnValue = true;
         }
     } else {
