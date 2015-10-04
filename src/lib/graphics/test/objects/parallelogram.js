@@ -11,7 +11,7 @@ describe("Parallelogram Object Testing", function() {
             var facesDummy = new graphics.Parallelogram().fromVertices(-2, 7, 2, -2);
             for(var j=0;j!==facesDummy.vertices.pMembers.length;++j) {
                 var currentVertex = facesDummy.vertices[facesDummy.vertices.pMembers[j]];
-                chai.assert.isTrue(imageDummy.isPointInside(currentVertex));
+                var returnsNothing = chai.expect(imageDummy.isPointInside(currentVertex)).to.be.true;
             }
         });
 
@@ -26,7 +26,7 @@ describe("Parallelogram Object Testing", function() {
                 new graphics.Vertex2D(-3, -9)
             ];
             for(var i=0;i!==pointsNotInside.length;++i) {
-                chai.assert.isFalse(imageDummy.isPointInside(pointsNotInside[i]));
+                var returnsNothing = chai.expect(imageDummy.isPointInside(pointsNotInside[i])).to.be.false;
             }
         });
     });
