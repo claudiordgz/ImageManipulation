@@ -8,9 +8,9 @@ var parallelograms = require('./graphics');
  */
 function partitionSquareIntoFour(parallelogram){
     'use strict';
-    var R1 = new parallelograms.Parallelogram().fromVertices(0, parallelogram.width/2, 0, parallelogram.height/2),
-        R2 = new parallelograms.Parallelogram().fromVertices(parallelogram.width/2, parallelogram.width,0, parallelogram.height/2),
-        R3 = new parallelograms.Parallelogram().fromVertices(0,parallelogram.width/2, parallelogram.height/2, parallelogram.height),
+    var R1 = new parallelograms.Parallelogram().fromVertices(0, (parallelogram.width/2) - 1, 0, (parallelogram.height/2) - 1),
+        R2 = new parallelograms.Parallelogram().fromVertices(parallelogram.width/2, parallelogram.width, 0, (parallelogram.height/2) - 1),
+        R3 = new parallelograms.Parallelogram().fromVertices(0, (parallelogram.width/2) - 1, parallelogram.height/2, parallelogram.height),
         R4 = new parallelograms.Parallelogram().fromVertices(parallelogram.width/2, parallelogram.width, parallelogram.height/2, parallelogram.height);
     return {
         TopLeft: R1, TopRight: R2, LowerLeft: R3, LowerRight: R4
@@ -27,7 +27,7 @@ function partitionSquareIntoFour(parallelogram){
 function squareOverlap(faceBox) {
     'use strict';
     var subSquares = partitionSquareIntoFour({width: faceBox.sourceWidth, height: faceBox.sourceHeight});
-    concentricParallelogramCollision(subSquares, faceBox);
+    return concentricParallelogramCollision(subSquares, faceBox);
 }
 
 function range(start, count) {
@@ -49,17 +49,19 @@ function concentricParallelogramCollision(subSquares, faceBox) {
     var vertices = range(0, faceBox.vertices.pMembers.length);
     for(var key in subSquares){
         if(subSquares.hasOwnProperty(key)){
-            if(!quadrantsPack.hasOwnProperty(key)){
-                quadrantsPack[key] = [];
-            }
-            for(var i=0; i!==vertices.length;++i){
+            var max = vertices.length;
+            var i = 0;
+            while(i !== max){
                 if(faceBox.vertices.hasOwnProperty(faceBox.vertices.pMembers[i])){
                     var vertex = faceBox.vertices[faceBox.vertices.pMembers[vertices[i]]];
                     var isInside = subSquares[key].isPointInside(vertex);
                     if(isInside) {
                         vertices.splice(i,1);
+                        max = vertices.length;
+                        quadrantsPack[key] = quadrantsPack[key] || [];
                         quadrantsPack[key].push(vertex);
-                        break;
+                    } else {
+                        i++;
                     }
                 }
             }
@@ -68,10 +70,11 @@ function concentricParallelogramCollision(subSquares, faceBox) {
             }
         }
     }
-    console.log(quadrantsPack);
+    return quadrantsPack;
 }
 
 module.exports = {
     squareOverlap: squareOverlap,
-    partitionSquareIntoFour: partitionSquareIntoFour
+    partitionSquareIntoFour: partitionSquareIntoFour,
+    concentricParallelogramCollision: concentricParallelogramCollision
 };
