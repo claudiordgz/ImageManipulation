@@ -27,7 +27,8 @@
     "color",
     "palette",
     "tracking",
-    "js"
+    "js",
+    "vector"
   ],
   "author": "claudiordgz",
   "license": "MIT",
