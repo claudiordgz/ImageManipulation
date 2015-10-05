@@ -11,7 +11,7 @@ describe("Image partitioning process", function() {
             var currentTest = test.vertices;
             var currentResults = expected.vertices;
             for (var key in currentResults) {
-                if(currentResults.hasOwnProperty(key) && currentTest.hasOwnProperty(key)){
+                if(currentResults[key] !== undefined && currentTest[key] !== undefined){
                     chai.expect(currentTest[key]).to.be(currentResults[key]);
                 }
             }
@@ -62,54 +62,119 @@ describe("Image partitioning process", function() {
             var faceBoxWidth = imageWidth * 0.45;
             var faceBoxHeight = imageHeight * 0.35;
 
-            var concentricSquareTest = function(offsetX, offsetY, test) {
+            var concentricSquareTest = function(offsetX, offsetY, vertexPerSquareTest, areaPerSquareTest) {
                 var faceBox = new graphics.FaceContainer(faceBoxWidth, faceBoxHeight, offsetX, offsetY, imageWidth, imageHeight, divWidth, divHeight);
-                var collisions = utilities.squareOverlap(faceBox);
-                test(collisions);
+                var faceBoxCollisionMap = utilities.squareOverlap(faceBox);
+                vertexPerSquareTest(faceBoxCollisionMap);
+                utilities.calculateAreasForPoints(faceBox, faceBoxCollisionMap);
+                areaPerSquareTest(faceBoxCollisionMap);
             };
 
             it("Centered face, one vertex per quadrant", function () {
-                var offsetX = (imageWidth - faceBoxWidth) / 2;
-                var offsetY = (imageHeight - faceBoxHeight) / 2;
-                concentricSquareTest(offsetX, offsetY, function(collisions) {
-                    for(var key in collisions) {
-                        if(collisions.hasOwnProperty(key)) {
-                            chai.expect(collisions[key].length).to.equal(1);
+                concentricSquareTest((imageWidth - faceBoxWidth) / 2, (imageHeight - faceBoxHeight) / 2,
+                    function(collisionMap) {
+                        for (var key in collisionMap) {
+                            if (collisionMap[key] !== undefined) {
+                                chai.expect(collisionMap[key].collisions.length).to.equal(1);
+                            }
                         }
+                    },
+                    function(collisionMap) {
+                        //
                     }
-                });
+                );
             });
 
             it("Concentric square test, all vertex TopLeft quadrant", function () {
-                concentricSquareTest(0, 0, function(collisions) {
-                    if(collisions.hasOwnProperty('TopLeft')){
-                        chai.expect(collisions.TopLeft.length).to.equal(4);
+                concentricSquareTest(0, 0,
+                    function(collisionMap) {
+                        chai.expect(collisionMap.TopLeft.collisions.length).to.equal(4);
+                    },
+                    function(collisionMap) {
+                        //
                     }
-                });
+                );
             });
 
             it("Concentric square test, all vertex TopRight quadrant", function () {
-                concentricSquareTest(imageWidth / 2, 0, function(collisions) {
-                    if(collisions.hasOwnProperty('TopRight')){
-                        chai.expect(collisions.TopRight.length).to.equal(4);
+                concentricSquareTest(imageWidth / 2, 0,
+                    function(collisionMap) {
+                        chai.expect(collisionMap.TopRight.collisions.length).to.equal(4);
+                    },
+                    function(collisionMap) {
+                        //
                     }
-                });
+                );
             });
 
             it("Concentric square test, all vertex LowerLeft quadrant", function () {
-                concentricSquareTest(0, imageHeight / 2, function(collisions) {
-                    if(collisions.hasOwnProperty('TopRight')){
-                        chai.expect(collisions.TopRight.length).to.equal(4);
+                concentricSquareTest(0, imageHeight / 2,
+                    function(collisionMap) {
+                        chai.expect(collisionMap.LowerLeft.collisions.length).to.equal(4);
+                    },
+                    function(collisionMap) {
+                        //
                     }
-                });
+                );
             });
 
             it("Concentric square test, all vertex LowerRight quadrant", function () {
-                concentricSquareTest(imageWidth / 2, imageHeight / 2, function(collisions) {
-                    if(collisions.hasOwnProperty('TopRight')){
-                        chai.expect(collisions.TopRight.length).to.equal(4);
+                concentricSquareTest(imageWidth / 2, imageHeight / 2,
+                    function(collisionMap) {
+                        chai.expect(collisionMap.LowerRight.collisions.length).to.equal(4);
+                    },
+                    function(collisionMap) {
+                        //
                     }
-                });
+                );
+            });
+
+            it("Concentric square test, all vertex TopLeft and TopRight quadrant", function () {
+                concentricSquareTest(imageWidth / 4, 0,
+                    function(collisionMap) {
+                        chai.expect(collisionMap.TopRight.collisions.length).to.equal(2);
+                        chai.expect(collisionMap.TopLeft.collisions.length).to.equal(2);
+                    },
+                    function(collisionMap) {
+                        //
+                    }
+                );
+            });
+
+            it("Concentric square test, all vertex LowerLeft and LowerRight quadrant", function () {
+                concentricSquareTest(imageWidth / 4, imageHeight / 2,
+                    function(collisionMap) {
+                        chai.expect(collisionMap.LowerLeft.collisions.length).to.equal(2);
+                        chai.expect(collisionMap.LowerRight.collisions.length).to.equal(2);
+                    },
+                    function(collisionMap) {
+                        //
+                    }
+                );
+            });
+
+            it("Concentric square test, all vertex TopLeft and LowerLeft quadrant", function () {
+                concentricSquareTest(0, imageHeight / 4,
+                    function(collisionMap) {
+                        chai.expect(collisionMap.TopLeft.collisions.length).to.equal(2);
+                        chai.expect(collisionMap.LowerLeft.collisions.length).to.equal(2);
+                    },
+                    function(collisionMap) {
+                        //
+                    }
+                );
+            });
+
+            it("Concentric square test, all vertex TopRight and LowerRight quadrant", function () {
+                concentricSquareTest(imageWidth / 2, imageHeight / 4,
+                    function(collisionMap) {
+                        chai.expect(collisionMap.TopRight.collisions.length).to.equal(2);
+                        chai.expect(collisionMap.LowerRight.collisions.length).to.equal(2);
+                    },
+                    function(collisionMap) {
+                        //
+                    }
+                );
             });
         });
     });
