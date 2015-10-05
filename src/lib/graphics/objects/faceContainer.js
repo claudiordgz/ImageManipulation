@@ -36,7 +36,7 @@ function recalculateVertices(parallelogramVertexSet, offsetX, offsetY) {
     'use strict';
     for (var i=0; i!==parallelogramVertexSet.pMembers.length;++i) {
         var key = parallelogramVertexSet.pMembers[i];
-        if (parallelogramVertexSet.hasOwnProperty(key)) {
+        if (parallelogramVertexSet[key] !== undefined) {
             parallelogramVertexSet[key].x += offsetX;
             parallelogramVertexSet[key].y += offsetY;
         }
