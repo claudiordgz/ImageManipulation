@@ -41,6 +41,12 @@ Parallelogram.prototype.innerVectors = function(){
     this.__isReady = true;
 };
 
+Parallelogram.prototype.area = function(){
+    'use strict';
+    return this.width * this.height;
+};
+
+
 /** @function isPointInside
  * Check if point is inside the parallelogram
  * (0<AM⋅AB<AB⋅AB)∧(0<AM⋅AD<AD⋅AD)
