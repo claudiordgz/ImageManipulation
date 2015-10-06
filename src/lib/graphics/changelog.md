@@ -1,8 +1,8 @@
 0.1.7 / 2015-10-01
-
-    - insideSquare algorithm
+    - squareOverlap algorithm
         - finds the position of the facebox into a partitioned
         parallelogram.
+    - calculateAreas of overlap
 
 0.1.6 / 2015-10-01
 
