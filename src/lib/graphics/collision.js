@@ -17,17 +17,39 @@ function partitionSquareIntoFour(parallelogram){
     };
 }
 
+/** @typedef {Object<string,string>} FaceBoxCollisionMap
+ * The Parallelograms are as follows:
+ *  @property {string} TopLeft
+ *  @property {TopLeft.collisions.Vertex2D[]} Array of vertices from the faceBox in the TopLeft Quadrant
+ *  @property {TopLeft.properties.Parallelogram} Sub Parallelogram properties
+ *  @property {string} TopRight
+ *  @property {TopRight.collisions.Vertex2D[]} Array of vertices from the faceBox in the TopRight Quadrant
+ *  @property {TopRight.properties.Parallelogram} Sub Parallelogram properties
+ *  @property {string} LowerLeft
+ *  @property {LowerLeft.collisions.Vertex2D[]} Array of vertices from the faceBox in the LowerLeft Quadrant
+ *  @property {LowerLeft.properties.Parallelogram} Sub Parallelogram properties
+ *  @property {string} LowerRight
+ *  @property {LowerRight.collisions.Vertex2D[]} Array of vertices from the faceBox in the LowerRight Quadrant
+ *  @property {LowerRight.properties.Parallelogram} Sub Parallelogram properties
+ */
+
 /*  @function squareOverlap
     Find where is the faceBox (the square containing ALL the faces)
     in the image, the offsets of the facebook are already applied.
     The origin 0,0 is the image's top-left corner.
-    @param {Object} originalImage the properties of the original image
-    @param {Object} faceBox the square that collects faces found
+    @param {FaceContainer} faceBox the square that collects faces found
+    @returns {FaceBoxCollisionMap}
  */
 function squareOverlap(faceBox) {
     'use strict';
     var subSquares = partitionSquareIntoFour({width: faceBox.sourceWidth, height: faceBox.sourceHeight});
-    return concentricParallelogramCollision(subSquares, faceBox);
+    var faceBoxCollisionMap = concentricParallelogramCollision(subSquares, faceBox);
+    for(var key in subSquares) {
+        if (faceBoxCollisionMap[key] !== undefined && subSquares[key] !== undefined) {
+            faceBoxCollisionMap[key].properties = subSquares[key];
+        }
+    }
+    return faceBoxCollisionMap;
 }
 
 function range(start, count) {
@@ -38,9 +60,10 @@ function range(start, count) {
         });
 }
 
-/* @function concentricParallelogramCollision
+
+/** @function concentricParallelogramCollision
  * Iterate through all the faceBox vertices and calculate the vectors between them.
- *
+ *  @returns {FaceBoxCollisionMap}
  */
 function concentricParallelogramCollision(subSquares, faceBox) {
     'use strict';
@@ -48,18 +71,21 @@ function concentricParallelogramCollision(subSquares, faceBox) {
     var quadrantsPack = {};
     var vertices = range(0, faceBox.vertices.pMembers.length);
     for(var key in subSquares){
-        if(subSquares.hasOwnProperty(key)){
+        if(subSquares[key] !== undefined){
             var max = vertices.length;
             var i = 0;
             while(i !== max){
-                if(faceBox.vertices.hasOwnProperty(faceBox.vertices.pMembers[i])){
+                if(faceBox.vertices[faceBox.vertices.pMembers[i]] !== undefined){
                     var vertex = faceBox.vertices[faceBox.vertices.pMembers[vertices[i]]];
                     var isInside = subSquares[key].isPointInside(vertex);
                     if(isInside) {
+                        vertex.identifier = vertex.identifier || '';
+                        vertex.identifier = faceBox.vertices.pMembers[vertices[i]].toString();
                         vertices.splice(i,1);
                         max = vertices.length;
-                        quadrantsPack[key] = quadrantsPack[key] || [];
-                        quadrantsPack[key].push(vertex);
+                        quadrantsPack[key] = quadrantsPack[key] || {};
+                        quadrantsPack[key].collisions = quadrantsPack[key].collisions || [];
+                        quadrantsPack[key].collisions.push(vertex);
                     } else {
                         i++;
                     }
