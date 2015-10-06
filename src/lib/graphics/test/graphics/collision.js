@@ -5,53 +5,8 @@ var areas = require("../../areaProbability");
 var graphics = require('../../graphics');
 
 
-describe("Image partitioning process", function() {
+describe("Vertex collision detection", function() {
     'use strict';
-    describe("partitionParallelogramIntoFour", function() {
-        var checkPartitioning = function(test, expected) {
-            var currentTest = test.vertices;
-            var currentResults = expected.vertices;
-            for (var key in currentResults) {
-                if(currentResults[key] !== undefined && currentTest[key] !== undefined){
-                    chai.expect(currentTest[key]).to.be(currentResults[key]);
-                }
-            }
-        };
-
-        it("Return four quadrants for a 100X200 image", function() {
-            var results100by200 = {
-                TopLeft: new graphics.Parallelogram().fromVertices(0, 50, 0, 100),
-                TopRight: new graphics.Parallelogram().fromVertices(50, 100, 0, 100),
-                LowerLeft: new graphics.Parallelogram().fromVertices(0, 50, 100, 200),
-                LowerRight: new graphics.Parallelogram().fromVertices(50, 100, 100, 200)
-            };
-            var portraitParallelograms = collision.partitionSquareIntoFour({width: 100, height: 200});
-            checkPartitioning(portraitParallelograms, results100by200);
-        });
-
-        it("Return four quadrants for a 200X200 image", function() {
-            var results200by200 = {
-                TopLeft: new graphics.Parallelogram().fromVertices(0, 100, 0, 100),
-                TopRight: new graphics.Parallelogram().fromVertices(100, 200, 0, 100),
-                LowerLeft: new graphics.Parallelogram().fromVertices(0, 100, 100, 200),
-                LowerRight: new graphics.Parallelogram().fromVertices(100, 200, 100, 200)
-            };
-            var squareParallelograms = collision.partitionSquareIntoFour({width: 200, height: 200});
-            checkPartitioning(squareParallelograms, results200by200);
-        });
-
-        it("Return four quadrants for a 200X100 image", function() {
-            var results200by100 = {
-                TopLeft: new graphics.Parallelogram().fromVertices(0, 100, 0, 50),
-                TopRight: new graphics.Parallelogram().fromVertices(100, 200, 0, 50),
-                LowerLeft: new graphics.Parallelogram().fromVertices(0, 100, 50, 100),
-                LowerRight: new graphics.Parallelogram().fromVertices(100, 200, 50, 100)
-            };
-            var landscapeParallelograms = collision.partitionSquareIntoFour({width: 200, height: 100});
-            checkPartitioning(landscapeParallelograms, results200by100);
-        });
-    });
-
     /** FaceContainer
      * width, height, offsetX, offsetY, imageWidth, imageHeight, containerWidth, containerHeight*/
     describe("squareOverlap", function() {
@@ -67,13 +22,14 @@ describe("Image partitioning process", function() {
                 var faceBox = new graphics.FaceContainer(faceBoxWidth, faceBoxHeight, offsetX, offsetY, imageWidth, imageHeight, divWidth, divHeight);
                 var faceBoxCollisionMap = collision.squareOverlap(faceBox);
                 vertexPerSquareTest(faceBoxCollisionMap);
-                console.log(areas.calculateAreasForPoints(faceBox, faceBoxCollisionMap));
+                areas.calculateAreasForPoints(faceBox, faceBoxCollisionMap);
                 areaPerSquareTest(faceBoxCollisionMap);
             };
 
             it("Centered face, one vertex per quadrant", function () {
                 concentricSquareTest((imageWidth - faceBoxWidth) / 2, (imageHeight - faceBoxHeight) / 2,
                     function(collisionMap) {
+                        console.log(collisionMap);
                         for (var key in collisionMap) {
                             if (collisionMap[key] !== undefined) {
                                 chai.expect(collisionMap[key].collisions.length).to.equal(1);
