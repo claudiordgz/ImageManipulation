@@ -1,6 +1,7 @@
 /*globals require, describe, it, console, assert*/
 var chai    = require("chai");
-var utilities = require("../../collision");
+var collision = require("../../collision");
+var areas = require("../../areaProbability");
 var graphics = require('../../graphics');
 
 
@@ -24,7 +25,7 @@ describe("Image partitioning process", function() {
                 LowerLeft: new graphics.Parallelogram().fromVertices(0, 50, 100, 200),
                 LowerRight: new graphics.Parallelogram().fromVertices(50, 100, 100, 200)
             };
-            var portraitParallelograms = utilities.partitionSquareIntoFour({width: 100, height: 200});
+            var portraitParallelograms = collision.partitionSquareIntoFour({width: 100, height: 200});
             checkPartitioning(portraitParallelograms, results100by200);
         });
 
@@ -35,7 +36,7 @@ describe("Image partitioning process", function() {
                 LowerLeft: new graphics.Parallelogram().fromVertices(0, 100, 100, 200),
                 LowerRight: new graphics.Parallelogram().fromVertices(100, 200, 100, 200)
             };
-            var squareParallelograms = utilities.partitionSquareIntoFour({width: 200, height: 200});
+            var squareParallelograms = collision.partitionSquareIntoFour({width: 200, height: 200});
             checkPartitioning(squareParallelograms, results200by200);
         });
 
@@ -46,7 +47,7 @@ describe("Image partitioning process", function() {
                 LowerLeft: new graphics.Parallelogram().fromVertices(0, 100, 50, 100),
                 LowerRight: new graphics.Parallelogram().fromVertices(100, 200, 50, 100)
             };
-            var landscapeParallelograms = utilities.partitionSquareIntoFour({width: 200, height: 100});
+            var landscapeParallelograms = collision.partitionSquareIntoFour({width: 200, height: 100});
             checkPartitioning(landscapeParallelograms, results200by100);
         });
     });
@@ -64,9 +65,9 @@ describe("Image partitioning process", function() {
 
             var concentricSquareTest = function(offsetX, offsetY, vertexPerSquareTest, areaPerSquareTest) {
                 var faceBox = new graphics.FaceContainer(faceBoxWidth, faceBoxHeight, offsetX, offsetY, imageWidth, imageHeight, divWidth, divHeight);
-                var faceBoxCollisionMap = utilities.squareOverlap(faceBox);
+                var faceBoxCollisionMap = collision.squareOverlap(faceBox);
                 vertexPerSquareTest(faceBoxCollisionMap);
-                utilities.calculateAreasForPoints(faceBox, faceBoxCollisionMap);
+                console.log(areas.calculateAreasForPoints(faceBox, faceBoxCollisionMap));
                 areaPerSquareTest(faceBoxCollisionMap);
             };
 
