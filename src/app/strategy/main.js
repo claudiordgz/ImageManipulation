@@ -1,5 +1,5 @@
 /*globals require,module, ich, $*/
-var util = require('faces/util');
+var util = require('faceCentering/util/util');
 var policies = require('faces/strategy/policies');
 
 // cm_mobHeader_artist_overlay - The full header background div
@@ -35,7 +35,9 @@ function defaultPolicy(index, element, imgUrl, policy) {
             var container = this.element.find(imageContainerClassName);
                 container.containerProperties = util.getProperties(container[0]);
             var style = this.policy(this.self, container, this.imageSrc, this.width, this.height, this.className);
-            util.createClass('.' + this.className, style);
+            if(style !== undefined) {
+                util.createClass('.' + this.className, style);
+            }
             container.addClass(this.className);
         }
     };

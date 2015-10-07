@@ -1,12 +1,12 @@
 /*globals require, module, tracking, console*/
-var util = require('faces/util');
+var util = require('faceCentering/util/util');
 var graphics = require('graphics');
 var faces = require('faceCentering');
 
 function trackingJsFromLocalImage(imageElement, imageContainer, imgUrl,  width, height, imgClass) {
     'use strict';
     var tracker = new tracking.ObjectTracker(['face']);
-    tracker.sourceElement = new graphics.ImagePack(width, height, '.' + imgClass, imageContainer);
+    tracker.sourceElement = new graphics.ImagePack(width, height, '.' + imgClass, imageContainer, imgUrl);
     tracker.setStepSize(1.7);
     tracking.track(imageElement, tracker);
     tracker.on('track', function(event) {

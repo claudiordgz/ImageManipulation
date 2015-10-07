@@ -5,6 +5,7 @@ var imageProcessing = require('faces/strategy/main');
 function main() {
     'use strict';
     var items = testbed.fromDirectorySmallSubset();
+    //var items = testbed.fromDirectory();
     imageProcessing.processImages(items);
 }
 

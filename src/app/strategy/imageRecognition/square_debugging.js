@@ -1,5 +1,5 @@
 /*globals require, module, console*/
-var util = require('faces/util');
+var util = require('faceCentering/util/util');
 
 function plotSquare(imageElement, x, y, w, h) {
     'use strict';
