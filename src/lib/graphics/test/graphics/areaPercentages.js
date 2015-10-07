@@ -40,7 +40,7 @@ describe("Area Percentages", function() {
                 );
             });
 
-            it("Concentric square test, all vertex TopLeft quadrant", function () {
+            it("all vertex TopLeft quadrant", function () {
                 concentricSquareTest(testbed.resultsAllVertexTopLeftQuadrant, 0, 0,
                     function(percentageAreaPerQuadrant) {
                         chai.should().equal(percentageAreaPerQuadrant.TopRight, undefined);
@@ -51,7 +51,7 @@ describe("Area Percentages", function() {
                 );
             });
 
-            it("Concentric square test, all vertex TopRight quadrant", function () {
+            it("all vertex TopRight quadrant", function () {
                 concentricSquareTest(testbed.resultsAllVertexTopRightQuadrant,imageWidth / 2, 0,
                     function(percentageAreaPerQuadrant) {
                         chai.should().equal(percentageAreaPerQuadrant.TopLeft, undefined);
@@ -61,7 +61,7 @@ describe("Area Percentages", function() {
                 );
             });
 
-            it("Concentric square test, all vertex LowerLeft quadrant", function () {
+            it("all vertex LowerLeft quadrant", function () {
                 concentricSquareTest(testbed.resultsAllVertexLowerLeftQuadrant, 0, imageHeight / 2,
                     function(percentageAreaPerQuadrant) {
                         chai.should().equal(percentageAreaPerQuadrant.TopRight, undefined);
@@ -71,7 +71,7 @@ describe("Area Percentages", function() {
                 );
             });
 
-            it("Concentric square test, all vertex LowerRight quadrant", function () {
+            it("all vertex LowerRight quadrant", function () {
                 concentricSquareTest(testbed.resultsAllVertexLowerRightQuadrant, imageWidth / 2, imageHeight / 2,
                     function(percentageAreaPerQuadrant) {
                         chai.should().equal(percentageAreaPerQuadrant.TopRight, undefined);
@@ -81,7 +81,7 @@ describe("Area Percentages", function() {
                 );
             });
 
-            it("Concentric square test, all vertex TopLeft and TopRight quadrant", function () {
+            it("all vertex TopLeft and TopRight quadrant", function () {
                 concentricSquareTest(testbed.resultsAllVertexTopLeftTopRightQuadrant, imageWidth / 4, 0,
                     function(percentageAreaPerQuadrant) {
                         chai.should().equal(percentageAreaPerQuadrant.LowerLeft, undefined);
@@ -90,7 +90,7 @@ describe("Area Percentages", function() {
                 );
             });
 
-            it("Concentric square test, all vertex LowerLeft and LowerRight quadrant", function () {
+            it("all vertex LowerLeft and LowerRight quadrant", function () {
                 concentricSquareTest(testbed.resultsAllVertexLowerLeftLowerRightQuadrant, imageWidth / 4, imageHeight / 2,
                     function(percentageAreaPerQuadrant) {
                         chai.should().equal(percentageAreaPerQuadrant.TopRight, undefined);
@@ -99,7 +99,7 @@ describe("Area Percentages", function() {
                 );
             });
 
-            it("Concentric square test, all vertex TopLeft and LowerLeft quadrant", function () {
+            it("all vertex TopLeft and LowerLeft quadrant", function () {
                 concentricSquareTest(testbed.resultsAllVertexTopLeftLowerLeftQuadrant, 0, imageHeight / 4,
                     function(percentageAreaPerQuadrant) {
                         chai.should().equal(percentageAreaPerQuadrant.TopRight, undefined);
@@ -108,7 +108,7 @@ describe("Area Percentages", function() {
                 );
             });
 
-            it("Concentric square test, all vertex TopRight and LowerRight quadrant", function () {
+            it("all vertex TopRight and LowerRight quadrant", function () {
                 concentricSquareTest(testbed.resultsAllVertexTopRightLowerRightQuadrant, imageWidth / 2, imageHeight / 4,
                     function(percentageAreaPerQuadrant) {
                         chai.should().equal(percentageAreaPerQuadrant.TopLeft, undefined);

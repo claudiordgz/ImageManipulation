@@ -3,6 +3,7 @@
     - feature: areaCalculation returns the Percentage of the area contained in a quadrant
     - feature: sliceDetection returns an object that contains the axis that the facebox crosses, xSlice, ySlice, both or noSlice
     - bug: fixes for collision detection for edges
+    - tests: test mechanisms for area Percentage calculation, slicing, collision detection, and bundling
 
 0.1.7 / 2015-10-01
 

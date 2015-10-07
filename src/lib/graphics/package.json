@@ -1,8 +1,8 @@
 {
   "name": "graphics",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Library for pallalelogram collisions",
-  "main": "graphics.js",
+  "main": "main.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/claudiordgz/faces"

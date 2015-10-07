@@ -36,7 +36,7 @@ describe("Vertex collision detection", function() {
                 );
             });
 
-            it("Concentric square test, all vertex TopLeft quadrant", function () {
+            it("all vertex TopLeft quadrant", function () {
                 concentricSquareTest(0, 0,
                     function(collisionMap) {
                         chai.expect(collisionMap.TopLeft.collisions.length).to.equal(4);
@@ -44,7 +44,7 @@ describe("Vertex collision detection", function() {
                 );
             });
 
-            it("Concentric square test, all vertex TopRight quadrant", function () {
+            it("all vertex TopRight quadrant", function () {
                 concentricSquareTest(imageWidth / 2, 0,
                     function(collisionMap) {
                         chai.expect(collisionMap.TopRight.collisions.length).to.equal(4);
@@ -52,7 +52,7 @@ describe("Vertex collision detection", function() {
                 );
             });
 
-            it("Concentric square test, all vertex LowerLeft quadrant", function () {
+            it("all vertex LowerLeft quadrant", function () {
                 concentricSquareTest(0, imageHeight / 2,
                     function(collisionMap) {
                         chai.expect(collisionMap.LowerLeft.collisions.length).to.equal(4);
@@ -60,7 +60,7 @@ describe("Vertex collision detection", function() {
                 );
             });
 
-            it("Concentric square test, all vertex LowerRight quadrant", function () {
+            it("all vertex LowerRight quadrant", function () {
                 concentricSquareTest(imageWidth / 2, imageHeight / 2,
                     function(collisionMap) {
                         chai.expect(collisionMap.LowerRight.collisions.length).to.equal(4);
@@ -68,7 +68,7 @@ describe("Vertex collision detection", function() {
                 );
             });
 
-            it("Concentric square test, all vertex TopLeft and TopRight quadrant", function () {
+            it("all vertex TopLeft and TopRight quadrant", function () {
                 concentricSquareTest(imageWidth / 4, 0,
                     function(collisionMap) {
                         chai.expect(collisionMap.TopRight.collisions.length).to.equal(2);
@@ -77,7 +77,7 @@ describe("Vertex collision detection", function() {
                 );
             });
 
-            it("Concentric square test, all vertex LowerLeft and LowerRight quadrant", function () {
+            it("all vertex LowerLeft and LowerRight quadrant", function () {
                 concentricSquareTest(imageWidth / 4, imageHeight / 2,
                     function(collisionMap) {
                         chai.expect(collisionMap.LowerLeft.collisions.length).to.equal(2);
@@ -86,7 +86,7 @@ describe("Vertex collision detection", function() {
                 );
             });
 
-            it("Concentric square test, all vertex TopLeft and LowerLeft quadrant", function () {
+            it("all vertex TopLeft and LowerLeft quadrant", function () {
                 concentricSquareTest(0, imageHeight / 4,
                     function(collisionMap) {
                         chai.expect(collisionMap.TopLeft.collisions.length).to.equal(2);
@@ -95,7 +95,7 @@ describe("Vertex collision detection", function() {
                 );
             });
 
-            it("Concentric square test, all vertex TopRight and LowerRight quadrant", function () {
+            it("all vertex TopRight and LowerRight quadrant", function () {
                 concentricSquareTest(imageWidth / 2, imageHeight / 4,
                     function(collisionMap) {
                         chai.expect(collisionMap.TopRight.collisions.length).to.equal(2);
