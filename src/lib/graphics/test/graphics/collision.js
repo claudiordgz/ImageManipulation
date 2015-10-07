@@ -1,7 +1,7 @@
 /*globals require, describe, it, console, assert*/
 var chai    = require("chai");
 var collision = require("../../collision");
-var areas = require("../../areaProbability");
+var areas = require("../../areaPercentages");
 var graphics = require('../../graphics');
 
 
@@ -18,26 +18,20 @@ describe("Vertex collision detection", function() {
             var faceBoxWidth = imageWidth * 0.45;
             var faceBoxHeight = imageHeight * 0.35;
 
-            var concentricSquareTest = function(offsetX, offsetY, vertexPerSquareTest, areaPerSquareTest) {
+            var concentricSquareTest = function(offsetX, offsetY, vertexPerSquareTest) {
                 var faceBox = new graphics.FaceContainer(faceBoxWidth, faceBoxHeight, offsetX, offsetY, imageWidth, imageHeight, divWidth, divHeight);
                 var faceBoxCollisionMap = collision.squareOverlap(faceBox);
                 vertexPerSquareTest(faceBoxCollisionMap);
-                areas.calculateAreasForPoints(faceBox, faceBoxCollisionMap);
-                areaPerSquareTest(faceBoxCollisionMap);
             };
 
             it("Centered face, one vertex per quadrant", function () {
                 concentricSquareTest((imageWidth - faceBoxWidth) / 2, (imageHeight - faceBoxHeight) / 2,
                     function(collisionMap) {
-                        console.log(collisionMap);
                         for (var key in collisionMap) {
                             if (collisionMap[key] !== undefined) {
                                 chai.expect(collisionMap[key].collisions.length).to.equal(1);
                             }
                         }
-                    },
-                    function(collisionMap) {
-                        //
                     }
                 );
             });
@@ -46,9 +40,6 @@ describe("Vertex collision detection", function() {
                 concentricSquareTest(0, 0,
                     function(collisionMap) {
                         chai.expect(collisionMap.TopLeft.collisions.length).to.equal(4);
-                    },
-                    function(collisionMap) {
-                        //
                     }
                 );
             });
@@ -57,9 +48,6 @@ describe("Vertex collision detection", function() {
                 concentricSquareTest(imageWidth / 2, 0,
                     function(collisionMap) {
                         chai.expect(collisionMap.TopRight.collisions.length).to.equal(4);
-                    },
-                    function(collisionMap) {
-                        //
                     }
                 );
             });
@@ -68,9 +56,6 @@ describe("Vertex collision detection", function() {
                 concentricSquareTest(0, imageHeight / 2,
                     function(collisionMap) {
                         chai.expect(collisionMap.LowerLeft.collisions.length).to.equal(4);
-                    },
-                    function(collisionMap) {
-                        //
                     }
                 );
             });
@@ -79,9 +64,6 @@ describe("Vertex collision detection", function() {
                 concentricSquareTest(imageWidth / 2, imageHeight / 2,
                     function(collisionMap) {
                         chai.expect(collisionMap.LowerRight.collisions.length).to.equal(4);
-                    },
-                    function(collisionMap) {
-                        //
                     }
                 );
             });
@@ -91,9 +73,6 @@ describe("Vertex collision detection", function() {
                     function(collisionMap) {
                         chai.expect(collisionMap.TopRight.collisions.length).to.equal(2);
                         chai.expect(collisionMap.TopLeft.collisions.length).to.equal(2);
-                    },
-                    function(collisionMap) {
-                        //
                     }
                 );
             });
@@ -103,9 +82,6 @@ describe("Vertex collision detection", function() {
                     function(collisionMap) {
                         chai.expect(collisionMap.LowerLeft.collisions.length).to.equal(2);
                         chai.expect(collisionMap.LowerRight.collisions.length).to.equal(2);
-                    },
-                    function(collisionMap) {
-                        //
                     }
                 );
             });
@@ -115,9 +91,6 @@ describe("Vertex collision detection", function() {
                     function(collisionMap) {
                         chai.expect(collisionMap.TopLeft.collisions.length).to.equal(2);
                         chai.expect(collisionMap.LowerLeft.collisions.length).to.equal(2);
-                    },
-                    function(collisionMap) {
-                        //
                     }
                 );
             });
@@ -127,9 +100,6 @@ describe("Vertex collision detection", function() {
                     function(collisionMap) {
                         chai.expect(collisionMap.TopRight.collisions.length).to.equal(2);
                         chai.expect(collisionMap.LowerRight.collisions.length).to.equal(2);
-                    },
-                    function(collisionMap) {
-                        //
                     }
                 );
             });
