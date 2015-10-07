@@ -1,6 +1,7 @@
 /*globals require, console, module*/
 var graphics = require('graphics');
-var util = require('faces/util');
+var util = require('./util/util');
+var css = require('./util/css');
 
 /*
  */
@@ -49,22 +50,23 @@ function retrieveFacesInImage(faceRecognizedEvent, imagePack) {
     return faces;
 }
 
-
-/* @function findFacesQuadrant
- * We partition the image in four quadrants and find the percentages
- * and quadrants being touched by the faces container
- * @param {FaceContainer} The one box to hold all faces in the image
- */
-function quadrantsPercentagesPerFaceArea(encompassingContainer) {
+function createStyle(className, imgUrl) {
     'use strict';
-    console.log(encompassingContainer);
+    /*jshint multistr: true */
+    var style = util.format('background-image: url(\'{0}\');  no-repeat center center fixed; \
+        -webkit-background-size: cover; \
+        -moz-background-size: cover; \
+        -o-background-size: cover; \
+        background-size: cover;', imgUrl);
+    util.createClass(className, style);
 }
 
 function faceCentering(faceRecognizedEvent, imagePack){
     'use strict';
     var faces = retrieveFacesInImage(faceRecognizedEvent, imagePack);
-    var encompassingContainer = calculateBigBoxEncompassingFaces(faces);
-    quadrantsPercentagesPerFaceArea(encompassingContainer);
+    var faceBox = calculateBigBoxEncompassingFaces(faces);
+    var faceBoxAnalysis = graphics.GetFaceBoxPercentagePerQuadrant(faceBox);
+
 }
 
 module.exports = {
