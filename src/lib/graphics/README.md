@@ -19,13 +19,14 @@ Conditions:
 
 In a Rectangle with the following positions:
 
-
+```
 A  B
  ⌜⌝
  ⌞⌟
 D  C
+```
 
-Point M of coordinates (x,y) is inside the rectangle if
+Point `M` of coordinates `(x,y)` is inside the rectangle if
 
     (0<AM⋅AB<AB⋅AB)∧(0<AM⋅AD<AD⋅AD)
 
