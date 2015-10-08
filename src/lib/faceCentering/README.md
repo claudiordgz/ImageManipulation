@@ -14,37 +14,37 @@ are our faces.
 1. We receive our image, we need access to the binary data of the image, which
 may require downloading it or having it cached in a CORS enabled server.
 
-![Le wild image appears](https://raw.githubusercontent.com/claudiordgz/faces/master/src/lib/faceCentering/docs/assets/001.png)
+  ![Le wild image appears](https://raw.githubusercontent.com/claudiordgz/faces/master/src/lib/faceCentering/docs/assets/001.png)
 
 2. We use face recognition software, in its most basic configuration it will retrieve 
 some faces. If it doesn't retrieve all, we would have to retrieve further information<sup>1</sup>.
 
-![Le wild faces are detected](https://raw.githubusercontent.com/claudiordgz/faces/master/src/lib/faceCentering/docs/assets/002.png)
+  ![Le wild faces are detected](https://raw.githubusercontent.com/claudiordgz/faces/master/src/lib/faceCentering/docs/assets/002.png)
 
 3. We define a face box, that contains all the found faces.
 
-![Le wild faces are detected](https://raw.githubusercontent.com/claudiordgz/faces/master/src/lib/faceCentering/docs/assets/003.png)
+  ![Le wild faces are detected](https://raw.githubusercontent.com/claudiordgz/faces/master/src/lib/faceCentering/docs/assets/003.png)
 
 4. We partition the image into quadrants and detect the vertices that touch each quadrant.
 
-![Le wild quadrants are sliced](https://raw.githubusercontent.com/claudiordgz/faces/master/src/lib/faceCentering/docs/assets/004.png)
+  ![Le wild quadrants are sliced](https://raw.githubusercontent.com/claudiordgz/faces/master/src/lib/faceCentering/docs/assets/004.png)
 
 5. We calculate the area of the face box contained in each quadrant, 
 then we calculate the percentage this area represents against the whole face box. 
 
-![Le wild areas are calculated](https://raw.githubusercontent.com/claudiordgz/faces/master/src/lib/faceCentering/docs/assets/005.png)
+  ![Le wild areas are calculated](https://raw.githubusercontent.com/claudiordgz/faces/master/src/lib/faceCentering/docs/assets/005.png)
 
 6. Now we need to calculate an anchor point. In the case of this example the anchor point
 is center, because all parts of the face box have very similar percentages, thus there is no
 dominant quadrant. Then we try to position our background image in a circular div.
 
-![Le wild div is positioned](https://raw.githubusercontent.com/claudiordgz/faces/master/src/lib/faceCentering/docs/assets/006.png)
+  ![Le wild div is positioned](https://raw.githubusercontent.com/claudiordgz/faces/master/src/lib/faceCentering/docs/assets/006.png)
 
 7. As we can see to showcase all the faces we would have blank spaces, which is solvable<sup>2</sup>. 
 As of now we need to prevent all white space so we default to cover all the div while centering the image (since 
 all of the quadrants a more or less equal percentage of the faces). 
 
-![Le wild image is centered](https://raw.githubusercontent.com/claudiordgz/faces/master/src/lib/faceCentering/docs/assets/007.png)
+  ![Le wild image is centered](https://raw.githubusercontent.com/claudiordgz/faces/master/src/lib/faceCentering/docs/assets/007.png)
 
 
 ##<sup>1</sup> Getting more data from the images
