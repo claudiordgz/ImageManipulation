@@ -4,7 +4,10 @@
   "description": "R&D of tracking JS library",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha src/test --recursive --reporter spec && ./node_modules/.bin/mocha src/lib/graphics/test --recursive --reporter spec && ./node_modules/.bin/mocha src/lib/faceCentering/test --recursive --reporter spec",
+    "tests:faces": "./node_modules/.bin/mocha src/test --recursive --reporter spec",
+    "tests:graphics": "./node_modules/.bin/mocha src/lib/graphics/test --recursive --reporter spec",
+    "tests:faceCentering": "./node_modules/.bin/mocha src/lib/faceCentering/test --recursive --reporter spec",
+    "tests": "npm run tests:faces && npm run tests:graphics && npm run tests:faceCentering",
     "test:watch": "npm run test -- -w",
     "build:js:main:debug": "browserify -d src/app/main.js -o js/index.js",
     "build:js:main": "browserify src/app/main.js | uglifyjs > js/index.js",
