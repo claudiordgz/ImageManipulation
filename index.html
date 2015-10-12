@@ -14,11 +14,12 @@
     <script>
         function aload(t){"use strict";t=t||window.document.querySelectorAll("[data-aload]"),void 0===t.length&&(t=[t]);var a,e=0,r=t.length;for(e;r>e;e+=1)a=t[e],a["LINK"!==a.tagName?"src":"href"]=a.getAttribute("data-aload"),a.removeAttribute("data-aload");return t}
     </script>
-    <script src="js/index.js"></script>
 </head>
 <body>
+<a href="#" class="nextButton">NEXT</a>
 
 <div class="mass"></div>
+
 
 <script id="element" type="text/html">
     <div class="col-md-4">
@@ -81,9 +82,7 @@
 <div class="row no-pad">
 </div>
 </script>
-
-
-
+<script src="js/index.js"></script>
 
 </body>
 </html>
