@@ -40,7 +40,7 @@ function defaultPolicy(index, element, imgUrl, policy) {
             var imageContainerClassName = '.cm_mobHeader_artist_image';
             var container = this.element.find(imageContainerClassName);
                 container.containerProperties = util.getProperties(container[0]);
-            var style = this.policy(this.self, container, this.imageSrc, this.width, this.height, this.className);
+            var style = this.policy(this.self, container, this.imageSrc, this.width, this.height, this.className, this.css);
             if(style !== undefined) {
                 sheet.selector('.' + this.className, style);
             }
