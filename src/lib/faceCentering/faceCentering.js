@@ -2,6 +2,7 @@
 var graphics = require('graphics');
 var util = require('./util/util');
 var css = require('./util/css');
+var positioning = require('./positioning');
 
 /*
  */
@@ -61,12 +62,15 @@ function createStyle(className, imgUrl) {
     util.createClass(className, style);
 }
 
-function faceCentering(faceRecognizedEvent, imagePack){
+function faceCentering(faceRecognizedEvent, imagePack, cssStyleSheet){
     'use strict';
     var faces = retrieveFacesInImage(faceRecognizedEvent, imagePack);
     var faceBox = calculateBigBoxEncompassingFaces(faces);
     var faceBoxAnalysis = graphics.GetFaceBoxPercentagePerQuadrant(faceBox);
-
+    var style = positioning.selectAnchorPoint(faceBox, faceBoxAnalysis);
+    if(style !== undefined) {
+        cssStyleSheet.selector(imagePack.imageClassName, style);
+    }
 }
 
 module.exports = {
