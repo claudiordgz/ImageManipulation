@@ -17,11 +17,13 @@ function trackingJsFromLocalImage(imageElement, imageContainer, imgUrl,  width, 
         }
     });
     /*jshint multistr: true */
-    return util.format('background-image: url(\'{0}\');  no-repeat center center fixed; \
-        -webkit-background-size: cover; \
-        -moz-background-size: cover; \
-        -o-background-size: cover; \
-        background-size: cover;', imgUrl);
+    return {
+        'background-image': util.format('url(\'{0}\'); no-repeat center center fixed', imgUrl),
+        '-webkit-background-size': 'cover',
+        '-moz-background-size': 'cover',
+        '-o-background-size': 'cover',
+        'background-size': 'cover'
+    };
 }
 
 module.exports = {

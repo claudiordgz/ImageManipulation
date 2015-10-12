@@ -1,4 +1,4 @@
-/*globals require,module, ich, $*/
+/*globals require,module, ich, $, cssjs*/
 var util = require('faceCentering/util/util');
 var policies = require('faces/strategy/policies');
 
@@ -11,8 +11,13 @@ function defaultPolicy(index, element, imgUrl, policy) {
     var ovalBackgroundClassName = util.format('cm_mobHeader_artist-image--style-{0}', index);
 
     var overlayClassName = util.format('cm_mobHeader_artist-overlay--style-{0}', index);
-    var overlayBackground = util.format('background-image: url(\'{0}\'); background-color: transparent;', imgUrl);
-    util.createClass('.' + overlayClassName, overlayBackground);
+    var overlayBackground = {
+            'background-image': util.format('url(\'{0}\')', imgUrl),
+        'background-color': 'transparent'
+    };
+
+    var sheet = cssjs.newSheet();
+    sheet.selector('.' + overlayClassName, overlayBackground);
 
     var overlayImg = new Image();
     overlayImg.element = element;
@@ -26,6 +31,7 @@ function defaultPolicy(index, element, imgUrl, policy) {
 
     ovalImg.element = element;
     ovalImg.className = ovalBackgroundClassName;
+    ovalImg.css = sheet;
     ovalImg.imageSrc = imgUrl;
     ovalImg.policy = policy;
     ovalImg.self = ovalImg;
@@ -36,7 +42,7 @@ function defaultPolicy(index, element, imgUrl, policy) {
                 container.containerProperties = util.getProperties(container[0]);
             var style = this.policy(this.self, container, this.imageSrc, this.width, this.height, this.className);
             if(style !== undefined) {
-                util.createClass('.' + this.className, style);
+                sheet.selector('.' + this.className, style);
             }
             container.addClass(this.className);
         }
