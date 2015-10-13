@@ -1,28 +1,11 @@
-/*globals console, module*/
+/*globals console, module, require*/
+var padding = require('./padding');
 
 var switchQuadrantNameToIdentifier = {
     TopLeft: 'A',
     TopRight: 'B',
     LowerRight: 'C',
     LowerLeft: 'D'
-};
-
-var calculateAndAddPadding = {
-    TopLeft: function(anchorVertex, faceBox) {
-        'use strict';
-        var PADDING_TOP_BOTTOM_PERCENT = 0.30,
-            PADDING_LEFT_RIGHT_PERCENT = 0.15,
-            faceBoxTopPadding = faceBox.height * PADDING_TOP_BOTTOM_PERCENT,
-            faceBoxLeftPadding = faceBox.width * PADDING_LEFT_RIGHT_PERCENT;
-        faceBoxTopPadding = faceBoxTopPadding > anchorVertex.y ? anchorVertex.y : faceBoxTopPadding;
-        faceBoxLeftPadding = faceBoxLeftPadding > anchorVertex.x ? anchorVertex.x : faceBoxLeftPadding;
-        return {
-            x: anchorVertex.x - faceBoxLeftPadding,
-            y: anchorVertex.y - faceBoxTopPadding,
-            xPadding: faceBoxLeftPadding,
-            yPadding: faceBoxTopPadding
-        };
-    }
 };
 
 var propertiesToCss = function(width, height, x, y) {
@@ -37,20 +20,22 @@ var getWidthHeightFromAnchor = {
     landscape: function(anchorPointAndPadding, faceBox)  {
 
     },
-    portrait: function(anchorPointAndPadding, faceBox) {
-        'use strict';
-        var aspectRatio, newWidth, newHeight, positionXOffset, positionYOffset;
-        if(faceBox.targetWidth < (faceBox.sourceWidth - anchorPointAndPadding.x)) {
-            aspectRatio = (faceBox.sourceWidth - anchorPointAndPadding.x) / faceBox.targetWidth;
-            positionYOffset = - (anchorPointAndPadding.y / aspectRatio);
-        } else {
-            aspectRatio = faceBox.sourceWidth / faceBox.targetWidth;
-            positionYOffset = anchorPointAndPadding.y === 0 ? 0 : - (anchorPointAndPadding.y / aspectRatio);
+    portrait: {
+        TopLeft: function(anchorPointAndPadding, faceBox) {
+            'use strict';
+            var aspectRatio, newWidth, newHeight, positionXOffset, positionYOffset;
+            if(faceBox.targetWidth < (faceBox.sourceWidth - anchorPointAndPadding.x)) {
+                aspectRatio = (faceBox.sourceWidth - anchorPointAndPadding.x) / faceBox.targetWidth;
+                positionYOffset = - (anchorPointAndPadding.y / aspectRatio);
+            } else {
+                aspectRatio = faceBox.sourceWidth / faceBox.targetWidth;
+                positionYOffset = anchorPointAndPadding.y === 0 ? 0 : - (anchorPointAndPadding.y / aspectRatio);
+            }
+            positionXOffset = 0;
+            newWidth = faceBox.sourceWidth / aspectRatio;
+            newHeight = faceBox.sourceHeight / aspectRatio;
+            return propertiesToCss(newWidth, newHeight, positionXOffset, positionYOffset);
         }
-        positionXOffset = 0;
-        newWidth = faceBox.sourceWidth / aspectRatio;
-        newHeight = faceBox.sourceHeight / aspectRatio;
-        return propertiesToCss(newWidth, newHeight, positionXOffset, positionYOffset);
     },
     square: function(anchorPointAndPadding, faceBox) {
 
@@ -62,13 +47,16 @@ var getWidthHeightFromAnchor = {
 var switchCaseSelection = {
     A: function(faceBox) {
         'use strict';
-        var newAnchor = calculateAndAddPadding.TopLeft(faceBox.vertices.A, faceBox);
-        newAnchor = getWidthHeightFromAnchor[faceBox.getOrientation()](newAnchor, faceBox);
+        var newAnchor = padding.calculateAndAddPadding.TopLeft(faceBox.vertices.A, faceBox);
+        newAnchor = getWidthHeightFromAnchor[faceBox.getOrientation()].TopLeft(newAnchor, faceBox);
+        console.log(newAnchor);
         return newAnchor;
     },
     B: function(faceBox, faceBoxAnalysis){
         'use strict';
-
+        var newAnchor = padding.calculateAndAddPadding.TopRight(faceBox.vertices.B, faceBox);
+        newAnchor = getWidthHeightFromAnchor[faceBox.getOrientation()].TopRight(newAnchor, faceBox);
+        return newAnchor;
     },
     C: function(faceBox, faceBoxAnalysis){
         'use strict';
