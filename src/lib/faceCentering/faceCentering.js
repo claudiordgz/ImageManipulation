@@ -51,17 +51,6 @@ function retrieveFacesInImage(faceRecognizedEvent, imagePack) {
     return faces;
 }
 
-function createStyle(className, imgUrl) {
-    'use strict';
-    /*jshint multistr: true */
-    var style = util.format('background-image: url(\'{0}\');  no-repeat center center fixed; \
-        -webkit-background-size: cover; \
-        -moz-background-size: cover; \
-        -o-background-size: cover; \
-        background-size: cover;', imgUrl);
-    util.createClass(className, style);
-}
-
 function faceCentering(faceRecognizedEvent, imagePack, cssStyleSheet){
     'use strict';
     var faces = retrieveFacesInImage(faceRecognizedEvent, imagePack);
