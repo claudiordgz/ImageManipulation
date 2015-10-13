@@ -55,3 +55,24 @@
     background-color:#ccc2a6;
     text-decoration:none;
 }
+
+.position-left-col {
+    position: fixed;
+    left:    calc(100% - 88%);
+    top:   calc(100% - 97%);
+    z-index: 100;
+}
+
+.position-center-col {
+    position: fixed;
+    left:    calc(100% - 52%);
+    top:   calc(100% - 97%);
+    z-index: 100;
+}
+
+.position-right-col {
+    position: fixed;
+    right:    calc(100% - 86%);
+    top:   calc(100% - 97%);
+    z-index: 100;
+}
