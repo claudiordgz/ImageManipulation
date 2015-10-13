@@ -19,41 +19,22 @@ describe("Selecting an anchor point", function() {
                 testData.faceBoxAnalysis);
         };
 
-        describe("Test for rFB292x326Image0", function() {
-            it("Orders the areas by highest and picks a ", function () {
-                var testData = testbed.rFB292x326Image0;
-                baseTest(testData);
+        var loopTest = function(testName) {
+            describe("Test for " + testName, function() {
+                it("Orders the areas by highest and picks a ", function () {
+                    var testVariables = testbed[testName];
+                    baseTest(testVariables);
+                });
             });
-        });
-        describe("Test for rFB166x250Image1", function() {
-            it("Orders the areas by highest and picks a ", function () {
-                var testData = testbed.rFB166x250Image1;
-                baseTest(testData);
-            });
-        });
-        describe("Test for rFB400x268Image3", function() {
-            it("Orders the areas by highest and picks a ", function () {
-                var testData = testbed.rFB400x268Image3;
-                baseTest(testData);
-            });
-        });
-        describe("Test for rFB400x272Image5", function() {
-            it("Orders the areas by highest and picks a ", function () {
-                var testData = testbed.rFB400x272Image5;
-                baseTest(testData);
-            });
-        });
-        describe("Test for rFB250x206Image4", function() {
-            it("Orders the areas by highest and picks a ", function () {
-                var testData = testbed.rFB250x206Image4;
-                baseTest(testData);
-            });
-        });
-        describe("Test for rFB250x248Image7", function() {
-            it("Orders the areas by highest and picks a ", function () {
-                var testData = testbed.rFB250x248Image7;
-                baseTest(testData);
-            });
-        });
+        };
+
+        for(var testData in testbed) {
+            if(testbed[testData] !== undefined) {
+                loopTest(testData);
+            }
+        }
+
+
+
     });
 });
