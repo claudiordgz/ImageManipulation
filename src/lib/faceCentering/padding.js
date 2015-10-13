@@ -17,10 +17,12 @@ var calculateAndAddPadding = {
         };
     },
     applyPaddingCenterOfEdge: {
+        PADDING_TOP_BOTTOM_PERCENT: 0.30,
+        PADDING_LEFT_RIGHT_PERCENT: 0.15,
         TopBottom: function(anchorVertex, faceBox, boundaryY, operationY) {
             'use strict';
             var faceBoxTopOrBottomPadding = faceBox.height * this.PADDING_TOP_BOTTOM_PERCENT;
-            faceBoxTopOrBottomPadding = boundaryY(faceBoxTopOrBottomPadding, anchorVertex.y, faceBox.sourceHeight)? anchorVertex.y : faceBoxTopOrBottomPadding;
+            faceBoxTopOrBottomPadding = boundaryY(faceBoxTopOrBottomPadding, anchorVertex.y, faceBox.sourceHeight) ? anchorVertex.y : faceBoxTopOrBottomPadding;
             return {
                 x: anchorVertex.x,
                 y: operationY(anchorVertex.y, faceBoxTopOrBottomPadding),
